@@ -1,4 +1,5 @@
 package com.equipotres.medioambiente.repositorios;
+import com.equipotres.medioambiente.Entidades.Campana;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 //Creado por davidlugodev
