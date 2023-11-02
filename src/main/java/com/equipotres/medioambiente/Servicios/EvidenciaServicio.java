@@ -11,10 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class EvidenciaServicio {
@@ -38,7 +35,6 @@ public class EvidenciaServicio {
 
         evidencia.setTitulo(titulo);
         evidencia.setContenido(contenido);
-        evidencia.setListaVotos();
         Foto foto = fotoServicio.guardaImagen(imagen);
         evidencia.setFoto(foto);
         evidencia.setFecha(LocalDate.now());
@@ -49,12 +45,14 @@ public class EvidenciaServicio {
 
     //Editar o modificar evidencia
     @Transactional
-    public void editarEvidencia(String id_evidencia, String titulo, StringBuilder contenido, MultipartFile imagen) throws MyException {
+    public void editarEvidencia(String id_evidencia, String titulo, StringBuilder contenido,
+                                MultipartFile imagen) throws MyException {
 
         //Validamos los campos
         validar(titulo, contenido);
 
-        // en caso de que el id de la Evidencia este mal digitado o que no se encuentre, se debe de usar un optional
+        // en caso de que el id de la Evidencia este mal digitado o que no se encuentre,
+        // se debe de usar un optional
         Optional<Evidencia> respuesta = evidenciaRepositorio.findById(id_evidencia);
 
         //comprobar de que si exista un dato con el mismo id
@@ -97,27 +95,48 @@ public class EvidenciaServicio {
 
 
     //Método votar por Participante
-    public void recibirVotoParticipante(String id_evidencia, Usuario usuario){
+    public void recibirVotoParticipante(String id_evidencia, Usuario usuario) {
 
         Optional<Evidencia> respuesta = evidenciaRepositorio.findById(id_evidencia);
 
-        if (respuesta.isPresent()){
+        if (respuesta.isPresent()) {
 
+            //instanciamos un objeto de tipo Evidencia
+            Evidencia evidencia = respuesta.get();
 
-
-
+            HashSet<Usuario> votosActuales = (HashSet<Usuario>) evidencia.getListaVotos();
+            votosActuales.add(usuario);
 
         }
 
+    }
 
 
+    //Método para contar votos por Participante
+    public long contarVotoParticipante(String id_evidencia) {
+
+        Optional<Evidencia> respuesta = evidenciaRepositorio.findById(id_evidencia);
+
+        if (respuesta.isPresent()) {
+
+            //instanciamos un objeto de tipo Evidencia
+            Evidencia evidencia = respuesta.get();
+
+
+            HashSet<Usuario> votosActuales = (HashSet<Usuario>) evidencia.getListaVotos();
+            Long cantidadVotos = votosActuales.stream().count();
+
+            return cantidadVotos;
+        }
+
+        return 0;
 
     }
 
 
     //Verificar campos vacios o nulos
     // Método para manejar excepciones
-    private void validar(String titulo, StringBuilder contenido ) throws MyException {
+    private void validar(String titulo, StringBuilder contenido) throws MyException {
 
         if (titulo == null) {
             throw new MyException("el titulo de la evidencia no puede ser nulo");
@@ -130,8 +149,6 @@ public class EvidenciaServicio {
         }
 
     }
-
-
 
 
 }
