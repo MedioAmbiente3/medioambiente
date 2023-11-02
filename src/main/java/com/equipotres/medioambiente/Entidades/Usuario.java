@@ -1,6 +1,5 @@
 package com.equipotres.medioambiente.Entidades;
 
-import com.equipotres.medioambiente.Enumeraciones.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario {
+public abstract class Usuario {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -22,9 +21,6 @@ public class Usuario {
     private String nombre;
     private String correo;
     private String password;
-
-    @Enumerated(EnumType.STRING)
-    private Role rol;
 
     @ManyToOne
     private Campana campana;

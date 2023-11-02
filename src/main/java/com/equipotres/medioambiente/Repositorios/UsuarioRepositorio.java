@@ -12,4 +12,7 @@ de CRUD estándar*/
 un usuario por su correo electrónico.*/
 @Query("SELECT u FROM Usuario u WHERE u.correo = :correo")
 public Usuario findXMail(@Param("correo") String correo);
+
+@Query("SELECT u FROM Usuario u WHERE u.id_usuario = :id_usuario")
+public Usuario findBy(@Param("id_usuario") String id_usuario);
 }
