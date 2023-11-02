@@ -1,3 +1,4 @@
+
 :root{
     --green:#09bf34;
 }
@@ -117,7 +118,7 @@ header .fa-bars{
 }
 
 .home-container{
-    background:url(../img/tree1.jpg) no-repeat;
+    background:url(/img/tree1.jpg) no-repeat;
     background-size: cover;
     background-position: center;
 }
@@ -638,6 +639,14 @@ video {
 }
 
 
+
+
+
+
+
+
+
+
 /* media queries  */
 @media (max-width:400px){
     
@@ -702,7 +711,8 @@ video {
     }
 
     .heading{
-        font-size: 5rem;
+        font-size: 3rem;
     }
 
 }
+

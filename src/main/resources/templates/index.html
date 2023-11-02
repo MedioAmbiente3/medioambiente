@@ -1,92 +1,367 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace= "/fragments/head :: head"></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complete responsive flower website design tutorial</title>
 
-    <body>
-        <!-- header section starts  -->
-        <header>
-            <section class="flex">
-                <h1 class="heading" >Medio Ambiente</h1>
-                <nav class="navbar">
-                    <h1 class="heading"> <a href="campana/registrar">campañas</a></h1>
-                </nav>
-                <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button type="button" class="btn btn-warning">Sign-up</button>
-                </div>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-                <!--
-                <div class="icons">
-                    <button class="button">Login</button>
-                    <button class="button" >Register</button>
-                    <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-user">Login</a>
-                </div>-->
-            </section>
-        </header>
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
 
-        <div class="home-container">
-            <section class="home" id="home"></section>
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header>
+
+    <section class="flex">
+
+        <input type="checkbox" name="" id="toggler">
+        
+        <label for="toggler" class="fas fa-bars"></label>
+
+        
+        <a href="#" class="logo">Campaña del Medio Ambiente<span>.</span></a>
+
+        <nav class="navbar">
+           <!-- <a href="#home">Inicio</a>-->
+            <a href="#about">Nosotros</a>
+            <a href="#campañas">campañas</a>
+            <a href="#review">review</a>
+            <a href="#contact">Contacto</a>
+            
+
+         <button class="button">Login</button>   
+        </nav>
+
+        <div class="icons">
+            <a href="#" class="fas fa-heart"></a>
+            <a href="#" class="fas fa-user"></a>
         </div>
 
-        <section class="about" id="about">
-            <div class="row">
+    </section>
 
-                <div class="video-container">
-                    <video src="../static/img/production_id_4176461 (2160p).mp4" loop autoplay muted></video>
-                </div>
+</header>
 
-                <div class="content">
-                    <h3>La tierra madre te necesita?</h3>
-                    <h1>Concurso global de carteles</h1>
-                        <p>Salvar el planeta es responsabilidad de todos.</p>
-                        <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de
-                            todo el mundo estan invitados a postular sus carteles. .</p>
-                        <h2>CONVOCATORIA 16BICM</h2>
-                        <a href="#" class="btn">Consulta convocatoria completa</a>
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<div class="home-container">
+
+    <section class="home" id="home">
+
+<!--aqui nuevo-->
+
+
+<!--signup form--->
+              <div class="form signup_form">
+                <form action="#">
+                    <h2>Signup</h2>
+                    <div class="input_box">
+                        <input type="email" placeholder="Enter your email" required/>
+                        <i class="uil uil -envelope-alt"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="password" placeholder="Crear password" required/>
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>   
+
+
+                    <div class="input_box">
+                        <input type="password" placeholder="Confirmar password" required/>
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>   
+
+
+
+                    
+                     <button class="button">Signup Now</button>
+                     <div class="login_signup">
+                        Already have an account? <a href="#" id="signup">login</a></div>
+                        
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--empieza-->
+
+    </section>
+
+</div>
+
+<!-- home section ends -->
+
+<!-- about section starts  -->
+
+
+<section class="about" id="about">
+
+    <h1 class="heading"> <span> about </span> us </h1>
+
+    <div class="row">
+
+        <div class="video-container">
+            <video src="/img/production_id_4176461 (2160p).mp4" loop autoplay muted></video>
+            <h3>cuidemos el planeta</h3>
+        </div>
+
+        <div class="content">
+            <h3>La tierra madre te necesita?</h3>
+            <h1>Concurso global de carteles</h4>
+            <p>Salvar el planeta es responsabilidad de todos.</p>
+            <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de todo el mundo estan invitados a postular sus carteles. .</p>
+            <h2>CONVOCATORIA 16BICM</h2>
+            <a href="#" class="btn">Consulta convocatoria completa</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- icons section starts  -->
+
+<div class="icons-container">
+
+    <section class="box-container">
+
+        <div class="box">
+            <img src="/img/imagenicono1.jpg" alt="">
+            <div class="info">
+                <h3></h3>
+                <span></span>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="/img/imagenicono2.png" alt="">
+            <div class="info">
+                <h3></h3>
+                <span></span>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="/img/imagenicono3.png" alt="">
+            <div class="info">
+                <h3></h3>
+                <span></span>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="/img/imagen4icono.jpg" alt="">
+            <div class="info">
+                <h3></h3>
+                <span></span>
+            </div>
+        </div>
+       
+    </section>
+
+</div>
+
+<!-- icons section ends -->
+
+<!-- prodcuts section starts  -->
+
+<section class="campañas" id="campañas">
+
+    <h1 class="heading"> <span>Campañas</span> </h1>
+
+    <div class="box-container">
+
+       
+
+        <div class="box">
+            
+            <div class="image">
+                <img src="/img/mascontaminacionmenosvida.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share"></a>
                 </div>
             </div>
-        </section>
+            <div class="content">
+                <h3>Mas contaminación es menos vida</h3>
+            </div>
+        </div>
 
-        <!-- footer section starts  -->
-
-        <section class="footer">
-            <div class="box-container">
-                <div class="box">
-                    <h3>Quick links</h3>
-                    <a href="#">home</a>
-                    <a href="#">about</a>
-                    <a href="#">campañas</a>
-                    <a href="#">review</a>
-                    <!-- <a href="#">contact</a>-->
-                </div>
-                <div class="box">
-                    <h3>Extra links</h3>
-                    <a href="#">my account</a>
-                    <a href="#">my favorite</a>
-                </div>
-                <div class="box">
-                    <h3>Localidad</h3>
-                    <a href="#">México</a>
-                    <a href="#">Ecuador</a>
-                    <a href="#">Colombia</a>
-                    <a href="#">Venezuela</a>
-                </div>
-                <div class="box">
-                    <h3>Contacto información</h3>
-                    <a href="#">+123-456-7890</a>
-                    <a href="#">villamarlen50@gmail.com</a>
-                    <a href="#">San Luis Potosí, méxico - 78000</a>
-                    <img src="../static/img/payment.png" alt="">
+        <div class="box">
+            <div class="image">
+                <img src="/img/situnolorecogesellosloharan.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share"></a>
                 </div>
             </div>
+            <div class="content">
+                <h3>Si tu no lo recojes ellos lo harán por <title></title></h3>
+                
+            </div>
+        </div>
 
-            <div class="credit"> creado por <span> equipo 3 egg latam</span> | all rights reserved </div>
+        
 
-        </section>
+    </div>
 
-        <!-- footer section ends -->
-        <script src="js/script.js"></script>
-        <script th:replace= "/fragments/scripts :: script"></script>
-    </body>
+</section>
+
+<!-- prodcuts section ends -->
+
+<!-- review section starts  -->
+
+<section class="review" id="review">
+
+<h1 class="heading"> customer's <span>review</span> </h1>
+
+<div class="box-container">
+
+    <div class="box">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>Medio Ambiente.</p>
+        <div class="user">
+            <img src="/img/pic-1.png" alt="">
+            <div class="user-info">
+                <h3>john deo</h3>
+                <span></span>
+            </div>
+        </div>
+        <span class="fas fa-quote-right"></span>
+    </div>
+
+    <div class="box">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
+        <div class="user">
+            <img src="/img/pic-2.png" alt="">
+            <div class="user-info">
+                <h3>john deo</h3>
+                <span></span>
+            </div>
+        </div>
+        <span class="fas fa-quote-right"></span>
+    </div>
+
+    <div class="box">
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
+        <div class="user">
+            <img src="/img/pic-3.png" alt="">
+            <div class="user-info">
+                <h3>john deo</h3>
+               
+            </div>
+        </div>
+        <span class="fas fa-quote-right"></span>
+    </div>
+
+</div>
+    
+
+
+
+<!-- contact section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container" id="contact">
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#">home</a>
+            <a href="#">about</a>
+            <a href="#">campañas</a>
+            <a href="#">review</a>
+           <!-- <a href="#">contact</a>-->
+        </div>
+
+        <div class="box">
+            <h3>extra links</h3>
+            <a href="#">my account</a>
+            <a href="#">my favorite</a>
+        </div>
+
+        <div class="box">
+            <h3>localidad</h3>
+            <a href="#">mexico</a>
+            <a href="#">ecuador</a>
+            <a href="#">colombia</a>
+            <a href="#">venezuela</a>
+        </div>
+
+        <div class="box">
+            <h3>contacto información</h3>
+            <a href="#">+123-456-7890</a>
+            <a href="#">villamarlen50@gmail.com</a>
+            <a href="#">San Luis Potosí, méxico - 78000</a>
+            <img src="/img/payment.png" alt="">
+        </div>
+        
+    </div>
+
+    <div class="credit"> creado por <span> equipo 3 egg latam</span> | all rights reserved </div>
+
+</section>
+
+<!-- footer section ends -->
+<script src="/medioambiente/src/main/resources/static/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
 </html>
