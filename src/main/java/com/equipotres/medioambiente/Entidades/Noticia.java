@@ -8,23 +8,17 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Campana extends Publicacion{
+public class Noticia extends Publicacion {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_campana;
-
-    private Boolean estado;
-
-    private String premio;
-
+    private String id_noticia;
 
 
 }

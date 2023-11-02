@@ -11,33 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/campana")
+@RequestMapping("/campana") //http://localhost:8080/campana
 public class CampanaController {
 
     @Autowired
     private CampanaServicio campanaServicio;
 
     //Vista campaña registro
-    @GetMapping("/registrar")
+    @GetMapping("/registrar") //http://localhost:8080/campana/registrar
     public String campana() {
         return "campana_registro.html";
     }
+
+    @GetMapping("/prueba")
+    public String index(){return "index.html";}
 
     //Registrar campañas
     @PostMapping("/registro")
     public String registro(@RequestParam String titulo,
                            @RequestParam String redaccion,
                            ModelMap modelo) {
-        try {
-            campanaServicio.crearCampana(titulo, redaccion);
-            modelo.put("exito", "La campaña fue guardada en "
-                    + "la Base de Datos");
-        } catch (MyException ex) {
 
-            modelo.put("error", ex.getMessage());
-            return "campana_registro.html";
-        }
-        return "index.html";
+        System.out.println("Título "+ titulo);
+        System.out.println("Redaccion " + redaccion);
+
+
+       return "campana_registro.html";
 
     }
 }
