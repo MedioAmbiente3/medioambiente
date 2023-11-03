@@ -15,12 +15,14 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Campana extends Publicacion {
+public class Campana {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id_campana;
+
+    private String titulo;
 
     private String descripcion;
 

@@ -1,5 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
+import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -26,9 +28,12 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    private ImagenServicio imagenServicio;
+
     //Crear usuario
     @Transactional
-    public void crearUsuario(String nombre, String email, String password) throws MyException {
+    public void crearUsuario(String nombre, String email, String password, MultipartFile imagen) throws MyException {
 
         //Validamos que los campos no esten vacios
         validar(nombre, email, password);
@@ -40,8 +45,8 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setCorreo(email);
         usuario.setPassword(password);
 
-
-
+        Imagen foto = imagenServicio.guardaImagen(imagen);
+        usuario.setImagen(foto);
         usuarioRepositorio.save(usuario);
 
     }

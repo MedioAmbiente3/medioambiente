@@ -3,12 +3,10 @@ package com.equipotres.medioambiente.Entidades;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -20,7 +18,8 @@ public class Auspiciante {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     String id_auspiciante;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Campana campana;
 
     @ManyToOne
