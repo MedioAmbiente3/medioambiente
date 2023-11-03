@@ -1,6 +1,7 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Enumeraciones.Rol;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,12 @@ public class PortalController {
                            @RequestParam String email,
                            @RequestParam String passwordA,
                            @RequestParam String passwordB,
+                           @RequestParam String rol,
                            ModelMap modelo,
                            MultipartFile archivo) {
         try {
-            usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB, archivo);
+            Rol rolEnum = Rol.valueOf(rol); // Convierte el String a Rol
+            usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB, rolEnum, archivo);
             modelo.put("exito", "Se ha registrado el usuario correctamente");
             return "index.html";
         } catch (MyException ex) {
@@ -52,6 +55,7 @@ public class PortalController {
             modelo.put("email", email);
             modelo.put("password", passwordA);
             modelo.put("passwordB", passwordB);
+            modelo.put("rol", rol);
             modelo.put("archivo", archivo);
             return "registro_usuarios.html";
         }
@@ -77,6 +81,10 @@ public class PortalController {
 
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
+        }
+
+        if (logueado.getRol().toString().equals("EMPRESA")) {
+            return "redirect:/empresa/dashboard";
         }
 
         return "campana_registro.html";
