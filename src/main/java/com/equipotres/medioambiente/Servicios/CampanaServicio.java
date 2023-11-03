@@ -1,7 +1,7 @@
 package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Campana;
-import com.equipotres.medioambiente.Entidades.Foto;
+import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.CampanaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +21,24 @@ public class CampanaServicio {
     private CampanaRepositorio campanaRepositorio;
 
     @Autowired
-    private FotoServicio fotoServicio;
+    private ImagenServicio imagenServicio;
 
     //Crear campaña
     @Transactional
-    public void crearCampana(String titulo, StringBuilder contenido, MultipartFile imagen) throws MyException {
+    public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo) throws MyException {
         //Validamos que los campos no esten vacios
-        validar(titulo, contenido);
+        validar(titulo, descripcion, desafio);
 
         //Crear un objeto de la clase Campana
         Campana campana = new Campana();
 
         campana.setTitulo(titulo);
-        campana.setContenido(contenido);
-        campana.setFecha(LocalDate.now());
-        Foto foto = fotoServicio.guardaImagen(imagen);
+        campana.setDescripcion(descripcion);
+        campana.setDesafio(desafio);
+        Imagen imagen = imagenServicio.guardaImagen(archivo);
         campana.setEstado(true);
-        campana.setPremio("Ganador");
-        campana.setFoto(foto);
+
+        campana.setImagen(imagen);
         //Guardamos la campaña
         campanaRepositorio.save(campana);
 
@@ -47,16 +47,17 @@ public class CampanaServicio {
     //Modificar campaña
     @Transactional
     public void modificarCampana(String id_campana, String titulo,
-                                 StringBuilder contenido) throws MyException {
+                                 String descripcion, String desafio) throws MyException {
         //Validamos que los campos no estén vacios
-        validar(titulo, contenido);
+        validar(titulo, descripcion, desafio);
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
         if (respuesta.isPresent()) {
             Campana campana = new Campana();
             campana.setTitulo(titulo);
-            campana.setContenido(contenido);
+            campana.setDescripcion(descripcion);
+            campana.setDesafio(desafio);
 
             campanaRepositorio.save(campana);
 
@@ -88,7 +89,7 @@ public class CampanaServicio {
     }
 
     //Validar campos vacios
-    private void validar(String titulo, StringBuilder contenido)
+    private void validar(String titulo, String descripcion, String desafio)
             throws MyException {
 
         if (titulo.isEmpty() || titulo == null) {
@@ -96,8 +97,13 @@ public class CampanaServicio {
                     + "nulo o estar vacio");
         }
 
-        if (contenido == null) {
+        if (descripcion.isEmpty() ||descripcion == null) {
             throw new MyException("La descripción de la campaña no puede ser "
+                    + "nulo o estar vacio");
+        }
+
+        if (desafio.isEmpty() || desafio == null) {
+            throw new MyException("el desafio de la campaña  no puede ser "
                     + "nulo o estar vacio");
         }
 

@@ -1,26 +1,28 @@
 package com.equipotres.medioambiente.Entidades;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Foto {
+@AllArgsConstructor
+public class Empresa {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    String id_empresa;
 
-    private String mime;
-    private String nombre;
-
-    @Lob @Basic(fetch = FetchType.LAZY)
-    private byte[] contenido;
+    @OneToOne
+    private Usuario usuario;
 
 
 }

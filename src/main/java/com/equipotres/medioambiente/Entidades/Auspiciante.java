@@ -3,30 +3,25 @@ package com.equipotres.medioambiente.Entidades;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Publicacion {
+@AllArgsConstructor
+public class Auspiciante {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_publicacion;
+    String id_auspiciante;
 
-    private String titulo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Campana campana;
 
-    private String contenido;
-
-    @OneToOne
-    private Imagen imagen;
-
-    @OneToOne
-    private Subscripcion subscripcion;
-
+    @ManyToOne
+    private Empresa empresa;
 }

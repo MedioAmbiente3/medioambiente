@@ -1,24 +1,39 @@
 package com.equipotres.medioambiente.Servicios;
 
+import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Usuario;
-import com.equipotres.medioambiente.Enumeraciones.Role;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioServicio {
+public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    private ImagenServicio imagenServicio;
+
     //Crear usuario
     @Transactional
-    public void crearUsuario(String nombre, String email, String password) throws MyException {
+    public void crearUsuario(String nombre, String email, String password, MultipartFile imagen) throws MyException {
 
         //Validamos que los campos no esten vacios
         validar(nombre, email, password);
@@ -29,10 +44,35 @@ public class UsuarioServicio {
         usuario.setNombre(nombre);
         usuario.setCorreo(email);
         usuario.setPassword(password);
-        usuario.setRol(Role.USER);
 
-
+        Imagen foto = imagenServicio.guardaImagen(imagen);
+        usuario.setImagen(foto);
         usuarioRepositorio.save(usuario);
+
+    }
+
+    //Http Sesion de usuario
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        Usuario usuario = usuarioRepositorio.findXMail(email);
+        if (usuario != null) {
+            List<GrantedAuthority> permisos = new ArrayList<>();
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession sesion = attr.getRequest().getSession(true);
+
+            sesion.setAttribute("usuariosesion", usuario);
+
+            return new User(usuario.getCorreo(), usuario.getPassword(), permisos);
+
+        } else {
+            return null;
+        }
 
     }
 

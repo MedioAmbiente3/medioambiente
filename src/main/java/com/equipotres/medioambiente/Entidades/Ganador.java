@@ -5,26 +5,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Evidencia  extends Publicacion{
+public class Ganador {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_evidencia;
+    private String id_ganador;
 
-    @ManyToMany
-    private Set<Usuario> listaVotos = new HashSet<>();
+    private LocalDate fechaCreacion;
 
     @ManyToOne
-    private Campana campana;
+    private Subscripcion subscripcion;
+
+    @ManyToOne
+    private Empresa empresa;
+
 
 
 
