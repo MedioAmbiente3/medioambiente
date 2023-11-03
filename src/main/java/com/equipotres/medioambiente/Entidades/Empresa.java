@@ -5,28 +5,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Publicacion {
+@AllArgsConstructor
+public class Empresa {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_publicacion;
-
-    private String titulo;
-
-    private String contenido;
+    String id_empresa;
 
     @OneToOne
-    private Imagen imagen;
+    private Usuario usuario;
 
-    @OneToOne
-    private Subscripcion subscripcion;
 
 }

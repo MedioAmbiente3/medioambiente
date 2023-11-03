@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-public class Foto {
+public class Imagen {
 
     @Id
     @GeneratedValue(generator = "uuid")

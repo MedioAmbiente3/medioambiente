@@ -1,7 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
-import com.equipotres.medioambiente.Entidades.Evidencia;
-import com.equipotres.medioambiente.Entidades.Foto;
+import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Noticia;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.NoticiaRepositorio;
@@ -22,10 +21,10 @@ public class NoticiaServicio {
     private NoticiaRepositorio noticiaRepositorio;
 
     @Autowired
-    private FotoServicio fotoServicio;
+    private ImagenServicio imagenServicio;
 
     //Crear una noticia
-    public void crearNoticia(String titulo, StringBuilder contenido, MultipartFile imagen) throws MyException {
+    public void crearNoticia(String titulo, String contenido, MultipartFile imagen) throws MyException {
 
         //Validamos los campos vacios
         validar(titulo, contenido);
@@ -33,9 +32,9 @@ public class NoticiaServicio {
         Noticia noticia = new Noticia();
         noticia.setTitulo(titulo);
         noticia.setContenido(contenido);
-        noticia.setFecha(LocalDate.now());
-        Foto foto = fotoServicio.guardaImagen(imagen);
-        noticia.setFoto(foto);
+        noticia.setEstado(true);
+        Imagen foto = imagenServicio.guardaImagen(imagen);
+        noticia.setImagen(foto);
 
         //Guardamos la noticia
         noticiaRepositorio.save(noticia);
@@ -44,7 +43,7 @@ public class NoticiaServicio {
 
     //Modificar una noticia
     @Transactional
-    public void modificarNoticia(String id_noticia, String titulo, StringBuilder contenido, MultipartFile imagen) throws MyException {
+    public void modificarNoticia(String id_noticia, String titulo, String contenido, MultipartFile imagen) throws MyException {
 
         //Validar campos vacios
         validar(titulo, contenido);
@@ -62,13 +61,13 @@ public class NoticiaServicio {
 
             noticia.setContenido(contenido);
             String idFoto = null;
-            if (noticia.getFoto() != null) {
-                idFoto = noticia.getFoto().getId();
+            if (noticia.getImagen() != null) {
+                idFoto = noticia.getImagen().getId();
 
             }
 
-            Foto foto = fotoServicio.actualizar(imagen, idFoto);
-            noticia.setFoto(foto);
+            Imagen foto = imagenServicio.actualizar(imagen, idFoto);
+            noticia.setImagen(foto);
             //guardamos
             noticiaRepositorio.save(noticia);
         }
@@ -93,7 +92,7 @@ public class NoticiaServicio {
     }
 
     //Campos vacios
-    private void validar(String titulo, StringBuilder contenido) throws MyException {
+    private void validar(String titulo, String contenido) throws MyException {
 
         if (titulo == null) {
             throw new MyException("el titulo de la noticia no puede ser nulo");
@@ -101,7 +100,7 @@ public class NoticiaServicio {
         if (titulo.isEmpty() || titulo == null) {
             throw new MyException("el titulo no puede estar vacio");
         }
-        if (contenido == null) {
+        if (contenido.isEmpty() || contenido == null) {
             throw new MyException("el contenido de la noticia no puede ser nulo");
         }
 

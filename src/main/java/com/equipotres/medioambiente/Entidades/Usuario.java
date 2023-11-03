@@ -1,12 +1,12 @@
 package com.equipotres.medioambiente.Entidades;
 
-import com.equipotres.medioambiente.Enumeraciones.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,11 +23,12 @@ public class Usuario {
     private String correo;
     private String password;
 
-    private Boolean ganador;
-
-    @Enumerated(EnumType.STRING)
-    private Role rol;
+    @OneToOne
+    private Imagen imagen;
 
     @ManyToOne
-    private Campana campana;
+    private Rol rol;
+
+    @OneToMany
+    private List<Noticia> noticiaList;
 }

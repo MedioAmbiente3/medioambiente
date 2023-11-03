@@ -9,19 +9,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comentario extends Publicacion{
+public class Comentario {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id_comentario;
 
+    private String contenido;
+
     @ManyToOne
-    private Evidencia evidencia;
+    private Publicacion publicacion;
+
+    @ManyToOne
+    private Usuario usuario;
+
+    private LocalDate fechaCreacion;
 
 }
