@@ -41,12 +41,12 @@ public class PortalController {
                            @RequestParam String email,
                            @RequestParam String passwordA,
                            @RequestParam String passwordB,
-                           @RequestParam String rol,
+
                            ModelMap modelo,
                            MultipartFile archivo) {
         try {
-            Rol rolEnum = Rol.valueOf(rol); // Convierte el String a Rol
-            usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB, rolEnum, archivo);
+            // Convierte el String a Rol
+            usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB, archivo);
             modelo.put("exito", "Se ha registrado el usuario correctamente");
             return "index.html";
         } catch (MyException ex) {
@@ -55,7 +55,6 @@ public class PortalController {
             modelo.put("email", email);
             modelo.put("password", passwordA);
             modelo.put("passwordB", passwordB);
-            modelo.put("rol", rol);
             modelo.put("archivo", archivo);
             return "registro_usuarios.html";
         }

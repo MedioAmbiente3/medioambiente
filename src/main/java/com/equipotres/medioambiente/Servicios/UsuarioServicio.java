@@ -35,7 +35,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     //Crear usuario
     @Transactional
-    public void crearUsuario(String nombre, String email, String passwordA, String passwordB, Rol rol,  MultipartFile imagen) throws MyException {
+    public void crearUsuario(String nombre, String email, String passwordA, String passwordB,  MultipartFile imagen) throws MyException {
 
         //Validamos que los campos no esten vacios
         validar(nombre, email, passwordA, passwordB);
@@ -46,7 +46,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-        usuario.setRol(rol);
+        usuario.setRol(Rol.USER);
         Imagen foto = imagenServicio.guardaImagen(imagen);
         usuario.setImagen(foto);
         usuarioRepositorio.save(usuario);
