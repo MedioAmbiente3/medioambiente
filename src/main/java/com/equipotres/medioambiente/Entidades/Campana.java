@@ -20,7 +20,7 @@ public class Campana {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_campana;
+    private String id;
 
     private String titulo;
 

@@ -19,7 +19,7 @@ public class Empresa {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    String id_empresa;
+    String id;
 
     @OneToOne
     private Usuario usuario;

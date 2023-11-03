@@ -18,10 +18,10 @@ public class Usuario {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_usuario;
+    private String id;
 
     private String nombre;
-    private String correo;
+    private String email;
     private String password;
 
     @OneToOne

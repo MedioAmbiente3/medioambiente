@@ -2,6 +2,7 @@ package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Enumeraciones.Rol;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -33,22 +35,27 @@ public class UsuarioServicio implements UserDetailsService {
 
     //Crear usuario
     @Transactional
-    public void crearUsuario(String nombre, String email, String password, MultipartFile imagen) throws MyException {
+    public void crearUsuario(String nombre, String email, String passwordA, String passwordB, MultipartFile imagen) throws MyException {
 
         //Validamos que los campos no esten vacios
-        validar(nombre, email, password);
+        validar(nombre, email, passwordA, passwordB);
         //Instanciamos un objeto de la clase Usuario
         Usuario usuario = new Usuario();
 
         //seteamos los atributos
         usuario.setNombre(nombre);
-        usuario.setCorreo(email);
-        usuario.setPassword(password);
-
+        usuario.setEmail(email);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
+        usuario.setRol(Rol.USER);
         Imagen foto = imagenServicio.guardaImagen(imagen);
         usuario.setImagen(foto);
         usuarioRepositorio.save(usuario);
 
+    }
+
+    //Captura el id del Usuario
+    public Usuario getOne(String id) {
+        return usuarioRepositorio.getOne(id);
     }
 
     //Http Sesion de usuario
@@ -68,7 +75,7 @@ public class UsuarioServicio implements UserDetailsService {
 
             sesion.setAttribute("usuariosesion", usuario);
 
-            return new User(usuario.getCorreo(), usuario.getPassword(), permisos);
+            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
 
         } else {
             return null;
@@ -78,18 +85,18 @@ public class UsuarioServicio implements UserDetailsService {
 
     //Modificar usuario
     @Transactional
-    public void modificaUsuario(String id_usuario, String nombre, String email,
-                                String password) throws MyException {
-        validar(nombre, email, password);
+    public void modificaUsuario(String id, String nombre, String email,
+                                String passwordA, String passwordB) throws MyException {
+        validar(nombre, email, passwordA, passwordB);
 
         //Verificar si el usuario existe en la base de datos
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id_usuario);
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
         if (respuesta.isPresent()) {
 
             Usuario usuario = new Usuario();
             usuario.setNombre(nombre);
-            usuario.setCorreo(email);
-            usuario.setPassword(password);
+            usuario.setEmail(email);
+
 
             usuarioRepositorio.save(usuario);
 
@@ -106,7 +113,7 @@ public class UsuarioServicio implements UserDetailsService {
 
 
     //Validar campos vacios
-    private void validar(String nombre, String email, String password)
+    private void validar(String nombre, String email, String passwordA, String passwordB)
             throws MyException {
 
         if (nombre.isEmpty() || nombre == null) {
@@ -119,9 +126,21 @@ public class UsuarioServicio implements UserDetailsService {
                     + "nulo o estar vacio");
         }
 
-        if (password.isEmpty() || password == null) {
+        if (passwordA.isEmpty() || passwordA == null) {
             throw new MyException("la contraseña del usuario  no puede "
                     + "ser nulo o estar vacio");
+        }
+
+        if (passwordB.isEmpty() || passwordB == null) {
+            throw new MyException("la contraseña del usuario  no puede ser nulo o estar vacio");
+        }
+
+        if (passwordA.length() <= 5 || passwordB.length() <= 5) {
+            throw new MyException("la contraseña debe contener mas de 6 caracteres ");
+        }
+
+        if (!passwordA.equals(passwordB)) {
+            throw new MyException("las contraseñas ingresadas deben coincidir");
         }
 
     }

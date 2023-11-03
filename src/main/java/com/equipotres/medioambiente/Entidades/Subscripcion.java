@@ -20,7 +20,7 @@ public class Subscripcion {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_subscripcion;
+    private String id;
 
     private LocalDate fechaCreacion;
 

@@ -17,7 +17,7 @@ public class Publicacion {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_publicacion;
+    private String id;
 
     private String titulo;
 
