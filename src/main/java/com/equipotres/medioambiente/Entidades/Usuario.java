@@ -1,5 +1,6 @@
 package com.equipotres.medioambiente.Entidades;
 
+import com.equipotres.medioambiente.Enumeraciones.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ public class Usuario {
     @OneToOne
     private Imagen imagen;
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private Rol rol;
 
     @OneToMany
