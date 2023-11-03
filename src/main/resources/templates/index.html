@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,18 +30,12 @@
 
         <nav class="navbar">
             <!-- <a href="#home">Inicio</a>-->
-            <a href="#about">Nosotros</a>
             <a href="#campañas">campañas</a>
-            <a href="#review">review</a>
-            <a href="#contact">Contacto</a>
-
-
-            <button class="button">Login</button>
         </nav>
 
         <div class="icons">
-            <a href="/login" class="fas fa-heart"></a>
-            <a href="/registrar" class="fas fa-user"></a>
+            <a href="/login" class="fas fa-user"></a>
+            <a href="/registrar"><i class="fas fa-user-plus"></i></a>
         </div>
 
     </section>
