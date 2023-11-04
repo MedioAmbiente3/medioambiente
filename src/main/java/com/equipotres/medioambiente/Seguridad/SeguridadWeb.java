@@ -30,7 +30,7 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/**")
                 .permitAll()
-                .antMatchers("/empresa/").hasRole("EMPRESA")
+                .antMatchers("/admin/empresa/").hasRole("EMPRESA")
                 .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/logincheck")

@@ -82,7 +82,7 @@ public class PortalController {
         }
 
         if (logueado.getRol().toString().equals("EMPRESA")) {
-            return "redirect:/empresa/dashboard";
+            return "redirect:/admin/empresa/dashboard/";
         }
 
         return "campana_registro.html";

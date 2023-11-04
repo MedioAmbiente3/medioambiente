@@ -2,7 +2,7 @@ package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Usuario;
-import com.equipotres.medioambiente.Enumeraciones.Rol;
+import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-        usuario.setRol(Rol.USER);
+        usuario.setRol(RolEnum.USER);
         Imagen foto = imagenServicio.guardaImagen(imagen);
         usuario.setImagen(foto);
         usuarioRepositorio.save(usuario);
