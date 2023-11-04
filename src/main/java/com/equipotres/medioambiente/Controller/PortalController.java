@@ -1,6 +1,8 @@
 package com.equipotres.medioambiente.Controller;
 
+import com.equipotres.medioambiente.Entidades.Rol;
 import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,7 @@ public class PortalController {
                            MultipartFile archivo) {
         try {
             // Convierte el String a Rol
-            usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB, archivo);
+            usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB , archivo);
             modelo.put("exito", "Se ha registrado el usuario correctamente");
             return "index.html";
         } catch (MyException ex) {
@@ -54,6 +56,7 @@ public class PortalController {
             modelo.put("email", email);
             modelo.put("password", passwordA);
             modelo.put("passwordB", passwordB);
+
             modelo.put("archivo", archivo);
             return "registro_usuarios.html";
         }

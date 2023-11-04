@@ -1,6 +1,7 @@
 package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Imagen;
+import com.equipotres.medioambiente.Entidades.Rol;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
@@ -35,7 +36,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     //Crear usuario
     @Transactional
-    public void crearUsuario(String nombre, String email, String passwordA, String passwordB,  MultipartFile imagen) throws MyException {
+    public void crearUsuario(String nombre, String email, String passwordA,
+                             String passwordB,
+                             MultipartFile imagen) throws MyException {
 
         //Validamos que los campos no esten vacios
         validar(nombre, email, passwordA, passwordB);

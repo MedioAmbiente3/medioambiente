@@ -19,8 +19,8 @@ public class Rol {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Enumerated(EnumType.STRING)
-    private RolEnum nombre;
+    //@Enumerated(EnumType.STRING)
+    //private RolEnum nombre;
 
 
 

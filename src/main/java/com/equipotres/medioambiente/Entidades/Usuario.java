@@ -27,10 +27,11 @@ public class Usuario {
     @OneToOne
     private Imagen imagen;
 
-    @ManyToOne
-    private Rol role;
 
-
+    //@ManyToOne
+    //private Rol rol;
+    @Enumerated(EnumType.STRING)
+    private RolEnum rol;
 
     @OneToMany
     private List<Noticia> noticias;
