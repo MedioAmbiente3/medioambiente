@@ -1,6 +1,6 @@
 package com.equipotres.medioambiente.Entidades;
 
-import com.equipotres.medioambiente.Enumeraciones.Rol;
+import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,18 +18,21 @@ public class Usuario {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_usuario;
+    private String id;
 
     private String nombre;
-    private String correo;
+    private String email;
     private String password;
 
     @OneToOne
     private Imagen imagen;
 
+
+    //@ManyToOne
+    //private Rol rol;
     @Enumerated(EnumType.STRING)
-    private Rol rol;
+    private RolEnum rol;
 
     @OneToMany
-    private List<Noticia> noticiaList;
+    private List<Noticia> noticias;
 }

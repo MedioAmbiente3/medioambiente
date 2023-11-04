@@ -1,34 +1,28 @@
 package com.equipotres.medioambiente.Entidades;
 
+import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.time.LocalDate;
+import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Subscripcion {
+public class Rol {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    private LocalDate fechaCreacion;
+    //@Enumerated(EnumType.STRING)
+    //private RolEnum nombre;
 
-    @ManyToOne
-    private Usuario usuario;
 
-    @ManyToOne
-    private Campana campana;
 
 
 }

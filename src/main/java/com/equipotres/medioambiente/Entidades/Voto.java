@@ -20,7 +20,7 @@ public class Voto {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_voto;
+    private String id;
 
     @ManyToOne
     private Publicacion publicacion;

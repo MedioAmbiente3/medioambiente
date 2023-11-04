@@ -20,7 +20,7 @@ public class Comentario {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_comentario;
+    private String id;
 
     private String contenido;
 

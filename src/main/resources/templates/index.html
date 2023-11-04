@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,26 +22,20 @@
     <section class="flex">
 
         <input type="checkbox" name="" id="toggler">
-        
+
         <label for="toggler" class="fas fa-bars"></label>
 
-        
+
         <a href="#" class="logo">Campaña del Medio Ambiente<span>.</span></a>
 
         <nav class="navbar">
-           <!-- <a href="#home">Inicio</a>-->
-            <a href="#about">Nosotros</a>
+            <!-- <a href="#home">Inicio</a>-->
             <a href="#campañas">campañas</a>
-            <a href="#review">review</a>
-            <a href="#contact">Contacto</a>
-            
-
-         <button class="button">Login</button>   
         </nav>
 
         <div class="icons">
-            <a href="#" class="fas fa-heart"></a>
-            <a href="#" class="fas fa-user"></a>
+            <a href="/login" class="fas fa-user"></a>
+            <a href="/registrar"><i class="fas fa-user-plus"></i></a>
         </div>
 
     </section>
@@ -51,57 +45,57 @@
 <!-- header section ends -->
 
 <!-- home section starts  -->
-
+<!-- Mensajes -->
+<div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+    <div class="card-body">
+        <h5 class="card-title">Error!</h5>
+        <p class="card-text" th:text="${error}"></p>
+    </div>
+</div>
+<div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+    <div class="card-body">
+        <h5 class="card-title">Exito!</h5>
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
+<!-- Fin Mensajes -->
 <div class="home-container">
 
     <section class="home" id="home">
 
-<!--aqui nuevo-->
+        <!--aqui nuevo-->
 
 
-<!--signup form--->
-              <div class="form signup_form">
-                <form action="#">
-                    <h2>Signup</h2>
-                    <div class="input_box">
-                        <input type="email" placeholder="Enter your email" required/>
-                        <i class="uil uil -envelope-alt"></i>
-                    </div>
-                    <div class="input_box">
-                        <input type="password" placeholder="Crear password" required/>
-                        <i class="uil uil-lock password"></i>
-                        <i class="uil uil-eye-slash pw_hide"></i>
-                    </div>   
+        <!--signup form--->
+        <div class="form signup_form">
+            <form action="#">
+                <h2>Signup</h2>
+                <div class="input_box">
+                    <input type="email" placeholder="Enter your email" required/>
+                    <i class="uil uil -envelope-alt"></i>
+                </div>
+                <div class="input_box">
+                    <input type="password" placeholder="Crear password" required/>
+                    <i class="uil uil-lock password"></i>
+                    <i class="uil uil-eye-slash pw_hide"></i>
+                </div>
 
 
-                    <div class="input_box">
-                        <input type="password" placeholder="Confirmar password" required/>
-                        <i class="uil uil-lock password"></i>
-                        <i class="uil uil-eye-slash pw_hide"></i>
-                    </div>   
+                <div class="input_box">
+                    <input type="password" placeholder="Confirmar password" required/>
+                    <i class="uil uil-lock password"></i>
+                    <i class="uil uil-eye-slash pw_hide"></i>
+                </div>
 
 
-
-                    
-                     <button class="button">Signup Now</button>
-                     <div class="login_signup">
-                        Already have an account? <a href="#" id="signup">login</a></div>
-                        
-                      </div>
+                <button class="button">Signup Now</button>
+                <div class="login_signup">
+                    Already have an account? <a href="#" id="signup">login</a></div>
+            </form>
+        </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-<!--empieza-->
+        <!--empieza-->
 
     </section>
 
@@ -114,7 +108,7 @@
 
 <section class="about" id="about">
 
-    <h1 class="heading"> <span> about </span> us </h1>
+    <h1 class="heading"><span> about </span> us </h1>
 
     <div class="row">
 
@@ -126,10 +120,11 @@
         <div class="content">
             <h3>La tierra madre te necesita?</h3>
             <h1>Concurso global de carteles</h4>
-            <p>Salvar el planeta es responsabilidad de todos.</p>
-            <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de todo el mundo estan invitados a postular sus carteles. .</p>
-            <h2>CONVOCATORIA 16BICM</h2>
-            <a href="#" class="btn">Consulta convocatoria completa</a>
+                <p>Salvar el planeta es responsabilidad de todos.</p>
+                <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de todo
+                    el mundo estan invitados a postular sus carteles. .</p>
+                <h2>CONVOCATORIA 16BICM</h2>
+                <a href="#" class="btn">Consulta convocatoria completa</a>
         </div>
 
     </div>
@@ -151,7 +146,7 @@
                 <span></span>
             </div>
         </div>
-    
+
         <div class="box">
             <img src="/img/imagenicono2.png" alt="">
             <div class="info">
@@ -159,7 +154,7 @@
                 <span></span>
             </div>
         </div>
-    
+
         <div class="box">
             <img src="/img/imagenicono3.png" alt="">
             <div class="info">
@@ -167,7 +162,7 @@
                 <span></span>
             </div>
         </div>
-    
+
         <div class="box">
             <img src="/img/imagen4icono.jpg" alt="">
             <div class="info">
@@ -175,7 +170,7 @@
                 <span></span>
             </div>
         </div>
-       
+
     </section>
 
 </div>
@@ -186,14 +181,13 @@
 
 <section class="campañas" id="campañas">
 
-    <h1 class="heading"> <span>Campañas</span> </h1>
+    <h1 class="heading"><span>Campañas</span></h1>
 
     <div class="box-container">
 
-       
 
         <div class="box">
-            
+
             <div class="image">
                 <img src="/img/mascontaminacionmenosvida.jpg" alt="">
                 <div class="icons">
@@ -216,11 +210,10 @@
             </div>
             <div class="content">
                 <h3>Si tu no lo recojes ellos lo harán por <title></title></h3>
-                
+
             </div>
         </div>
 
-        
 
     </div>
 
@@ -232,136 +225,122 @@
 
 <section class="review" id="review">
 
-<h1 class="heading"> customer's <span>review</span> </h1>
+    <h1 class="heading"> customer's <span>review</span></h1>
 
-<div class="box-container">
+    <div class="box-container">
 
-    <div class="box">
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-        </div>
-        <p>Medio Ambiente.</p>
-        <div class="user">
-            <img src="/img/pic-1.png" alt="">
-            <div class="user-info">
-                <h3>john deo</h3>
-                <span></span>
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
             </div>
-        </div>
-        <span class="fas fa-quote-right"></span>
-    </div>
-
-    <div class="box">
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-        </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
-        <div class="user">
-            <img src="/img/pic-2.png" alt="">
-            <div class="user-info">
-                <h3>john deo</h3>
-                <span></span>
+            <p>Medio Ambiente.</p>
+            <div class="user">
+                <img src="/img/pic-1.png" alt="">
+                <div class="user-info">
+                    <h3>john deo</h3>
+                    <span></span>
+                </div>
             </div>
+            <span class="fas fa-quote-right"></span>
         </div>
-        <span class="fas fa-quote-right"></span>
-    </div>
 
-    <div class="box">
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-        </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
-        <div class="user">
-            <img src="/img/pic-3.png" alt="">
-            <div class="user-info">
-                <h3>john deo</h3>
-               
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
             </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim
+                maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt
+                eaque nulla dignissimos.</p>
+            <div class="user">
+                <img src="/img/pic-2.png" alt="">
+                <div class="user-info">
+                    <h3>john deo</h3>
+                    <span></span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
         </div>
-        <span class="fas fa-quote-right"></span>
+
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim
+                maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt
+                eaque nulla dignissimos.</p>
+            <div class="user">
+                <img src="/img/pic-3.png" alt="">
+                <div class="user-info">
+                    <h3>john deo</h3>
+
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+
     </div>
 
-</div>
-    
 
+    <!-- contact section ends -->
 
+    <!-- footer section starts  -->
 
-<!-- contact section ends -->
+    <section class="footer">
 
-<!-- footer section starts  -->
+        <div class="box-container" id="contact">
 
-<section class="footer">
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="#">home</a>
+                <a href="#">about</a>
+                <a href="#">campañas</a>
+                <a href="#">review</a>
+                <!-- <a href="#">contact</a>-->
+            </div>
 
-    <div class="box-container" id="contact">
+            <div class="box">
+                <h3>extra links</h3>
+                <a href="#">my account</a>
+                <a href="#">my favorite</a>
+            </div>
 
-        <div class="box">
-            <h3>quick links</h3>
-            <a href="#">home</a>
-            <a href="#">about</a>
-            <a href="#">campañas</a>
-            <a href="#">review</a>
-           <!-- <a href="#">contact</a>-->
+            <div class="box">
+                <h3>localidad</h3>
+                <a href="#">mexico</a>
+                <a href="#">ecuador</a>
+                <a href="#">colombia</a>
+                <a href="#">venezuela</a>
+            </div>
+
+            <div class="box">
+                <h3>contacto información</h3>
+                <a href="#">+123-456-7890</a>
+                <a href="#">villamarlen50@gmail.com</a>
+                <a href="#">San Luis Potosí, méxico - 78000</a>
+                <img src="/img/payment.png" alt="">
+            </div>
+
         </div>
 
-        <div class="box">
-            <h3>extra links</h3>
-            <a href="#">my account</a>
-            <a href="#">my favorite</a>
-        </div>
+        <div class="credit"> creado por <span> equipo 3 egg latam</span> | all rights reserved</div>
 
-        <div class="box">
-            <h3>localidad</h3>
-            <a href="#">mexico</a>
-            <a href="#">ecuador</a>
-            <a href="#">colombia</a>
-            <a href="#">venezuela</a>
-        </div>
+    </section>
 
-        <div class="box">
-            <h3>contacto información</h3>
-            <a href="#">+123-456-7890</a>
-            <a href="#">villamarlen50@gmail.com</a>
-            <a href="#">San Luis Potosí, méxico - 78000</a>
-            <img src="/img/payment.png" alt="">
-        </div>
-        
-    </div>
-
-    <div class="credit"> creado por <span> equipo 3 egg latam</span> | all rights reserved </div>
-
-</section>
-
-<!-- footer section ends -->
-<script src="/medioambiente/src/main/resources/static/js/script.js"></script>
+    <!-- footer section ends -->
+    <script src="/medioambiente/src/main/resources/static/js/script.js"></script>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 </body>
 </html>

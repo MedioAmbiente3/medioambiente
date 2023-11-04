@@ -20,7 +20,7 @@ public class Ganador {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id_ganador;
+    private String id;
 
     private LocalDate fechaCreacion;
 

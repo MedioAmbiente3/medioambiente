@@ -17,7 +17,7 @@ public class Auspiciante {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    String id_auspiciante;
+    String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Campana campana;

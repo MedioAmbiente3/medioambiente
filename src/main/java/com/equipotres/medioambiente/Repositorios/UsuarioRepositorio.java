@@ -12,6 +12,6 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
     de CRUD estándar*/
 /*se define un método personalizado findXMail(String correo) para buscar
 un usuario por su correo electrónico.*/
-    @Query("SELECT u FROM Usuario u WHERE u.correo = :correo")
-    public Usuario findXMail(@Param("correo") String correo);
+    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
+    public Usuario findXMail(@Param("email") String email);
 }
