@@ -62,34 +62,7 @@ public class PortalController {
         }
     }
 
-    //Verificar si inicio session
-    @GetMapping("/login")
-    public String login(@RequestParam(required = false) String error, HttpSession session,
-                        ModelMap modelo) {
 
-        if (error != null) {
-            modelo.put("error", "Usuario o contraseña invalidos");
-            session.removeAttribute("usuariosesion");
-        }
-        return "login_usuarios.html"; //devolver la vista
-    }
-
-    //Inicio de session de un usuario, sea User o Admin
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
-    @GetMapping("/inicio")
-    public String inicio(HttpSession sesion) {
-        Usuario logueado = (Usuario) sesion.getAttribute("usuariosesion");
-
-        if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/admin/dashboard";
-        }
-
-        if (logueado.getRol().toString().equals("EMPRESA")) {
-            return "redirect:/admin/empresa/dashboard/";
-        }
-
-        return "campana_registro.html";
-    }
 
 
 }

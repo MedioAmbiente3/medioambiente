@@ -11,6 +11,7 @@ public class AdminController {
 
     @GetMapping({"/", "", "/inicio"})
     public String index() {
+
         return "admin/index";
     }
 }
