@@ -13,7 +13,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="/" class="logo d-flex align-items-center">
         <img th:src="@{/img/logo.png}" alt="">
-        <span class="d-none d-lg-block">Campaña</span>
+        <span class="d-none d-lg-block">Noticias</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -392,7 +392,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Campaña</h1>
+      <h1>Noticias</h1>
       
     </div><!-- End Page Title -->
 
@@ -402,23 +402,41 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datos de la campaña</h5>
+              <h5 class="card-title">Datos de la Noticias</h5>
 
               <!-- General Form Elements -->
               <form>
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Desafio</label>
+                  <label for="inputText" class="col-sm-2 col-form-label">Titulo</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control">
                   </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="inputText" class="col-sm-2 col-form-label">Descripcion</label>
+                  <label for="inputDate" class="col-sm-2 col-form-label">Fecha de Creacion</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Autor</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Contenido</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control">
                     </div>
                   </div>
-           
+                  <!--
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control">
+                  </div>
+                </div>-->
                 <!--
                 <div class="row mb-3">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
@@ -563,14 +581,14 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
   </footer><!-- End Footer -->
 
