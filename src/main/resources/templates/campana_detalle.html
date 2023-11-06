@@ -5,17 +5,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 -->
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Listado de Campañas</title>
+        <title>Detalle de Campaña</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Listar campañas</div>
-    <ul>
-    	<li th:each="campana : ${listado}">
-        	<span th:text="${campana.titulo}"></span>
-        	<span th:text="${campana.descripcion}"></span>
-    	</li>
-    </ul>
+    	<h1>Detalles de la Campaña</h1>
+    	<p><strong>Título:</strong> <span th:text="${campana.titulo}"></span></p>
+    	<p><strong>Descripción:</strong> <span th:text="${campana.descripcion}"></span>
     </body>
 </html>

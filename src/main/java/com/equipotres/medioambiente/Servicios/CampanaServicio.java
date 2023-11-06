@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +57,15 @@ public class CampanaServicio {
             campanaRepositorio.save(campana);
         }
 
+    }
+    //Obtener campaña por Id
+    public Campana findCampanaPorId(String id) throws MyException {
+        Optional<Campana> campana = campanaRepositorio.findById(id);
+        if ( campana.isPresent() ) {
+            return campana.get();}
+        else {
+            throw new MyException("No se encontró la campaña con el ID " + id);
+        }
     }
 
     //Consultar todas las campañas
