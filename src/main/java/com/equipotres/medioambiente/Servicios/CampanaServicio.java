@@ -25,31 +25,28 @@ public class CampanaServicio {
 
     //Crear campaña
     @Transactional
-    public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo) throws MyException {
+    public void crearCampana(String titulo, String descripcion,MultipartFile archivo)
+            throws MyException {
         //Validamos que los campos no esten vacios
-        validar(titulo, descripcion, desafio);
-
+            validar(titulo, descripcion);
         //Crear un objeto de la clase Campana
-        Campana campana = new Campana();
-
-        campana.setTitulo(titulo);
-        campana.setDescripcion(descripcion);
-        campana.setDesafio(desafio);
-        Imagen imagen = imagenServicio.guardaImagen(archivo);
-        campana.setEstado(true);
-
-        campana.setImagen(imagen);
+            Campana campana = new Campana();
+            campana.setTitulo(titulo);
+            campana.setDescripcion(descripcion);
+            campana.setDesafio("");
+            Imagen imagen = imagenServicio.guardaImagen(archivo);
+            campana.setEstado(true);
+            campana.setImagen(imagen);
         //Guardamos la campaña
-        campanaRepositorio.save(campana);
-
+            campanaRepositorio.save(campana);
     }
 
     //Modificar campaña
     @Transactional
     public void modificarCampana(String id_campana, String titulo,
-                                 String descripcion, String desafio) throws MyException {
+                                 String descripcion) throws MyException {
         //Validamos que los campos no estén vacios
-        validar(titulo, descripcion, desafio);
+        validar(titulo, descripcion);
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
@@ -57,10 +54,8 @@ public class CampanaServicio {
             Campana campana = new Campana();
             campana.setTitulo(titulo);
             campana.setDescripcion(descripcion);
-            campana.setDesafio(desafio);
-
+            campana.setDesafio("");
             campanaRepositorio.save(campana);
-
         }
 
     }
@@ -87,9 +82,8 @@ public class CampanaServicio {
         }
 
     }
-
     //Validar campos vacios
-    private void validar(String titulo, String descripcion, String desafio)
+    private void validar(String titulo, String descripcion)
             throws MyException {
 
         if (titulo.isEmpty() || titulo == null) {
@@ -99,11 +93,6 @@ public class CampanaServicio {
 
         if (descripcion.isEmpty() ||descripcion == null) {
             throw new MyException("La descripción de la campaña no puede ser "
-                    + "nulo o estar vacio");
-        }
-
-        if (desafio.isEmpty() || desafio == null) {
-            throw new MyException("el desafio de la campaña  no puede ser "
                     + "nulo o estar vacio");
         }
 

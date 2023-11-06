@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/campana") //http://localhost:8080/campana
-public class CampanaController {
+public class  CampanaController {
 
     @Autowired
     private CampanaServicio campanaServicio;
@@ -29,14 +30,19 @@ public class CampanaController {
     //Registrar campañas
     @PostMapping("/registro")
     public String registro(@RequestParam String titulo,
-                           @RequestParam String redaccion,
-                           ModelMap modelo) {
-
-        System.out.println("Título "+ titulo);
-        System.out.println("Redaccion " + redaccion);
-
-
-       return "campana_registro.html";
-
+                           @RequestParam String  descripcion,
+                           ModelMap modelo,
+                           MultipartFile archivo) {
+        try {
+            campanaServicio.crearCampana(titulo, descripcion, archivo);
+            modelo.put("exito", "Se ha registrado correctamente la campaña");
+            return "campana_lista.html";
+        } catch (MyException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("titulo", titulo);
+            modelo.put("descripcion", descripcion);
+            modelo.put("archivo", archivo);
+            return "campana_registro.html";
+        }
     }
 }
