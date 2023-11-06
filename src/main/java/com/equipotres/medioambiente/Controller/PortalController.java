@@ -8,10 +8,7 @@ import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,12 +20,6 @@ public class PortalController {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
-
-    @GetMapping("/")
-    public String index(){
-        return "index.html";
-
-    }
 
     //Ruta registrar usuario
     @GetMapping("/registrar")
@@ -49,7 +40,7 @@ public class PortalController {
             // Convierte el String a Rol
             usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB , archivo);
             modelo.put("exito", "Se ha registrado el usuario correctamente");
-            return "index.html";
+            return "/inicio";
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
@@ -58,10 +49,41 @@ public class PortalController {
             modelo.put("passwordB", passwordB);
 
             modelo.put("archivo", archivo);
-            return "registro_usuarios.html";
+            return "/register";
         }
     }
 
+@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
+    @GetMapping("/perfil")
+    public String perfil(ModelMap modelo,HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        modelo.put("usuario", usuario);
+        return "usuario_modificar.html";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
+    @PostMapping("/perfil/{id}")
+    public String actualizar(@PathVariable String id, @RequestParam String nombre,
+                             @RequestParam String email,
+                             @RequestParam String passwordA, @RequestParam String passwordB,
+                             ModelMap modelo, MultipartFile imagen) {
+
+
+        try {
+            usuarioServicio.modificaUsuario(id, nombre, email, passwordA, passwordB, imagen);
+            modelo.put("exito", "Usuario actualizado correctamente!");
+            return "inicio.html";
+
+        } catch (MyException ex) {
+
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombre", nombre);
+            modelo.put("email", email);
+
+            return "usuario_modificar.html";
+
+        }
+    }
 
 
 

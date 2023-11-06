@@ -31,6 +31,7 @@ public class AuthController {
     public String inicio(HttpSession sesion) {
         Usuario logueado = (Usuario) sesion.getAttribute("usuariosesion");
 
+
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/";
         }
@@ -39,7 +40,7 @@ public class AuthController {
             return "redirect:/admin/empresa/dashboard/";
         }
 
-        return "campana_registro.html";
+        return "inicio.html";
     }
 
     @GetMapping(value = "/index")
@@ -65,5 +66,11 @@ public class AuthController {
        @GetMapping(value = "/generar_empresa")
     public String generar_empresa() {
         return "generar_empresa";
+    }
+
+
+    @GetMapping(value = "/campana_lista_user")
+    public String campana_lista_user() {
+        return "campana_lista_user";
     }
 }
