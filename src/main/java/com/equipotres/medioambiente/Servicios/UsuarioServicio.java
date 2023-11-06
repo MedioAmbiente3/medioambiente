@@ -89,20 +89,34 @@ public class UsuarioServicio implements UserDetailsService {
     //Modificar usuario
     @Transactional
     public void modificaUsuario(String id, String nombre, String email,
-                                String passwordA, String passwordB) throws MyException {
+                                String passwordA, String passwordB, MultipartFile archivo)
+            throws MyException {
+
         validar(nombre, email, passwordA, passwordB);
 
         //Verificar si el usuario existe en la base de datos
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
         if (respuesta.isPresent()) {
 
-            Usuario usuario = new Usuario();
+            Usuario usuario = respuesta.get();
             usuario.setNombre(nombre);
             usuario.setEmail(email);
 
+            usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
+
+            //usuario.setRol(Rol.USER);
+
+            String idImagen = null;
+
+            if (usuario.getImagen() != null) {
+                idImagen = usuario.getImagen().getId();
+            }
+
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+
+            usuario.setImagen(imagen);
 
             usuarioRepositorio.save(usuario);
-
         }
 
     }
