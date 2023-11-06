@@ -40,14 +40,14 @@ public class CampanaServicio {
             campanaRepositorio.save(campana);
     }
 
-    //Modificar campaña
+    //Actualizar campaña
     @Transactional
-    public void modificarCampana(String id_campana, String titulo,
+    public void actualizarCampana(String id, String titulo,
                                  String descripcion) throws MyException {
         //Validamos que los campos no estén vacios
         validar(titulo, descripcion);
 
-        Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
+        Optional<Campana> respuesta = campanaRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
             Campana campana = new Campana();
@@ -78,16 +78,16 @@ public class CampanaServicio {
 
     //Eliminar campañas
     @Transactional
-    public void eliminarCampana(String id_campana) {
+    public void eliminarCampana(String id) throws MyException {
 
-        Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
-
+        Optional<Campana> respuesta = campanaRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Campana campana = new Campana();
-
             campanaRepositorio.delete(campana);
-
+        }else{
+            throw new MyException("La campaña con el id " + id + " no existe.");
         }
+
 
     }
     //Validar campos vacios
@@ -98,7 +98,6 @@ public class CampanaServicio {
             throw new MyException("el titulo de la campaña  no puede ser "
                     + "nulo o estar vacio");
         }
-
         if (descripcion.isEmpty() ||descripcion == null) {
             throw new MyException("La descripción de la campaña no puede ser "
                     + "nulo o estar vacio");

@@ -47,14 +47,14 @@ public class  CampanaController {
             return "campana_registro.html";
         }
     }
-
+//Mostrar listado de campañas en BD
     @GetMapping("/listar")
     public String listar(ModelMap modelo) {
         List<Campana> listado = campanaServicio.listarCampanas();
         modelo.put("listado", listado);
         return "campana_lista.html";
     }
-
+//Mostrar detalles de 1 campaña
     @GetMapping("/detalle/{id}")
     public String detalle(@PathVariable String id, ModelMap modelo) {
         try {
@@ -65,5 +65,33 @@ public class  CampanaController {
             modelo.put("error", ex.getMessage());
             return "index.html";
         }
+    }
+    
+//Actualizar campañas
+    @PutMapping("/actualizar/{id}")
+    public String actualizar(@PathVariable String id,
+                             @RequestParam String titulo,
+                             @RequestParam String descripcion,
+                             ModelMap modelo){
+        try{
+            campanaServicio.actualizarCampana(id, titulo, descripcion);
+            modelo.put("exito","Se ha actualizado correctamente la campaña");
+            return "redirect:/campana/listar";}
+        catch(MyException ex){
+            modelo.put("error",ex.getMessage());
+            modelo.put("titulo",titulo);
+            modelo.put("descripcion",descripcion);
+            return "campaña_regitro.html";}
+    }
+    //Eliminar campañas
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable String id, ModelMap modelo) {
+        try {
+            campanaServicio.eliminarCampana(id);
+            modelo.put("exito", "Se ha eliminado correctamente la campaña");
+            return "redirect:/campana/listar";}
+        catch(MyException ex)  {
+            modelo.put("error",ex.getMessage());
+            return "index.html";}
     }
 }
