@@ -76,6 +76,11 @@ public class CampanaServicio {
 
     }
 
+    //Captura el id del autor
+    public Campana getOne(String id) {
+        return campanaRepositorio.getOne(id);
+    }
+
     //Eliminar campañas
     @Transactional
     public void eliminarCampana(String id) throws MyException {

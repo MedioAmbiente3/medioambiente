@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
+<html lang="en">
 
 <head th:replace="admin/layout :: head-admin"></head>
-
 
 <body>
 
@@ -13,7 +11,7 @@
     <div class="d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
             <img th:src="@{/img/logo.png}" alt="">
-            <span class="d-none d-lg-block">Campaña</span>
+            <span class="d-none d-lg-block">Bienvenid@</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -185,7 +183,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6 th:text="${session.usuariosesion.nombre}"></h6>
-                        <span th:text="${session.usuariosesion.getRol()}"></span>
+                        <span>Usuario</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -238,44 +236,31 @@
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
+
     <ul class="sidebar-nav" id="sidebar-nav">
+
         <li class="nav-item">
-            <a class="nav-link ">
-                <p>Qué quieres hacer?</p>
-            </a>
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>Campañas</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-            <li>
-                <a  href="/campana/registrar">
-                    <i class="bi bi-circle"></i><span>Registrar Campañas</span>
-                </a>
-            </li>
-            <li>
-            <li>
-                <a href="/campana/lista">
-                    <i class="bi bi-circle"></i><span>Ver Campañas</span>
-                </a>
-        </ul>
-    </li><!-- End Forms Nav -->
-        <li class="nav-item">
-            <a  class="nav-link collapsed" href="/noticia/registrar">
-                <i class="bi bi-journal-text"></i>
-                <span>Registrar Noticias</span>
+            <a class="nav-link collapsed" href="#">
+                <i class="bi bi-grid"></i>
+                <span>Campañas</span>
             </a>
         </li>
+
+
         <li class="nav-item">
-            <a  class="nav-link collapsed" href="/empresa/registrar">
-                <i class="bi bi-journal-text"></i>
-                <span>Registrar Empresas</span>
+            <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Mostrar Campañas</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
+            <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+
+
+            </ul>
+
         </li>
         <li class="nav-item">
-            <a  class="nav-link collapsed" href="/admin/inicio">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Volver al dashboard</span>
+            <a class="nav-link collapsed" href="#">
+                <i class="bi bi-grid"></i>
+                <span>Volver</span>
             </a>
         </li>
         <li class="nav-item">
@@ -283,77 +268,92 @@
                 <i class="bi bi-box-arrow-in-right"></i>
                 <span>Salir</span>
             </a>
-        </li><!-- End Login Page Nav -->
+        </li>
+
     </ul>
-</aside><!-- End Sidebar--><!-- End Sidebar-->
+
+</aside><!-- End Sidebar-->
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Campaña</h1>
-
+        <h1>Data Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active">Data</li>
+            </ol>
+        </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Datos de la campaña</h5>
-                        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
-                            <div class="card-body">
-                                <h5 class="card-title">Error 👎</h5>
-                                <p class="card-text" th:text="${error}"></p>
-                            </div>
-                        </div>
-                        <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
-                            <div class="card-body">
-                                <h5 class="card-title">Exito!</h5>
-                                <p class="card-text" th:text="${exito}"></p>
-                            </div>
-                        </div>
-                        <!-- General Form Elements -->
-                        <form th:action="@{/campana/registro}" method="POST" enctype="multipart/form-data">
-                            <div class="row mb-3">
-                                <label for="titulo" class="col-sm-2 col-form-label">Título</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="titulo" name="titulo" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="desafio" class="col-sm-2 col-form-label">Desafio</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="desafio" name="desafio" class="form-control">
-                                </div>
-                            </div>
+                        <h5 class="card-title">Datatables</h5>
+                        <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
 
-                            <div class="row mb-3">
-                                <label for="archivo" class="col-sm-2 col-form-label">Imagen</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" name="archivo" id="archivo">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Guardar</button>
-                            </div>
-                        </form>
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Desafio</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                            </thead>
+                            <tbody th:each="campana : ${campanas}">
+                            <tr>
+                                <th scope="row" th:text="${campana.id}">1</th>
+                                <td th:text="${campana.titulo}"></td>
+                                <td th:text="${campana.descripcion}"></td>
+                                <td th:text="${campana.desafio}"></td>
+                                <td><a><img th:if="${campana.imagen != null}" class="logo"
+                                             th:src="@{/imagen/campana/__${campana.id}__}" ></a></td>
+                                <td>2016-05-25</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Bridie Kessler</td>
+                                <td>Developer</td>
+                                <td>2014-12-05</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Ashleigh Langosh</td>
+                                <td>Finance</td>
+                                <td>2011-08-12</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Angus Grady</td>
+                                <td>HR</td>
+                                <td>2012-06-11</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>Raheem Lehner</td>
+                                <td>Dynamic Division Officer</td>
+                                <td>2011-04-19</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
                     </div>
                 </div>
 
             </div>
-
         </div>
     </section>
 
-</main>
-<!-- End #main -->
+</main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
@@ -369,9 +369,7 @@
     </div>
 </footer><!-- End Footer -->
 
-<!-- Vendor JS Files -->
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <div th:replace="admin/layout :: scripts-admin"></div>
 
 </body>

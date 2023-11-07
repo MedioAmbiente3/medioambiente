@@ -34,13 +34,12 @@
          
             <a href="#about">Nosotros</a>
             <a href="#noticiaContainer">Noticias</a>
-            <a href="/campana/lista">Campañas</a>
+            <a href="#campañas">Campañas</a>
             <a href="#review">Opiniones</a>
             <a href="#contact">Contacto</a>
             <span></span>
 
-         <button class="button"> <a th:if="${session.usuariosesion == null}" href="/login">Iniciar Sesion</a></button>
-         <button class="button"> <a th:if="${session.usuariosesion == null}" href="/register">Registrate</a></button>
+         <button class="button"> <a th:if="${session.usuariosesion != null}" href="/campana/lista">Unete a una campaña</a></button>
          
         </nav>
 
@@ -55,6 +54,7 @@
 <!-- home section starts  -->
 
 <div class="home-container">
+    <!--Mensajes-->
 
     <section class="home" id="home"
 
