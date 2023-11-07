@@ -5,12 +5,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
 
 @Controller
+@RequestMapping("/")
 public class AuthController {
 
     //Verificar si inicio session
@@ -25,6 +27,7 @@ public class AuthController {
         return "login"; //devolver la vista
     }
 
+    //Iniciar sesion
     //Inicio de session de un usuario, sea User o Admin
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
     @GetMapping("/inicio")
@@ -53,24 +56,6 @@ public class AuthController {
         return "register";
     }
 
-       @GetMapping(value = "/campana_registro")
-    public String campana_registro() {
-        return "campana_registro";
-    }
-    
-       @GetMapping(value = "/generar_noticias")
-    public String generar_noticias() {
-        return "generar_noticias";
-    }
-    
-       @GetMapping(value = "/generar_empresa")
-    public String generar_empresa() {
-        return "generar_empresa";
-    }
 
 
-    @GetMapping(value = "/campana_lista_user")
-    public String campana_lista_user() {
-        return "campana_lista_user";
-    }
 }

@@ -40,7 +40,7 @@ public class PortalController {
             // Convierte el String a Rol
             usuarioServicio.crearUsuario(nombre, email, passwordA, passwordB , archivo);
             modelo.put("exito", "Se ha registrado el usuario correctamente");
-            return "/inicio";
+            return "/index";
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
@@ -53,7 +53,7 @@ public class PortalController {
         }
     }
 
-@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
     @GetMapping("/perfil")
     public String perfil(ModelMap modelo,HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
@@ -72,7 +72,7 @@ public class PortalController {
         try {
             usuarioServicio.modificaUsuario(id, nombre, email, passwordA, passwordB, imagen);
             modelo.put("exito", "Usuario actualizado correctamente!");
-            return "inicio.html";
+            return "/campana/lista.html";
 
         } catch (MyException ex) {
 

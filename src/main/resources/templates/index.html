@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,13 +34,13 @@
          
             <a href="#about">Nosotros</a>
             <a href="#noticiaContainer">Noticias</a>
-            <a href="#campañas">Campañas</a>
+            <a href="/campana/lista">Campañas</a>
             <a href="#review">Opiniones</a>
             <a href="#contact">Contacto</a>
             <span></span>
 
-         <button class="button"> <a href="login">Iniciar Sesion</a></button>   
-         <button class="button"> <a href="register">Registrate</a></button>
+         <button class="button"> <a th:if="${session.usuariosesion == null}" href="/login">Iniciar Sesion</a></button>
+         <button class="button"> <a th:if="${session.usuariosesion == null}" href="/register">Registrate</a></button>
          
         </nav>
 
