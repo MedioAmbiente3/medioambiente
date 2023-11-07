@@ -22,6 +22,7 @@ public class CampanaController {
     public String campana() {
         return "campana_registro.html";
     }
+
     //Registrar campañas
     @PostMapping("/registro")
     public String registro(
@@ -29,29 +30,34 @@ public class CampanaController {
               @RequestParam String descripcion,
               @RequestParam String desafio,
                      MultipartFile archivo,
-                          ModelMap modelo) {
-        try {
+                          ModelMap modelo)
+    {
+        try
+        {
             campanaServicio.crearCampana(titulo, descripcion, desafio , archivo);
             modelo.put("exito", "Se ha registrado la Campaña correctamente");
-            return "admin/index";
-        } catch (MyException ex) {
-            modelo.put("error", ex.getMessage());
-            modelo.put("titulo", titulo);
+              return "admin/index";
+        }
+        catch (MyException ex)
+        {
+            modelo.put(      "error", ex.getMessage());
+            modelo.put(     "titulo", titulo);
             modelo.put("descripcion", descripcion);
-            modelo.put("desafio", desafio);
-            modelo.put("archivo", archivo);
-
+            modelo.put(    "desafio", desafio);
+            modelo.put(    "archivo", archivo);
             return "campana_registro.html";
         }
-
     }
+
     //Lista de las campañas
     @GetMapping(value = "/lista")
-    public String campana_lista_user(ModelMap modelo) {
+    public String campana_lista_user(ModelMap modelo)
+    {
         List<Campana> campanas = campanaServicio.listarCampanas();
         modelo.addAttribute("campanas", campanas);
-        return "campana_lista_user";
+        return "campana_lista_user.html";
     }
+
     //Modificar campañas
     @PutMapping("/modificar/{id}")
     public String modificar(

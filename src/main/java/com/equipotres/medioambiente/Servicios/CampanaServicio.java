@@ -55,7 +55,8 @@ public class CampanaServicio {
             //Validamos que los campos no estén vacios
             validar(titulo, desafio,descripcion);
             Optional<Campana> respuesta = campanaRepositorio.findById(id);
-        if (respuesta.isPresent()) {
+        if (respuesta.isPresent())
+        {
             Campana campana = new Campana();
             campana.setTitulo(titulo);
             campana.setDescripcion(descripcion);
@@ -65,18 +66,22 @@ public class CampanaServicio {
     }
 
     //Consultar todas las campañas
-    public List<Campana> listarCampanas() {
+    public List<Campana> listarCampanas()
+    {
         List<Campana> campanas = new ArrayList();
         campanas = campanaRepositorio.findAll();
         return campanas;
     }
 
-    //Captura el id del autor
+    //Captura la campaña por id
     public Campana getOne(String id) {
         return campanaRepositorio.getOne(id);
     }
+
     //Dar de BAJA Campaña por id
-    public void darBajaPorId(String id) throws MyException {
+    public void darBajaPorId(String id)
+            throws MyException
+    {
         Optional<Campana> campanaActiva = campanaRepositorio.findById(id);
             if ( campanaActiva.isPresent() )
             {
@@ -91,11 +96,12 @@ public class CampanaServicio {
     //Eliminar campañas
     @Transactional
     public void eliminarCampana(String id)
-            throws MyException {
-            Optional<Campana> respuesta = campanaRepositorio.findById(id);
-            if (respuesta.isPresent()) {
-                Campana campana = new Campana();
-                campanaRepositorio.delete(campana);
+            throws MyException
+    {
+        Optional<Campana> respuesta = campanaRepositorio.findById(id);
+            if (respuesta.isPresent())
+            {
+                campanaRepositorio.delete(respuesta.get());
             }
             else
             {
@@ -107,15 +113,20 @@ public class CampanaServicio {
             String titulo,
             String desafio,
             String descripcion)
-            throws MyException {
-        if (titulo.isEmpty() || titulo == null) {
+            throws MyException
+    {
+        if (titulo.isEmpty() || titulo == null)
+        {
             throw new MyException("el título de la campaña  no puede ser "
                     + "nulo o estar vacío");
         }
-        if (desafio.isEmpty() ||desafio == null) {
+        if (desafio.isEmpty() ||desafio == null)
+        {
             throw new MyException("El desafío de la campaña no puede ser "
                     + "nulo o estar vacío");
-        }if (descripcion.isEmpty() ||descripcion == null) {
+        }
+        if (descripcion.isEmpty() ||descripcion == null)
+        {
             throw new MyException("La descripción de la campaña no puede ser "
                     + "nulo o estar vacío");
         }
