@@ -24,10 +24,14 @@ public class CampanaServicio {
 
     //Crear campaña
     @Transactional
-    public void crearCampana(String titulo, String descripcion,MultipartFile archivo)
+    public void crearCampana(
+            String titulo,
+            String descripcion,
+            String desafio,
+            MultipartFile archivo)
             throws MyException {
         //Validamos que los campos no esten vacios
-            validar(titulo, descripcion);
+            validar(titulo, desafio,descripcion);
         //Crear un objeto de la clase Campana
             Campana campana = new Campana();
             campana.setTitulo(titulo);
@@ -42,29 +46,21 @@ public class CampanaServicio {
 
     //Actualizar campaña
     @Transactional
-    public void actualizarCampana(String id, String titulo,
-                                 String descripcion) throws MyException {
-        //Validamos que los campos no estén vacios
-        validar(titulo, descripcion);
-
-        Optional<Campana> respuesta = campanaRepositorio.findById(id);
-
+    public void modificarCampana(
+            String id,
+            String titulo,
+            String desafio,
+            String descripcion)
+            throws MyException {
+            //Validamos que los campos no estén vacios
+            validar(titulo, desafio,descripcion);
+            Optional<Campana> respuesta = campanaRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Campana campana = new Campana();
             campana.setTitulo(titulo);
             campana.setDescripcion(descripcion);
-            campana.setDesafio("");
+            campana.setDesafio(desafio);
             campanaRepositorio.save(campana);
-        }
-
-    }
-    //Obtener campaña por Id
-    public Campana findCampanaPorId(String id) throws MyException {
-        Optional<Campana> campana = campanaRepositorio.findById(id);
-        if ( campana.isPresent() ) {
-            return campana.get();}
-        else {
-            throw new MyException("No se encontró la campaña con el ID " + id);
         }
     }
 
@@ -73,41 +69,56 @@ public class CampanaServicio {
         List<Campana> campanas = new ArrayList();
         campanas = campanaRepositorio.findAll();
         return campanas;
-
     }
 
     //Captura el id del autor
     public Campana getOne(String id) {
         return campanaRepositorio.getOne(id);
     }
+    //Dar de BAJA Campaña por id
+    public void darBajaPorId(String id) throws MyException {
+        Optional<Campana> campanaActiva = campanaRepositorio.findById(id);
+            if ( campanaActiva.isPresent() )
+            {
+                campanaActiva.get().setEstado(Boolean.FALSE);
+            }
+            else
+            {
+            throw new MyException("No se encontró la campaña con el ID " + id);
+            }
+    }
 
     //Eliminar campañas
     @Transactional
-    public void eliminarCampana(String id) throws MyException {
-
-        Optional<Campana> respuesta = campanaRepositorio.findById(id);
-        if (respuesta.isPresent()) {
-            Campana campana = new Campana();
-            campanaRepositorio.delete(campana);
-        }else{
-            throw new MyException("La campaña con el id " + id + " no existe.");
-        }
-
-
+    public void eliminarCampana(String id)
+            throws MyException {
+            Optional<Campana> respuesta = campanaRepositorio.findById(id);
+            if (respuesta.isPresent()) {
+                Campana campana = new Campana();
+                campanaRepositorio.delete(campana);
+            }
+            else
+            {
+                throw new MyException("La campaña con el id " + id + " no existe.");
+            }
     }
     //Validar campos vacios
-    private void validar(String titulo, String descripcion)
+    private void validar(
+            String titulo,
+            String desafio,
+            String descripcion)
             throws MyException {
-
         if (titulo.isEmpty() || titulo == null) {
-            throw new MyException("el titulo de la campaña  no puede ser "
-                    + "nulo o estar vacio");
+            throw new MyException("el título de la campaña  no puede ser "
+                    + "nulo o estar vacío");
         }
-        if (descripcion.isEmpty() ||descripcion == null) {
+        if (desafio.isEmpty() ||desafio == null) {
+            throw new MyException("El desafío de la campaña no puede ser "
+                    + "nulo o estar vacío");
+        }if (descripcion.isEmpty() ||descripcion == null) {
             throw new MyException("La descripción de la campaña no puede ser "
-                    + "nulo o estar vacio");
+                    + "nulo o estar vacío");
         }
-
     }
 
 }
