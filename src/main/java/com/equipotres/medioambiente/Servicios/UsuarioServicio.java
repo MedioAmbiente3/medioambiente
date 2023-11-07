@@ -5,6 +5,7 @@ import com.equipotres.medioambiente.Entidades.Rol;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
+import com.equipotres.medioambiente.Repositorios.RolRepositorio;
 import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,26 +35,37 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private ImagenServicio imagenServicio;
 
+    @Autowired
+    private RolRepositorio rolRepositorio;
+
     //Crear usuario
     @Transactional
-    public void crearUsuario(String nombre, String email, String passwordA,
-                             String passwordB,
-                             MultipartFile imagen) throws MyException {
-
+    public void crearUsuario(
+        String nombre,
+        String email,
+        String passwordA,
+        String passwordB,
+        MultipartFile imagen
+    ) throws MyException {
         //Validamos que los campos no esten vacios
         validar(nombre, email, passwordA, passwordB);
         //Instanciamos un objeto de la clase Usuario
         Usuario usuario = new Usuario();
 
+        // TODO: Buscar la forma de mostrar el mensaje en el front
+        Optional<Rol> userRolOptional = rolRepositorio.findByNombre(RolEnum.USER);
+        if (userRolOptional.isEmpty()) {
+            throw new MyException("No se encontro el rol USER en la base de datos");
+        }
+
         //seteamos los atributos
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-        usuario.setRol(RolEnum.USER);
+        usuario.setRol(userRolOptional.get());
         Imagen foto = imagenServicio.guardaImagen(imagen);
         usuario.setImagen(foto);
         usuarioRepositorio.save(usuario);
-
     }
 
     //Captura el id del Usuario
@@ -68,7 +80,7 @@ public class UsuarioServicio implements UserDetailsService {
         Usuario usuario = usuarioRepositorio.findXMail(email);
         if (usuario != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre());
 
             permisos.add(p);
 

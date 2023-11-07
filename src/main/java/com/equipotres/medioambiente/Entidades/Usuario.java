@@ -1,6 +1,5 @@
 package com.equipotres.medioambiente.Entidades;
 
-import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,12 +26,12 @@ public class Usuario {
     @OneToOne
     private Imagen imagen;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Rol rol;
 
-    //@ManyToOne
-    //private Rol rol;
-    @Enumerated(EnumType.STRING)
-    private RolEnum rol;
-
-    @OneToMany
+    @OneToMany(
+            mappedBy = "usuario",
+            fetch = FetchType.LAZY
+    )
     private List<Noticia> noticias;
 }
