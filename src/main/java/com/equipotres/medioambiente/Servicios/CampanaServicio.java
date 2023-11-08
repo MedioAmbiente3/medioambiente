@@ -36,9 +36,9 @@ public class CampanaServicio {
         campana.setDescripcion(descripcion);
         campana.setDesafio(desafio);
         Imagen imagen = imagenServicio.guardaImagen(archivo);
+        campana.setImagen(imagen);
         campana.setEstado(true);
 
-        campana.setImagen(imagen);
         //Guardamos la campaña
         campanaRepositorio.save(campana);
 
@@ -91,6 +91,11 @@ public class CampanaServicio {
 
         }
 
+    }
+
+    //Traer una campaña
+    public Optional<Campana> findById(String campanaId) {
+        return campanaRepositorio.findById(campanaId);
     }
 
     //Validar campos vacios
