@@ -1,6 +1,8 @@
 package com.equipotres.medioambiente.Servicios;
 
+import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Imagen;
+import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.ImagenRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,7 @@ public class ImagenServicio {
         return null;
     }
 
+    //Modificar o editar la imagen
     public Imagen actualizar(MultipartFile archivo, String idImagen) throws MyException{
         if (archivo != null) {
             try {
@@ -72,6 +75,17 @@ public class ImagenServicio {
 
     }
 
+    //Captura el id de la Imagen
+    public Imagen getOne(String id) {
+        return imagenRepositorio.getOne(id);
+    }
+
+
+    //Traer una campaña
+
+
+
+    //Listar todas las imagenes
     @Transactional
     public List<Imagen> listarTodos() {
         return imagenRepositorio.findAll();

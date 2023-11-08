@@ -1,5 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
+import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Rol;
 import com.equipotres.medioambiente.Entidades.Usuario;
@@ -126,6 +127,15 @@ public class UsuarioServicio implements UserDetailsService {
         //Retornamos el usuario encontrado
         return usuarioRepositorio.findXMail(email);
     }
+
+    //Listar Usuarios
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> usuarios = new ArrayList();
+        usuarios = usuarioRepositorio.findAll();
+        return usuarios;
+
+    }
+
 
 
 

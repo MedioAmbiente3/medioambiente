@@ -12,4 +12,6 @@ public class NoticiasController {
     public String generar_noticias() {
         return "generar_noticias";
     }
+
+
 }

@@ -310,12 +310,17 @@
                             </thead>
                             <tbody th:each="campana : ${campanas}">
                             <tr>
-                                <th scope="row" th:text="${campana.id}">1</th>
+                                <th scope="row">1</th>
                                 <td th:text="${campana.titulo}"></td>
                                 <td th:text="${campana.descripcion}"></td>
                                 <td th:text="${campana.desafio}"></td>
-                                <td><a><img th:if="${campana.imagen != null}" class="logo"
-                                             th:src="@{/imagen/campana/__${campana.id}__}" ></a></td>
+                                <td>
+                                    <a>
+                                        <img th:if="${campana.imagen != null}"
+                                             th:src="@{/imagen/campana/__${campana.id}__}" width="100" height="100" >
+                                    </a>
+                                </td>
+
                                 <td>2016-05-25</td>
                             </tr>
                             <tr>

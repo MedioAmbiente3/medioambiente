@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
     <head th:replace="admin/layout :: head-admin"></head>
@@ -254,7 +254,7 @@
         </a>
       <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a  href="/campana/registrar">
+          <a sec:authorize="hasRole('ADMIN')" href="/campana/registrar">
             <i class="bi bi-circle"></i><span>Registrar Campañas</span>
           </a>
         </li>
@@ -263,16 +263,17 @@
           <a href="/campana/lista">
             <i class="bi bi-circle"></i><span>Ver Campañas</span>
           </a>
+        </li>
       </ul>
     </li><!-- End Forms Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/noticia/registrar">
+        <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/noticia/registrar">
           <i class="bi bi-journal-text"></i>
           <span>Registrar Noticias</span>
         </a>
       </li>
       <li class="nav-item">
-        <a  class="nav-link collapsed" href="/empresa/registrar">
+        <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/empresa/registrar">
           <i class="bi bi-journal-text"></i>
           <span>Registrar Empresas</span>
         </a>
