@@ -2,9 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+  
+      <div id="gradBgn">
+        <div class="position-relative">
+          <div class="d-flex justify-content-between p-3 align-items-center position-fixed w-100">
+            <div>
+              <img src="/static_files/images/logos/htmlWhiteLogo.png" alt="Company Logo" height="48">
+            </div>
+            <div>
+              <div class="d-flex position-relative">
+                <div class="d-none d-sm-block"><a href="#" class="custom-link">About</a></div>
+                <div class="d-none d-sm-block">
+                  <a href="#" class="custom-link">Pages <i class="ms-1 gg-chevron-down"></i></a>
+                </div>
+                <div id="subMenu">
+                  <span class="hamLine"></span>
+                  <span class="hamLine"></span>
+                  <span class="hamLine"></span>
+                </div>
+                <div id="fullPageMenu" class="visually-hidden">
+                  <div class="anton d-flex align-items-center position-fixed vh-100 w-100 start-0 top-0 blurOverlay">
+                    <div class="container">
+                      <div class="display-1"><a href="#" class="custom-link">About</a></div>
+                      <div class="display-1"><a href="#" class="custom-link">Services</a></div>
+                      <div class="display-1"><a href="#" class="custom-link">Contact</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4 start-0 top-0 position-fixed vh-100 align-items-center d-none d-md-flex" >
+                  <div class="openSans">
+                    <div class="selected sideLink ms-3 my-3"><span class="avatar">H</span> Home</div>
+                    <div class="sideLink ms-3 my-3"><span class="avatar">G</span> Utilities</div>
+                    <div class="sideLink ms-3 my-3"><span class="avatar">C</span> Blog</div>
+                    <div class="sideLink ms-3 my-3"><span class="avatar">C</span> Contact</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <script src="/js/nav.js"></script>
 </body>
 </html>

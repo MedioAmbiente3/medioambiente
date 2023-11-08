@@ -31,59 +31,53 @@ section{
 }
 
 /*nav*/
-nav{
-    position: relative;
-    
-    height: 50px;
-    background-color: #0c0c0c;
-    border-radius: 8px;
-    display:flex;
-    justify-content:center;
-    align-items: center;
-}
-
- nav a {
-    position: relative;
-    display: inline-block;
-    font-size: 1em;
-    color: #ffff;
-    text-decoration: none;
-    padding: 0 23px;
-    z-index: 1;
-
-}
-
- nav span{
-    position: absolute;
+#mainNavigation a {
+    font-family: 'Cabin', sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.4)
+  }
+  
+  #lista{
+    background-color: #407040e8;
+  }
+  a.dropdown-toggle {
+    color:#d2dbdc !important
+  }
+  a.dropdown-item:hover {
+    color:#616364 !important
+  }
+  .nav-item a{
+    color:#d5cbcb;
+  }
+  .nav-item a:hover {
+    color:#fff
+  }
+  .nav-item{
+    min-width:12vw;
+  }
+  #mainNavigation {
+    position:fixed;
     top:0;
-    left: 0;
-    width: 80px;
-    height: 100%;
-    background: linear-gradient(45deg, #2c2c2e,#1bffff);
-    border-radius: 8px;
-    transition: .5s ease;
+    left:0;
+    width:100%;
+    
 
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+    background: -moz-linear-gradient(top, rgba(20, 74, 34, 0.925) 0%, rgba(0, 0, 0, 0.495) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); /* Chrome10-25, Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(18, 54, 25, 0.943) 0%, rgba(8, 45, 25, 0.55) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000', GradientType=0); /* IE6-9 */
 }
 
- nav a:nth-child(1):hover~span {
-   left: 0;
- }
- nav a:nth-child(2):hover~span {
-   left: 80px;
- }
- nav a:nth-child(3):hover~span {
-   left: 180px;
-   
- }
- nav a:nth-child(4):hover~span {
-    left: 270px;
-    
-  }
-  nav a:nth-child(5):hover~span {
-    left: 360px;
-    
-  }
+#navbarNavDropdown.collapsing .navbar-nav,
+#navbarNavDropdown.show .navbar-nav {
+  background: #d2d5d6;
+  padding: 12px;
+}
 /*nav*/
+
 .btn{
     display: inline-block;
     margin-top: 1rem;
@@ -133,11 +127,11 @@ header .navbar a:hover{
     color:var(--green);
 }
 .button{
-    color:#1d95c9;
+    color:#89969c;
 }
 .button{
     padding:6px 24px;
-    
+
     background:transparent;
     border-radius:6px;
     cursor:pointer;
@@ -168,14 +162,13 @@ header .fa-bars{
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    width: 150%;
-   
+
 }
 
 .home{
     display: flex;
     align-items: center;
-    min-height: 100vh;
+    min-height: 90vh;
 
 
     /*aqui nuevo codugo*/
@@ -183,7 +176,7 @@ header .fa-bars{
 }
 .home::before{
     content:"";
- 
+
     position: absolute;
     height:100%;
     width:40%;
@@ -311,7 +304,7 @@ video {
     box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
     border-radius: .5rem;
     border:.1rem solid rgba(0,0,0,.1);
-    position: relative;    
+    position: relative;
 }
 
 .products .box-container .box .discount{
@@ -761,7 +754,7 @@ video {
     accent-color:#7d2ae8;
 
 }
-    
+
 .checkbox label{
     font-size:12px;
     cursor:pointer;
@@ -798,7 +791,7 @@ video {
 
 /* media queries  */
 @media (max-width:400px){
-    
+
     html{
         font-size: 70%;
     }
@@ -846,15 +839,15 @@ video {
     .icons-container .icons h3{
         font-size: 2rem;
     }
-    
+
     .icons-container .icons span{
         font-size: 1.7rem;
     }
-    
+
 }
 
 @media (max-width:1000px){
-    
+
     html{
         font-size: 70%;
     }
@@ -864,4 +857,3 @@ video {
     }
 
 }
-
