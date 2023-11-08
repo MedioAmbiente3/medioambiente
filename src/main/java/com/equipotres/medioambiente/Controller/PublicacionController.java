@@ -58,9 +58,9 @@ public class PublicacionController {
 
     // Lista de las publicaciones
     @GetMapping(value = "/lista")
-    public String publicacion_lista_campana(@RequestParam Campana campana, ModelMap modelo)
+    public String publicacion_lista_campana( String id_campana, ModelMap modelo )
     {
-        List<Publicacion> publicaciones = publicacionServicio.publicacionesDeCampana(campana);
+        List<Publicacion> publicaciones = publicacionServicio.publicacionesDeCampana( id_campana );
         modelo.addAttribute(publicaciones);
         return "publicacion_lista_campana.html";
     }

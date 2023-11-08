@@ -55,13 +55,13 @@ public class PublicacionServicio {
         return publicaciones;
     }
 
-    public List<Publicacion> publicacionesDeCampana(Campana campana)
+    public List<Publicacion> publicacionesDeCampana(String id_campana)
     {
         List<Subscripcion> subscripciones = subscripcionServicio.listarSubscripciones();
 
         List<Publicacion>  publicaciones = new ArrayList<>();
         for (Subscripcion sub :subscripciones) {
-            if( sub.getCampana().getId().equals( campana.getId() ) )
+            if( sub.getCampana().getId().equals( id_campana )
             {
                 String id_subscripcion = sub.getId();
                 publicaciones.add(publicacionRepositorio.findByIdSubscripcion(id_subscripcion));
