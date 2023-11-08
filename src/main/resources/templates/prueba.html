@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro de Subscripción</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Registro de Subscripción</h1>
+    <p>ID de Usuario en Sesión: <span th:text="${session.usuariosesion.id}"></span></p>
+    <table>
+        <thead>
+            <tr>
+                <th>ID de Campaña</th>
+                <th>Nombre de Campaña</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="campana : ${campanas}">
+                <td th:text="${campana.id}"></td>
+                <td th:text="${campana.titulo  }"></td>
+                <td>
+                    <form th:action="@{/subscripcion/registro}" method="post">
+                        <input type="hidden" th:value="${campana.id}" name="id_campana">
+                        <!-- Asegúrate de tener el id del usuario que inició sesión disponible, por ejemplo en el objeto de sesión -->
+                        <input type="hidden" th:value="${session.usuariosesion.id}" name="id_usuario">
+                        <input type="submit" value="Suscribir">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+ 

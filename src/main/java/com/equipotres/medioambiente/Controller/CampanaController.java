@@ -20,56 +20,53 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/campana") //http://localhost:8080/campana
-public class CampanaController {
+public class CampanaController
+{
+  @Autowired
+  private CampanaServicio campanaServicio;
 
-    @Autowired
-    private CampanaServicio campanaServicio;
+  @Autowired
+  private ImagenServicio imagenServicio;
 
-    @Autowired
-    private ImagenServicio imagenServicio;
+  //Vista campaña registro
+  @GetMapping("/registrar") //http://localhost:8080/campana/registrar
+  public String campana() { return "campana_registro";}
 
-    //Vista campaña registro
-    @GetMapping("/registrar") //http://localhost:8080/campana/registrar
-    public String campana() {
-        return "campana_registro.html";
+  //Registrar campañas
+  @PostMapping("/registro")
+  public String registro
+  (
+    @RequestParam String titulo,
+    @RequestParam String descripcion,
+    @RequestParam String desafio,
+           MultipartFile archivo,
+                ModelMap modelo
+  )
+  {
+    try
+    {
+      campanaServicio.crearCampana(titulo, descripcion, desafio , archivo);
+      modelo.put("exito", "Se ha registrado la Campaña correctamente");
+      return "admin/index";
     }
-
-
-    //Registrar campañas
-    @PostMapping("/registro")
-    public String registro(@RequestParam String titulo,
-                           @RequestParam String descripcion,
-                           @RequestParam String desafio,
-                           MultipartFile archivo,
-                           ModelMap modelo) {
-
-        try {
-            // Convierte el String a Rol
-            campanaServicio.crearCampana(titulo, descripcion, desafio , archivo);
-            modelo.put("exito", "Se ha registrado la Campaña correctamente");
-            return "admin/index";
-        } catch (MyException ex) {
-            modelo.put("error", ex.getMessage());
-            modelo.put("titulo", titulo);
-            modelo.put("descripcion", descripcion);
-            modelo.put("desafio", desafio);
-            modelo.put("archivo", archivo);
-
-            return "campana_registro.html";
-        }
-
+    catch (MyException ex)
+    {
+      modelo.put("error", ex.getMessage());
+      modelo.put("titulo", titulo);
+      modelo.put("descripcion", descripcion);
+      modelo.put("desafio", desafio);
+      modelo.put("archivo", archivo);
+      return "campana_registro";
     }
+  }
 
-    //Lista de las campañas
-    @GetMapping(value = "/lista")
-    public String campana_lista_user(ModelMap modelo) {
-        List<Campana> campanas = campanaServicio.listarCampanas();
-        modelo.addAttribute("campanas", campanas);
-        return "campana_lista_user";
-    }
-
-
-
-
+  //Lista de las campañas
+  @GetMapping(value = "/lista")
+  public String campana_lista_user(ModelMap modelo)
+  {
+    List<Campana> campanas = campanaServicio.listarCampanas(" ");
+    modelo.addAttribute("campanas", campanas);
+    return "campana_lista_user";
+  }
 
 }
