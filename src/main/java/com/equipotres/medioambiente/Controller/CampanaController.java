@@ -2,9 +2,11 @@ package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Imagen;
+import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.ImagenServicio;
+import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,11 +28,14 @@ public class CampanaController {
     private CampanaServicio campanaServicio;
 
     @Autowired
+    private UsuarioServicio usuarioServicio;
+
+    @Autowired
     private ImagenServicio imagenServicio;
 
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
-    public String campana() {
+    public String registrar() {
         return "campana_registro.html";
     }
 
@@ -61,11 +66,42 @@ public class CampanaController {
     }
 
     //Lista de las campañas
-    @GetMapping(value = "/lista")
-    public String campana_lista_user(ModelMap modelo) {
+    @GetMapping("/lista")
+    public String lista(ModelMap modelo) {
         List<Campana> campanas = campanaServicio.listarCampanas();
         modelo.addAttribute("campanas", campanas);
-        return "campana_lista_user";
+        return "campana_lista_user.html";
+    }
+
+
+    //Modificar campañas
+    //Traer el id señalado a modificar
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, ModelMap modelo) {
+        modelo.put("campana", campanaServicio.getOne(id));
+
+        return "campana_modificar.html";
+    }
+
+    //Realizar la modificación al id previamente seleccionado
+    @PostMapping("/modificar/{id}")
+    public String modificar(
+                            @PathVariable String id,
+                            @RequestParam  String titulo,
+                            @RequestParam String descripcion,
+                            @RequestParam String desafio,
+                            @RequestParam Boolean estado,
+                            MultipartFile archivo,
+                            ModelMap modelo) {
+        try {
+            campanaServicio.modificarCampana(id, titulo,descripcion, desafio, estado, archivo );
+            modelo.put("exito", "Se ha modificado la campaña");
+            return "redirect:../lista";
+        } catch (MyException ex) {
+            modelo.put("error", "No se ha realizado ningún cambio");
+            return "campana_modificar.html";
+        }
+
     }
 
 
