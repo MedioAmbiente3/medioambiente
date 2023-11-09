@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="admin/layout :: head-admin"></head>
 
@@ -16,12 +16,6 @@
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -176,7 +170,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <img th:if="${session.usuariosesion.imagen != null}" th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${session.usuariosesion.nombre}"></span>
                 </a><!-- End Profile Iamge Icon -->
 
@@ -258,7 +252,7 @@
 
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/admin/inicio">
                 <i class="bi bi-grid"></i>
                 <span>Volver</span>
             </a>
@@ -277,74 +271,57 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Data Tables</h1>
+        <h1>Campañas</h1>
         <nav>
+            <!--
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
                 <li class="breadcrumb-item active">Data</li>
             </ol>
+            -->
         </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Datatables</h5>
-                        <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+                        <h5 class="card-title">Lista de Campañas</h5>
 
-                        <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Título</th>
-                                <th scope="col">Descripcion</th>
-                                <th scope="col">Desafio</th>
-                                <th scope="col">Imagen</th>
-                                <th scope="col">Fecha</th>
-                            </tr>
-                            </thead>
-                            <tbody th:each="campana : ${campanas}">
-                            <tr>
-                                <th scope="row" th:text="${campana.id}">1</th>
-                                <td th:text="${campana.titulo}"></td>
-                                <td th:text="${campana.descripcion}"></td>
-                                <td th:text="${campana.desafio}"></td>
-                                <td><a><img th:if="${campana.imagen != null}" class="logo"
-                                             th:src="@{/imagen/campana/__${campana.id}__}" ></a></td>
-                                <td>2016-05-25</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Bridie Kessler</td>
-                                <td>Developer</td>
-                                <td>2014-12-05</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Ashleigh Langosh</td>
-                                <td>Finance</td>
-                                <td>2011-08-12</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Angus Grady</td>
-                                <td>HR</td>
-                                <td>2012-06-11</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Raheem Lehner</td>
-                                <td>Dynamic Division Officer</td>
-                                <td>2011-04-19</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <!-- End Table with stripped rows -->
+                        <!---->
+                        <div th:each="campana : ${campanas}" class="card" style="width: 18rem;">
+                            <img th:if="${campana.imagen != null}"  th:src="@{/imagen/campana/__${campana.id}__}"
+                                 class="card-img-top" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 th:text="${campana.titulo}" class="card-title"></h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Descripción</li>
+                                <div class="card-body">
+                                    <p th:text="${campana.descripcion}" class="card-text"></p>
+                                </div>
+                                    <li class="list-group-item">Desafio</li>
+                                <div class="card-body">
+                                    <p th:text="${campana.desafio}" class="card-text"></p>
+                                </div>
+                            </ul>
+                            <div class="card-body">
+                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/campana/modificar/__${campana.id}__}">
+                                    <i class="card-link"></i>
+                                    Modificar
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
+                                    <i class="card-link"></i>
+                                    Unirse
+                                </a>
+                            </div>
+                        </div>
+                        <!--Find -->
+
 
                     </div>
                 </div>
@@ -361,11 +338,6 @@
         &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-
     </div>
 </footer><!-- End Footer -->
 

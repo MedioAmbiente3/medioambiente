@@ -36,9 +36,9 @@ public class CampanaServicio {
         campana.setDescripcion(descripcion);
         campana.setDesafio(desafio);
         Imagen imagen = imagenServicio.guardaImagen(archivo);
+        campana.setImagen(imagen);
         campana.setEstado(true);
 
-        campana.setImagen(imagen);
         //Guardamos la campaña
         campanaRepositorio.save(campana);
 
@@ -46,19 +46,30 @@ public class CampanaServicio {
 
     //Modificar campaña
     @Transactional
-    public void modificarCampana(String id_campana, String titulo,
-                                 String descripcion, String desafio) throws MyException {
+    public void modificarCampana(String id_campana,
+                                 String titulo,
+                                 String descripcion,
+                                 String desafio,
+                                 Boolean estado,
+                                 MultipartFile archivo) throws MyException {
         //Validamos que los campos no estén vacios
         validar(titulo, descripcion, desafio);
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
         if (respuesta.isPresent()) {
-            Campana campana = new Campana();
+            Campana campana = respuesta.get();
             campana.setTitulo(titulo);
             campana.setDescripcion(descripcion);
             campana.setDesafio(desafio);
+            campana.setEstado(estado);
+            String idImagen = null;
+            if (campana.getImagen() != null) {
+                idImagen = campana.getImagen().getId();
 
+            }
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            campana.setImagen(imagen);
             campanaRepositorio.save(campana);
 
         }
@@ -91,6 +102,11 @@ public class CampanaServicio {
 
         }
 
+    }
+
+    //Traer una campaña
+    public Optional<Campana> findById(String campanaId) {
+        return campanaRepositorio.findById(campanaId);
     }
 
     //Validar campos vacios
