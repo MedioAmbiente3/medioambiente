@@ -78,7 +78,7 @@ public class UsuarioController {
         try {
             usuarioServicio.modificaUsuario(id, nombre, email, passwordA, passwordB, imagen);
             modelo.put("exito", "Usuario actualizado correctamente!");
-            return "/campana/lista.html";
+            return "/login";
 
         } catch (MyException ex) {
 
