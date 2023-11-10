@@ -170,8 +170,11 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img th:if="${session.usuariosesion.imagen != null}" th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${session.usuariosesion.nombre}"></span>
+                    <img th:if="${session.usuariosesion.imagen != null}"
+                         th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}"
+                         alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2"
+                         th:text="${session.usuariosesion.nombre}"></span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -242,11 +245,12 @@
 
 
         <li class="nav-item">
+
             <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Mostrar Campañas</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-layout-text-window-reverse"></i><span>Mostrar Campañas</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
-
 
             </ul>
 
@@ -289,10 +293,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Lista de Campañas</h5>
-
                         <!---->
                         <div th:each="campana : ${campanas}" class="card" style="width: 18rem;">
-                            <img th:if="${campana.imagen != null}"  th:src="@{/imagen/campana/__${campana.id}__}"
+                            <img th:if="${campana.imagen != null}"
+                                 th:src="@{/imagen/campana/__${campana.id}__}"
                                  class="card-img-top" alt="Card image cap">
                             <div class="card-body">
                                 <h5 th:text="${campana.titulo}" class="card-title"></h5>
@@ -307,31 +311,38 @@
                                     <p th:text="${campana.desafio}" class="card-text"></p>
                                 </div>
                             </ul>
-                            <div class="card-body">
-                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/campana/modificar/__${campana.id}__}">
-                                    <i class="card-link"></i>
+                               <div class="card-body">
+                                <a sec:authorize="hasRole('ADMIN')"
+                                   th:href="@{/campana/modificar/__${campana.id}__}">
+                                   <i class="card-link"></i>
                                     Modificar
                                 </a>
                             </div>
                             <div class="card-body">
-                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
-                                    <i class="card-link"></i>
-                                    Unirse
+                                <a sec:authorize="hasRole('ADMIN')"
+                                   th:href="@{/subscripcion/registrar/__${campana.id}__}">
+                                   th:text="${#strings.isEmpty(
+                                   publicacionServicio.obtenerIdSuscripcion(
+                                   session.usuariosesion.id, campana.id)
+                                    )} ?'Unirse' : 'Unido'"
+                                   th:disabled="${!#strings.isEmpty(
+                                   subscripcionServicio.obtenerIdSuscripcion(
+                                   session.usuariosesion.id, campana.id))}"
+                                   <i class="card-link"></i>
                                 </a>
+                                
                             </div>
                             <div class="card-body">
-                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/publicacion/registrar/__${campana.id}__}">
-                                    <i class="card-link"></i>
-                                    Publicar
+                                <a sec:authorize="hasRole('ADMIN')"
+                                   th:href="@{/publicacion/registrar/__${campana.id}__}">
+                                   <i class="card-link"></i>
+                                   Publicar
                                 </a>
                             </div>
                         </div>
                         <!--Find -->
-
-
                     </div>
                 </div>
-
             </div>
         </div>
     </section>

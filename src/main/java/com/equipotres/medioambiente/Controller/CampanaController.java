@@ -6,6 +6,7 @@ import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.ImagenServicio;
+import com.equipotres.medioambiente.Servicios.PublicacionServicio;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -33,6 +34,9 @@ public class CampanaController {
     @Autowired
     private ImagenServicio imagenServicio;
 
+    @Autowired
+    private PublicacionServicio publicacionServicio;
+    
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
     public String registrar() {
@@ -70,6 +74,8 @@ public class CampanaController {
     public String lista(ModelMap modelo) {
         List<Campana> campanas = campanaServicio.listarCampanas();
         modelo.addAttribute("campanas", campanas);
+        // Agrega la referencia al servicio al modelo
+        modelo.addAttribute("publicacionServicio", publicacionServicio);
         return "campana_lista_user.html";
     }
 
