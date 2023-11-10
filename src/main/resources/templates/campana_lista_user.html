@@ -320,17 +320,16 @@
                             </div>
                             <div class="card-body">
                                 <a sec:authorize="hasRole('ADMIN')"
-                                   th:href="@{/subscripcion/registrar/__${campana.id}__}">
-                                   th:text="${#strings.isEmpty(
-                                   publicacionServicio.obtenerIdSuscripcion(
+                                   th:href="${#strings.isEmpty(
+                                   subscripcionServicio.obtenerIdSubscripcion(
                                    session.usuariosesion.id, campana.id)
-                                    )} ?'Unirse' : 'Unido'"
-                                   th:disabled="${!#strings.isEmpty(
-                                   subscripcionServicio.obtenerIdSuscripcion(
-                                   session.usuariosesion.id, campana.id))}"
-                                   <i class="card-link"></i>
+                                   )} ? '/subscripcion/registrar/' + ${campana.id} : 'javascript:void(0)'"
+                                   th:text="${#strings.isEmpty(
+                                   subscripcionServicio.obtenerIdSubscripcion(
+                                   session.usuariosesion.id,campana.id)
+                                    )} ?'Unirse' : 'Unido'" >
+                                <i class="card-link"></i>
                                 </a>
-                                
                             </div>
                             <div class="card-body">
                                 <a sec:authorize="hasRole('ADMIN')"

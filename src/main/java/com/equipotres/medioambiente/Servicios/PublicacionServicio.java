@@ -18,9 +18,6 @@ public class PublicacionServicio {
     private PublicacionRepositorio publicacionRepositorio;
 
     @Autowired
-    private SubscripcionRepositorio subscripcionRepositorio;
-
-    @Autowired
     private ImagenServicio imagenServicio;
 
     @Autowired
@@ -35,7 +32,8 @@ public class PublicacionServicio {
             MultipartFile archivo,
             String idUsuario,
             String idCampana)
-            throws MyException {
+            throws MyException
+    {
         //Validamos que los campos no esten vacios
         validar(titulo, contenido);
         //Crear un objeto de la clase Publicación
@@ -44,19 +42,12 @@ public class PublicacionServicio {
         publicacion.setContenido(contenido);
         Imagen imagen = imagenServicio.guardaImagen(archivo);
         publicacion.setImagen(imagen);
-        String idSubscripcion = obtenerIdSuscripcion(idUsuario, idCampana);
-        System.out.println("idUsuario: " + idUsuario);
-        System.out.println("idCampana: " + idCampana);
-        System.out.println("id" + idSubscripcion);
+        String idSubscripcion = subscripcionServicio.
+               obtenerIdSubscripcion(idUsuario, idCampana);
         Subscripcion subscripcion = subscripcionServicio.getOne(idSubscripcion);
-
         publicacion.setSubscripcion(subscripcion);
         //Guardamos la publicacion
         publicacionRepositorio.save(publicacion);
-    }
-
-    public String obtenerIdSuscripcion(String idUsuario, String idCampana) {
-        return subscripcionRepositorio.obtenerIdSuscripcion(idUsuario, idCampana);
     }
 
     //Método modificar Publicación
