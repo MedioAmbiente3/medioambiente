@@ -23,10 +23,10 @@ public class Voto {
     private String id;
 
     @ManyToOne
-    private Publicacion publicacion;
+    private Publicacion Publicacion;
 
     @ManyToOne
-    private Usuario usuario;
+    private Usuario Usuario;
 
     private LocalDate fechaCreacion;
 
