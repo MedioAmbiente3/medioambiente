@@ -89,8 +89,12 @@ public class UsuarioServicio implements UserDetailsService {
 
     //Modificar usuario
     @Transactional
-    public void modificaUsuario(String id, String nombre, String email,
-                                String passwordA, String passwordB, MultipartFile archivo)
+    public void modificaUsuario(String id,
+                                String nombre,
+                                String email,
+                                String passwordA,
+                                String passwordB,
+                                MultipartFile archivo)
             throws MyException {
 
         validar(nombre, email, passwordA, passwordB);
@@ -104,19 +108,13 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setEmail(email);
 
             usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-
             //usuario.setRol(Rol.USER);
-
             String idImagen = null;
-
             if (usuario.getImagen() != null) {
                 idImagen = usuario.getImagen().getId();
             }
-
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-
             usuario.setImagen(imagen);
-
             usuarioRepositorio.save(usuario);
         }
 

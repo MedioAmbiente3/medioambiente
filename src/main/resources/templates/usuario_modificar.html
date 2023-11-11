@@ -10,9 +10,21 @@
 
     <nav th:replace="admin/layout :: navbar1"></nav>
 
-  
-
   <main id="main" class="main">
+        <!-- Mensajes -->
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+          <div class="card-body">
+            <h5 class="card-title">Exito 👍</h5>
+            <p class="card-text" th:text="${exito}"></p>
+          </div>
+        </div>
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+          <div class="card-body">
+            <h5 class="card-title">Error 👎</h5>
+            <p class="card-text" th:text="${error}"></p>
+          </div>
+        </div>
+        <!--Fin Mensajes -->
 
     <div class="pagetitle">
       <h1>Perfil</h1>
@@ -27,55 +39,41 @@
 
     <section class="section profile">
       <div class="row">
-        <div class="col-xl-4">
+        <div class="col-12">
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
                 <a  class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img  th:if="${session.usuariosesion.imagen != null}"  class="rounded-circle" th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}" >
-                    <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${session.usuariosesion.nombre}"></span>
+                    <img  th:if="${session.usuariosesion.imagen != null}" class="card-img-top" th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}" >
+                    
                   </a>
               <h2 th:text="${session.usuariosesion.nombre}"></h2>
-              
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
+
             </div>
           </div>
 
         </div>
 
-        <div class="col-xl-8">
+        <div class="col-m-6">
 
           <div class="card">
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
 
-                <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Descripción General</button>
-                </li>
+                
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
                 </li>
-
+               
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configuración</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-overview">Descripción General</button>
                 </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar Contraseña</button>
-                </li>
-
               </ul>
               <div class="tab-content pt-2">
 
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                <div class="tab-pane fade profile-overview" id="profile-overview">
            
 
                   <h5 class="card-title">Detalles del perfil</h5>
@@ -93,108 +91,61 @@
 
                 </div>
 
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
+
+
+
 
                   <!-- Profile Edit Form -->
-                  <form action="/perfil/{id}" method="POST" enctype="multipart/form-data">
+                  <form th:action="@{/perfil/__${session.usuariosesion.id}__}" method="POST" enctype="multipart/form-data">
                     <input hidden th:value="${id}" name="id">
                     <div class="row mb-3">
-                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
+                        <label for="imagen" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
                         <div class="col-md-8 col-lg-9">
-                            <!-- Campo oculto para almacenar la ruta de la imagen actual -->
-                            <input type="hidden" th:name="currentImage" th:value="@{/imagen/perfil/__${session.usuariosesion.id}__}">
-                
                             <!-- Imagen de perfil actual -->
-                            <img th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}" alt="Perfil" class="img-thumbnail" id="currentImagePreview">
-                
+                            <img th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}"
+                                 alt="Perfil" class="card-img-top" id="imagen">
                             <!-- Input para cargar nuevas imágenes -->
-                            <input type="file" name="file" accept="image/*" class="form-control-file">
-                          
+                          <input type="file" class="form-control" name="imagen" th:value="${session.usuariosesion.imagen}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
+                      <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
                       <div class="col-md-8 col-lg-9">
-                          <input name="nombre" type="text" class="form-control" id="fullName"  th:value="${session.usuariosesion.nombre}">
+                          <input name="nombre" type="text" class="form-control" id="nombre"  th:value="${session.usuariosesion.nombre}">
                       </div>
                   </div>
-
-
                     <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                      <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" th:value="${session.usuariosesion.email}">
+                        <input name="email" type="email" class="form-control" id="email" th:value="${session.usuariosesion.email}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="password" class="col-md-4 col-lg-3 col-form-label">Contraseña</label>
+                      <label for="passwordA" class="col-md-4 col-lg-3 col-form-label">Contraseña</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="passwordA" type="text" class="form-control" id="Email" >
+                        <input name="passwordA" type="text" class="form-control" id="passwordA" >
                       </div>
                     </div>
-
                     <div class="row mb-3">
-                      <label for="password" class="col-md-4 col-lg-3 col-form-label">Repita la contraseña</label>
+                      <label for="passwordB" class="col-md-4 col-lg-3 col-form-label">Repita la contraseña</label>
                       <div class="col-md-8 col-lg-9">
-                          <input name="passwordB" type="text" class="form-control" id="password" >
+                          <input name="passwordB" type="text" class="form-control" id="passwordB" >
                       </div>
                   </div>
-                  
-
-
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
-                  </form><!-- End Profile Edit Form -->
-
-                </div>
-
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                  <!-- Settings Form -->
-                  <form>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label"> Notificaciones de Email </label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">
-                            Changes made to your account
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">
-                            Information on new products and services
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">
-                            Marketing and promo offers
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                          <label class="form-check-label" for="securityNotify">
-                            Security alerts
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                  </form><!-- End settings Form -->
+                  </form>
+                  <!-- End Profile Edit Form -->
 
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
+                  <!--
                   <form>
 
                     <div class="row mb-3">
@@ -221,7 +172,7 @@
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
                     </div>
-                  </form><!-- End Change Password Form -->
+                  </form> End Change Password Form -->
 
                 </div>
 

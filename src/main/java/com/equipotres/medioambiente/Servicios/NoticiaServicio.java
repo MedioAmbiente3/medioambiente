@@ -28,11 +28,11 @@ public class NoticiaServicio {
 
         //Validamos los campos vacios
         validar(titulo, contenido);
-
+        LocalDate fecha;
         Noticia noticia = new Noticia();
         noticia.setTitulo(titulo);
         noticia.setContenido(contenido);
-        noticia.setEstado(true);
+        noticia.setFechaCreacion(LocalDate.now());
         Imagen foto = imagenServicio.guardaImagen(imagen);
         noticia.setImagen(foto);
 
@@ -43,13 +43,13 @@ public class NoticiaServicio {
 
     //Modificar una noticia
     @Transactional
-    public void modificarNoticia(String id_noticia, String titulo, String contenido, MultipartFile imagen) throws MyException {
+    public void modificarNoticia(String idNoticia, String titulo, String contenido, MultipartFile imagen) throws MyException {
 
         //Validar campos vacios
         validar(titulo, contenido);
 
         // en caso de que el id de la Evidencia este mal digitado o que no se encuentre, se debe de usar un optional
-        Optional<Noticia> respuesta = noticiaRepositorio.findById(id_noticia);
+        Optional<Noticia> respuesta = noticiaRepositorio.findById(idNoticia);
 
         //comprobar de que si exista un dato con el mismo id
         if (respuesta.isPresent()) {
@@ -60,6 +60,7 @@ public class NoticiaServicio {
             noticia.setTitulo(titulo);
 
             noticia.setContenido(contenido);
+            noticia.setFechaCreacion(LocalDate.now());
             String idFoto = null;
             if (noticia.getImagen() != null) {
                 idFoto = noticia.getImagen().getId();
@@ -79,7 +80,6 @@ public class NoticiaServicio {
     public Noticia getOne(String id) {
         return noticiaRepositorio.getOne(id);
     }
-
     //Consultar noticias
     //Listar todos los usuarios
     @Transactional
@@ -89,6 +89,19 @@ public class NoticiaServicio {
         noticias = noticiaRepositorio.findAll();
         //Metodo propio del jpaRepo es traer todos los datos de la tabla con el ".findAll()"
         return noticias;
+    }
+
+    @Transactional
+    public void eliminarNoticias(String id) {
+
+        Optional<Noticia> respuesta = noticiaRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+            Noticia noticia  = new Noticia();
+
+            noticiaRepositorio.delete(noticia);
+
+        }
     }
 
     //Campos vacios

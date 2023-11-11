@@ -5,10 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -25,9 +23,11 @@ public class Noticia {
 
     private String contenido;
 
-    private Boolean estado;
-
+    private LocalDate fechaCreacion;
     @OneToOne
     private Imagen imagen;
+
+   // @ManyToOne(fetch = FetchType.LAZY)
+   // private Usuario usuario;
 
 }
