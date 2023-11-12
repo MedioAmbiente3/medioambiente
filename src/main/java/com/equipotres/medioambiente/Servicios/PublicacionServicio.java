@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PublicacionServicio {
 
@@ -57,7 +60,36 @@ public class PublicacionServicio {
 
     //Método consultar Publicación
 
-    //Id de la publicación
+    public List<Publicacion> listarPublicaciones()
+    {
+        List<Publicacion> listaDePublicaciones = publicacionRepositorio.findAll();
+        return listaDePublicaciones;
+    }
+    public List<Publicacion> listarPublicacionesDeCampana(String idCampana)
+    {
+        List<Publicacion> publicacionesDeCampana = new ArrayList<>();
+        for(Publicacion pub: listarPublicaciones())
+        {
+          if(pub.getSubscripcion().getCampana().getId().equals(idCampana))
+          {
+            publicacionesDeCampana.add(pub);
+          }
+        }
+        return publicacionesDeCampana;
+    }
+    public String obtenerIdPublicacion(String idUsuario, String idCampana)
+    {
+        String idPublicacion = new String();
+        for (Publicacion pub:listarPublicacionesDeCampana(idCampana))
+        {
+            if(pub.getSubscripcion().getUsuario().getId().equals(idUsuario))
+            {
+                idPublicacion = pub.getId();
+            }
+        }
+        return idPublicacion;
+    }
+    //Obtener la publicación dado el id
     public Publicacion getOne(String id){
         return publicacionRepositorio.getOne(id);
 

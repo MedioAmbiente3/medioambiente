@@ -1,8 +1,10 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Campana;
+import com.equipotres.medioambiente.Entidades.Publicacion;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
+import com.equipotres.medioambiente.Servicios.PublicacionServicio;
 import com.equipotres.medioambiente.Servicios.SubscripcionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,9 @@ public class CampanaController {
 
     @Autowired
     private SubscripcionServicio subscripcionServicio;
-    
+
+    @Autowired
+    private PublicacionServicio publicacionServicio;
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
     public String registrar() {
@@ -59,11 +63,21 @@ public class CampanaController {
     public String lista(ModelMap modelo) {
         List<Campana> campanas = campanaServicio.listarCampanas();
         modelo.addAttribute("campanas", campanas);
-        // Agrega al modelo la referencia al servicio
+        // Agrega al modelo las referencias a los servicios
         modelo.addAttribute("subscripcionServicio", subscripcionServicio);
+        modelo.addAttribute("publicacionServicio", publicacionServicio);
         return "campana_lista_user.html";
     }
 
+    //Lista de publicaciones
+    @GetMapping("/publicacion/{publicacionid}")
+    public String listaDePublicaciones(@PathVariable String publicacionid, ModelMap modelo){
+        Publicacion publicacion = publicacionServicio.getOne(publicacionid);
+        modelo.addAttribute("publicacion", publicacion);
+        String campanaid = publicacion.getSubscripcion().getCampana().getId();
+        modelo.addAttribute("campanaid",campanaid);
+        return "campana_publicacion.html";    
+    }
 
     //Modificar campañas
     //Traer el id señalado a modificar

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,24 +18,40 @@ public class VotoServicio {
     private VotoRepositorio votoRepositorio;
 
     @Transactional
-    public void crearVoto(Voto voto) throws MyException{
-
-        String validar = votoRepositorio.obtenerIdVoto(voto.getUsuario().getId(),voto.getPublicacion().getId());
-
-        if (validar.isEmpty()){
-            votoRepositorio.save(voto);
-        }
-        else{
-            throw new MyException("el voto ya se encuentra registrado.");
-        }
-
+    public void crearVoto(Voto voto) throws MyException
+    {
+        votoRepositorio.save(voto);
     }
 
-    public List<Voto> listarVotos(){
-
+    public List<Voto> listarVotos()
+    {
         List<Voto> votos = votoRepositorio.findAll();
         return votos;
     }
+    
+    public List<Voto> listarVotosDeUsuario(String idUsuario)
+    {
+        List<Voto> votosDeUsuario = new ArrayList<>();
+        for (Voto voto :listarVotos())
+        {
+            if(voto.getUsuario().getId().equals(idUsuario))
+            {votosDeUsuario.add(voto);}
+        }
+        return votosDeUsuario;
+    }
+    public String obtenerIdVoto(String idUsuario, String idPublicacion)
+    {
+        String idVoto = new String();
+        for (Voto voto:listarVotosDeUsuario(idUsuario))
+        {
+            if(voto.getPublicacion().getId().equals(idPublicacion))
+            {
+              idVoto = voto.getId();
+            }
+        }
+        return idVoto;
+    }
+
 
     public Optional<Voto> votosPorIdPublicacion(String idPublicacion){
 
@@ -47,6 +64,7 @@ public class VotoServicio {
         Optional<Voto> votosIdUsr = votoRepositorio.findById(idUsuario);
         return votosIdUsr;
     }
+    
     public Voto obtenerID(String id){
 
         return votoRepositorio.getOne(id);

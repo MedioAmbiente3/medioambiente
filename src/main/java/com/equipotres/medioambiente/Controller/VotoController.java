@@ -34,22 +34,31 @@ public class VotoController {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String idPublicacion,
-                           @RequestParam String idUsuario,
+    public String registro(@RequestParam String idUsuario,
+                           @RequestParam String idPublicacion,
                            ModelMap modelo) {
-        try {
-            Publicacion publicacion = publicacionServicio.getOne(idPublicacion);
-            Usuario usuario = usuarioServicio.getOne(idUsuario);
-            Voto voto = new Voto();
-            voto.setPublicacion(publicacion);
-            voto.setUsuario(usuario);
-            voto.setFechaCreacion(LocalDate.now());
-            votoServicio.crearVoto(voto);
-
-            return "publicacion_lista";
-        } catch (MyException ex) {
-            modelo.put("error", ex.getMessage());
-            return "publicacion_lista";
-        }
+    try
+    {
+       if(votoServicio.obtenerIdVoto(idUsuario,idPublicacion).isEmpty())
+       {
+         Usuario usuario = usuarioServicio.getOne(idUsuario);
+         Publicacion publicacion = publicacionServicio.getOne(idPublicacion);
+         Voto voto = new Voto();
+         voto.setUsuario(usuario);
+         voto.setPublicacion(publicacion);
+         voto.setFechaCreacion(LocalDate.now());
+         votoServicio.crearVoto(voto);
+       }
+       else
+       {
+         throw new MyException("ya el voto se había efectuado");
+       }
+       return "publicacion_lista";
     }
+    catch (MyException ex)
+    {
+       modelo.put("error", ex.getMessage());
+       return "publicacion_lista";
+    }
+  }
 }

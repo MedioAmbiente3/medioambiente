@@ -296,33 +296,26 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Publicación </h5>
-
-                        <form th:action="@{/publicacion/registro}" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="campanaid" th:value="${campana.id}" />
-                            <input type="hidden" th:value="${session.usuariosesion.id}" name="usuarioid">
-                            <div class="row mb-3">
-                                <label for="titulo" class="col-sm-2 col-form-label">Título</label>
-                                <div class="col-sm-10">
-                                    <input  type="text" id="titulo" name="titulo" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="contenido" class="col-sm-2 col-form-label">Contenido</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="contenido" name="contenido" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="archivo" class="col-sm-2 col-form-label">Imagen</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" name="archivo" id="archivo">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Publicar</button>
-                            </div>
-                        </form>
-                        <!-- End Table with stripped rows -->
+                        <div class="container">
+	    <div class="row mb-3">
+	    <div class="col-sm-10">
+		<p id="titulo" th:text = "${publicacion.titulo}" class="form-control" > </p>
+	    </div>
+	    </div>
+	    <div class="row mb-3">
+	    <label for="contenido"  class="col-sm-2 col-form-label">Contenido</label>
+		<div class="col-sm-10">
+		<p id="contenido" th:text = "${publicacion.contenido}" class = "form-control" > </p>
+		</div>
+	    </div>
+            <img th:if="${publicacion.getImagen() != null}"
+             th:src = "@{/imagen/publicacion/__${publicacion.id}__}"
+             class="card-img-top" alt="Card image cap">
+         <div class="col-12">
+          <a  th:href="@{/campana/lista}" class="btn btn-primary w-100">Regresar</a>
+         </div>
+            </div>
+                          <!-- End Table with stripped rows -->
                     </div>
                 </div>
 
