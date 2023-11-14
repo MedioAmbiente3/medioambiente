@@ -41,6 +41,7 @@ public class ImagenServicio {
         return null;
     }
 
+    //Modificar o editar la imagen
     public Imagen actualizar(MultipartFile archivo, String idImagen) throws MyException{
         if (archivo != null) {
             try {
@@ -72,6 +73,17 @@ public class ImagenServicio {
 
     }
 
+    //Captura el id de la Imagen
+    public Imagen getOne(String id) {
+        return imagenRepositorio.getOne(id);
+    }
+
+
+    //Traer una campaña
+
+
+
+    //Listar todas las imagenes
     @Transactional
     public List<Imagen> listarTodos() {
         return imagenRepositorio.findAll();

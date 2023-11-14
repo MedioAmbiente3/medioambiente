@@ -7,6 +7,20 @@
 
   <main>
     <div class="container">
+      <!-- Mensajes -->
+      <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+        <div class="card-body">
+          <h5 class="card-title">Exito 👍</h5>
+          <p class="card-text" th:text="${exito}"></p>
+        </div>
+      </div>
+      <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError" >
+        <div class="card-body">
+          <h5 class="card-title">Error 👎</h5>
+          <p class="card-text" th:text="${error}"></p>
+        </div>
+      </div>
+      <!--Fin Mensajes -->
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
@@ -21,40 +35,34 @@
               </div><!-- End Logo -->
 
               <div class="card mb-3">
-
                 <div class="card-body">
-
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Crea tu cuenta</h5>
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
-
                   <form class="row g-3 needs-validation" novalidate th:action="@{/registro}" method="POST" enctype="multipart/form-data">
                     <div class="col-12">
                       <label for="nombre" class="form-label">Tu nombre</label>
                       <input type="text" name="nombre" class="form-control" id="nombre" required th:value="${nombre}">
                       <div class="invalid-feedback">Por favor ingresa tu nombre</div>
                     </div>
-
                     <div class="col-12">
                       <label for="email" class="form-label">Tu email</label>
                       <input type="email" name="email" class="form-control" id="email" required th:value="${email}">
                       <div class="invalid-feedback">Por favor ingresa nuevamente tu correo</div>
                     </div>
-
                     <div class="col-12">
                       <label for="passwordA" class="form-label">Contraseña</label>
                       <input type="password" name="passwordA" class="form-control" id="passwordA" required th:value="${passwordA}">
                       <div class="invalid-feedback">Ingrese una contraseña</div>
                     </div>
-
                     <div class="col-12">
                       <label for="passwordB" class="form-label">Ingrese nuevamente tu contraseña</label>
                       <input type="password" name="passwordB" class="form-control" id="passwordB" required th:value="${passwordB}">
                       <div class="invalid-feedback">Ingrese nuevamente una contraseña</div>
                     </div>
                     <div class="form-group my-3">
-                      <input type="file" class="form-control" name="archivo" >
+                      <input type="file" class="form-control" name="archivo"  >
                     </div>
 
                     <div class="col-12">

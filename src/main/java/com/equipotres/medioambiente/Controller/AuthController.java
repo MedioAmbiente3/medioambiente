@@ -41,8 +41,7 @@ public class AuthController {
         }
 
         if (logueado.getRol().getNombre().equals(RolEnum.EMPRESA)) {
-            return "redirect:/admin/empresa/dashboard/";
-        }
+            return "redirect:/empresa_lista.html";
 
         return "inicio.html";
     }

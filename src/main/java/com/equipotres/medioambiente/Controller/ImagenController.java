@@ -1,8 +1,9 @@
 package com.equipotres.medioambiente.Controller;
 
-import com.equipotres.medioambiente.Entidades.Campana;
-import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Entidades.*;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
+import com.equipotres.medioambiente.Servicios.NoticiaServicio;
+import com.equipotres.medioambiente.Servicios.PublicacionServicio;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/imagen")
 public class ImagenController {
 
-
     @Autowired
     UsuarioServicio usuarioServicio;
 
+    @Autowired
     CampanaServicio campanaServicio;
 
+    @Autowired
+    NoticiaServicio noticiaServicio;
+
+    @Autowired
+    PublicacionServicio publicacionServicio;
+
+    //Imagen de perfil del usuario
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id) {
         Usuario usuario = usuarioServicio.getOne(id);
@@ -37,14 +44,7 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
-    @RequestMapping("/url")
-    public String page(Model model) {
-        model.addAttribute("attribute", "value");
-        return "view.name";
-    }
-
-
-    //Imagenes de la campaña
+    //Imagen de una campaña
     @GetMapping("/campana/{id}")
     public ResponseEntity<byte[]> imagenCampana(@PathVariable String id) {
         Campana campana = campanaServicio.getOne(id);
@@ -57,8 +57,30 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
+    //Imagen de una noticia
+    @GetMapping("/noticia/{id}")
+    public ResponseEntity<byte[]> imagenNoticia(@PathVariable String id) {
+        Noticia noticia = noticiaServicio.getOne(id);
 
+        byte[] imagen = noticia.getImagen().getContenido();
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
 
+        return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
+    }
+
+    //Imagen de una publicación
+    @GetMapping("/publicacion/{id}")
+    public ResponseEntity<byte[]> imagenPublicacion(@PathVariable String id) {
+        Publicacion publicacion = publicacionServicio.getOne(id);
+
+        byte[] imagen = publicacion.getImagen().getContenido();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+
+        return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
+    }
 
 }

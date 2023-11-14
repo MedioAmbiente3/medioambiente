@@ -1,6 +1,5 @@
 package com.equipotres.medioambiente.Entidades;
 
-import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
+import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Rol;
 import com.equipotres.medioambiente.Entidades.Usuario;
@@ -100,8 +101,12 @@ public class UsuarioServicio implements UserDetailsService {
 
     //Modificar usuario
     @Transactional
-    public void modificaUsuario(String id, String nombre, String email,
-                                String passwordA, String passwordB, MultipartFile archivo)
+    public void modificaUsuario(String id,
+                                String nombre,
+                                String email,
+                                String passwordA,
+                                String passwordB,
+                                MultipartFile archivo)
             throws MyException {
 
         validar(nombre, email, passwordA, passwordB);
@@ -115,19 +120,13 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setEmail(email);
 
             usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-
             //usuario.setRol(Rol.USER);
-
             String idImagen = null;
-
             if (usuario.getImagen() != null) {
                 idImagen = usuario.getImagen().getId();
             }
-
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-
             usuario.setImagen(imagen);
-
             usuarioRepositorio.save(usuario);
         }
 
@@ -138,6 +137,15 @@ public class UsuarioServicio implements UserDetailsService {
         //Retornamos el usuario encontrado
         return usuarioRepositorio.findXMail(email);
     }
+
+    //Listar Usuarios
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> usuarios = new ArrayList();
+        usuarios = usuarioRepositorio.findAll();
+        return usuarios;
+
+    }
+
 
 
 

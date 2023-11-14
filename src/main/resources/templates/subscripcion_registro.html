@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="admin/layout :: head-admin"></head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:replace="admin/layout :: navbar-admin"></header><!-- End Header -->
+<nav th:replace="admin/layout :: navbar1"></nav>
+<!-- End Sidebar-->
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Subscribirse a una campaña</h1>
+        <!--<nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html"></a></li>
+                <li class="breadcrumb-item"></li>
+                <li class="breadcrumb-item active"></li>
+            </ol>
+        </nav> -->
+    </div>
+
+    <!-- Mensajes -->
+    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+            <h5 class="card-title">Exito 👍</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+        <div class="card-body">
+            <h5 class="card-title">Error 👎</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+    <!--Fin Mensajes -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Subscribirse a una campaña</h5>
+
+                        <form th:action="@{/subscripcion/registro}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="campanaid" th:value="${campana.id}" />
+                            <input type="hidden" th:value="${session.usuariosesion.id}" name="usuarioid">
+                            <!--<input type="hidden" name="usuarioid" th:value="${usuario.id}" />-->
+                            <div class="row mb-3">
+                                <label for="titulo" class="col-sm-2 col-form-label">Título</label>
+                                <div class="col-sm-10">
+                                    <p th:text="${campana.titulo}" type="text" id="titulo" name="titulo" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                                <div class="col-sm-10">
+                                    <p th:text="${campana.descripcion}" type="text" id="descripcion" name="descripcion" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="desafio" class="col-sm-2 col-form-label">Desafio</label>
+                                <div class="col-sm-10">
+                                    <p th:text="${campana.desafio}" type="text" id="desafio" name="desafio" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit">Unirse</button>
+                            </div>
+                        </form>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div th:replace="admin/layout :: scripts-admin"></div>
+
+</body>
+
+</html>

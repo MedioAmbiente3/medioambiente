@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>complete responsive flower website design tutorial</title>
-
+    <title>Website Medio Ambiente</title>
+=======
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
@@ -20,33 +20,42 @@
 
 <header>
 
-    <section class="flex">
-       
-        <input type="checkbox" name="" id="toggler">
-        
-        <label for="toggler" class="fas fa-bars"></label>
-       
-        
-        <a href="/" class="logo">Campaña del Medio Ambiente<span>.</span></a>
-
-        <nav class="navbar">
-           <!-- <a href="#home">Inicio</a>-->
-         
-            <a href="#about">Nosotros</a>
-            <a href="#noticiaContainer">Noticias</a>
-            <a href="/campana/lista">Campañas</a>
-            <a href="#review">Opiniones</a>
-            <a href="#contact">Contacto</a>
-            <span></span>
-
-         <button class="button"> <a th:if="${session.usuariosesion == null}" href="/login">Iniciar Sesion</a></button>
-         <button class="button"> <a th:if="${session.usuariosesion == null}" href="/register">Registrate</a></button>
-         
-        </nav>
-
-        
-
-    </section>
+    <div id="mainNavigation" class="navbar navbar-expand-md navbar-dark fixed-top">
+        <a class="navbar-brand" href="#home">
+            <img src="/img/logo.png" style="width: 90px;" class="invert" alt="Logo">
+            <span class="logo-text" style="color: aliceblue; margin-left: 10px; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MedioAmbiente</span>
+        </a>
+        <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+        </button>
+        <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto ">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#about">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#noticiaContainer">Noticias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#campañas">Campañas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#review">Opiniones</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Únete
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="lista">
+                        <li><a class="dropdown-item" href="/login">Iniciar Sesion</a></li>
+                        <li><a class="dropdown-item" href="#">Salir</a></li>
+                        <li><a class="dropdown-item" href="#contact">Contactenos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
 
 </header>
 
@@ -54,11 +63,13 @@
 
 <!-- home section starts  -->
 
+
+
 <div class="home-container">
 
-    <section class="home" id="home"
+    <section class="home" id="home">
 
-    </section>
+</section>
 
 </div>
 
@@ -66,7 +77,8 @@
 
 <!-- about section starts  -->
 
-
+<div id="hola"></div>
+<br>
 <section class="about" id="about">
 
     <h1 class="heading"> <span> Nosotros </span>  </h1>
@@ -74,12 +86,13 @@
     <div class="row">
 
         <div class="video-container">
-            <video src="/img/production_id_4176461 (2160p).mp4" loop autoplay muted></video>
+            <img src="/img/video.gif" alt="mundo"></img>
         </div>
 
         <div class="content">
-            <h3>La tierra madre te necesita?</h3>
-            <h1>Concurso global de carteles</h4>
+            <h3>La Tierra madre te necesita?</h3>
+            <h1>MedioAmbiente existe porque nuestro frágil planeta necesita una voz. Necesita soluciones. Necesita cambio. Necesita acción.</h4>
+            <p>Algunas personas miran a un bosque y ven sólo ganancia. Pero hay otros miles más que ven una casa, una sabiduría, un futuro. En todo el mundo, defendemos el medio ambiente y las comunidades que dependen de sus recursos, responsabilizando a gobiernos y corporaciones que los amenazan. Desde cualquier lugar, tenemos el poder de transformar al mundo cuando trabajamos juntos y para eso, te necesitamos.</p>    
             <p>Salvar el planeta es responsabilidad de todos.</p>
             <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de todo el mundo estan invitados a postular sus carteles. .</p>
             <h2>CONVOCATORIA 16BICM</h2>
@@ -256,7 +269,7 @@
 
 <section class="review" id="review">
 
-<h1 class="heading"> customer's <span>review</span> </h1>
+<h1 class="heading"> Opiniones </h1>
 
 <div class="box-container">
 
@@ -268,11 +281,15 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
         </div>
-        <p>Medio Ambiente.</p>
+        <p>Los recursos renovables son una solución sostenible y prometedora para abordar los problemas ambientales y energéticos. Su uso puede contribuir a la 
+           creación de un futuro más limpio y saludable para las generaciones venideras.           
+         <br>
+         <br>  
+        </p>
         <div class="user">
             <img src="/img/pic-1.png" alt="">
             <div class="user-info">
-                <h3>john deo</h3>
+                <h3>Camilo Huertas</h3>
                 <span></span>
             </div>
         </div>
@@ -287,11 +304,12 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
+        <p>La generación de fertilizantes a base de desechos orgánicos es una práctica que combina beneficios ambientales, agrícolas y económicos. Al aprovechar los residuos orgánicos y convertirlos en nutrientes naturales para las plantas, estamos 
+           promoviendo la sostenibilidad y construyendo un futuro más saludable para nuestro planeta.</p>
         <div class="user">
             <img src="/img/pic-2.png" alt="">
             <div class="user-info">
-                <h3>john deo</h3>
+                <h3>Vanessa P.</h3>
                 <span></span>
             </div>
         </div>
@@ -306,11 +324,12 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
+        <p>El reciclaje del plástico es esencial para preservar la vida natural en los océanos. Al reducir la cantidad de plásticos que llegan al mar y darles un nuevo uso, estamos tomando medidas concretas para 
+           proteger los ecosistemas marinos y garantizar un futuro saludable para la vida acuática.</p>
         <div class="user">
             <img src="/img/pic-3.png" alt="">
             <div class="user-info">
-                <h3>john deo</h3>
+                <h3>David Lugo</h3>
                
             </div>
         </div>
@@ -331,34 +350,35 @@
     <div class="box-container" id="contact">
 
         <div class="box">
-            <h3>quick links</h3>
-            <a href="#">home</a>
-            <a href="#">about</a>
-            <a href="#">campañas</a>
-            <a href="#">review</a>
-           <!-- <a href="#">contact</a>-->
+            <h3>links</h3>
+            <a href="#">Nosotros</a>
+            <a href="#noticiaContainer">Noticias</a>
+            <a href="#campañas">Campañas</a>
+            <!--<a href="#">Opiniones</a>-->
+           <a  href="#review">Opiniones </a>
+           <a href="#">Unete</a>
         </div>
 
         <div class="box">
             <h3>extra links</h3>
-            <a href="#">my account</a>
-            <a href="#">my favorite</a>
+            <a href="#">Mi cuenta</a>
+            <a href="#">Mis favoritos</a>
         </div>
 
         <div class="box">
             <h3>localidad</h3>
-            <a href="#">mexico</a>
-            <a href="#">ecuador</a>
-            <a href="#">colombia</a>
-            <a href="#">venezuela</a>
+            <a href="#">México</a>
+            <a href="#">Ecuador</a>
+            <a href="#">Colombia</a>
+            <a href="#">Venezuela</a>
         </div>
 
         <div class="box">
-            <h3>contacto información</h3>
+            <h3>Contacto Información</h3>
             <a href="#">+123-456-7890</a>
             <a href="#">villamarlen50@gmail.com</a>
-            <a href="#">San Luis Potosí, méxico - 78000</a>
-            <img src="/img/payment.png" alt="">
+            <a href="#">San Luis Potosí, México - 78000</a>
+           <!-- <img src="/img/payment.png" alt=""> -->
         </div>
         
     </div>
@@ -371,9 +391,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/scriptCarrusel.js"></script>
 <script src="/js/scriptCampana.js"></script>
-
 
 
 </body>

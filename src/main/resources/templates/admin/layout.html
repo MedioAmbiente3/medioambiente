@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:fragment="head-admin">
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link th:href="@{/admin/img/favicon.png}" rel="icon">
-    <link th:href="@{/admin/img/apple-touch-icon.png}" rel="apple-touch-icon">
+  <!-- Favicons -->
+  <link th:href="@{/admin/img/favicon.png}" rel="icon">
+  <link th:href="@{/admin/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link th:href="@{/admin/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/admin/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-    <link th:href="@{/admin/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-    <link th:href="@{/admin/vendor/quill/quill.snow.css}" rel="stylesheet">
-    <link th:href="@{/admin/vendor/quill/quill.bubble.css}" rel="stylesheet">
-    <link th:href="@{/admin/vendor/remixicon/remixicon.css}" rel="stylesheet">
-    <link th:href="@{/admin/vendor/simple-datatables/style.css}" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link th:href="@{/admin/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/admin/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/admin/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{/admin/vendor/quill/quill.snow.css}" rel="stylesheet">
+  <link th:href="@{/admin/vendor/quill/quill.bubble.css}" rel="stylesheet">
+  <link th:href="@{/admin/vendor/remixicon/remixicon.css}" rel="stylesheet">
+  <link th:href="@{/admin/vendor/simple-datatables/style.css}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link th:href="@{/admin/css/style.css}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link th:href="@{/admin/css/style.css}" rel="stylesheet">
 
-    <!-- =======================================================
+  <!-- =======================================================
     * Template Name: NiceAdmin
     * Updated: Sep 18 2023 with Bootstrap v5.3.2
     * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -37,20 +39,198 @@
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
 </head>
-<body>
-    <div th:fragment="scripts-admin">
-        <!-- Vendor JS Files -->
-        <script th:src="@{/admin/vendor/apexcharts/apexcharts.min.js}"></script>
-        <script th:src="@{/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-        <script th:src="@{/admin/vendor/chart.js/chart.umd.js}"></script>
-        <script th:src="@{/admin/vendor/echarts/echarts.min.js}"></script>
-        <script th:src="@{/admin/vendor/quill/quill.min.js}"></script>
-        <script th:src="@{/admin/vendor/simple-datatables/simple-datatables.js}"></script>
-        <script th:src="@{/admin/vendor/tinymce/tinymce.min.js}"></script>
-        <script th:src="@{/admin/vendor/php-email-form/validate.js}"></script>
 
-        <!-- Template Main JS File -->
-        <script th:src="@{/admin/js/main.js}"></script>
+<body>
+  <!-- NAVBAR -->
+  <div th:fragment="navbar-admin">
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+      <div class="d-flex align-items-center justify-content-between">
+        <a class="logo d-flex align-items-center">
+          <img th:src="@{/img/logo.png}" alt="">
+          <span class="d-none d-lg-block" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</span>
+          <span class="d-none d-lg-block" th:if="${#authorization.expression('hasRole(''USER'')')}">Usuario</span>
+          <span class="d-none d-lg-block" th:if="${#authorization.expression('hasRole(''EMPRESA'')')}">Empresa</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+      <!-- End Logo -->
+
+      <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+          <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+          <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+      </div><!-- End Search Bar -->
+
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link nav-icon search-bar-toggle " href="#">
+              <i class="bi bi-search"></i>
+            </a>
+          </li><!-- End Search Icon-->
+
+       <!-- End Notification Nav -->
+
+       <!-- End Messages Nav -->
+
+          <li class="nav-item dropdown pe-3">
+
+            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+              <img
+              th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}"
+              alt="Perfil" class="rounded-circle" id="imagen">
+              <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${session.usuariosesion.nombre}"></span>
+            </a><!-- End Profile Iamge Icon -->
+
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+              <li class="dropdown-header">
+                <h6 th:text="${session.usuariosesion.nombre}"></h6>
+                
+            </li>
+            <li>
+                
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="/perfil">
+                  <i class="bi bi-person"></i>
+                  <span>Mi Perfil</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+            
+
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="/logout">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Cerrar sesion </span>
+                </a>
+              </li>
+
+            </ul><!-- End Profile Dropdown Items -->
+          </li><!-- End Profile Nav -->
+
+        </ul>
+      </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+  </div>
+
+    <!-- ======= Sidebar ======= -->
+    <div th:fragment="navbar1">
+
+      <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link ">
+          <p>Qué quieres hacer?</p>
+        </a>
+      <!--Inicio nav izquierdo-->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav-campanas" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Campañas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav-campanas" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a sec:authorize="hasRole('ADMIN')" href="/campana/registrar">
+              <i class="bi bi-circle"></i><span>Registrar Campañas</span>
+            </a>
+          </li>
+          <li>
+            <a href="/campana/lista/admin" sec:authorize="hasRole('ADMIN')">
+              <i class="bi bi-circle"></i><span>Ver Campañas</span>
+            </a>
+            <a href="/campana/lista/" sec:authorize="hasRole('USER')">
+              <i class="bi bi-circle"></i><span>Ver Campañas</span>
+            </a>
+            <a href="/campana/lista/" sec:authorize="hasRole('EMPRESA')">
+              <i class="bi bi-circle"></i><span>Ver Campañas</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav-noticias" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Noticias</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav-noticias" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/noticia/registrar">
+              <i class="bi bi-journal-text"></i>
+              <span>Registrar Noticias</span>
+            </a>
+          </li>
+          <li>
+            <a href="/noticia/lista">
+              <i class="bi bi-circle"></i><span>Ver Noticias</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav-empresas" data-bs-toggle="collapse" href="#" sec:authorize="hasAnyRole('ADMIN', 'USER')"
+        >
+          <i class="bi bi-journal-text"></i><span>Empresas</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <a class="nav-link collapsed" data-bs-target="#forms-nav-empresas" data-bs-toggle="collapse" href="#" sec:authorize="hasRole('EMPRESA')">
+          <i class="bi bi-journal-text"></i><span>Auspicio</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav-empresas" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/empresa/registrar">
+              <i class="bi bi-journal-text"></i>
+              <span>Registrar Empresas</span>
+            </a>
+            </a>
+          </li>
+          <li>
+            <a href="#" sec:authorize="hasAnyRole('ADMIN', 'USER')">
+              <i class="bi bi-circle"></i><span>Ver Empresas</span>
+            </a>
+            <a href="#" sec:authorize="hasRole('EMPRESA')">
+              <i class="bi bi-circle"></i><span>Ver Auspicio</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/logout">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Salir</span>
+        </a>
+      </li><!-- End Login Page Nav -->
+    </ul>
+  </aside>
+    </div>
+
+
+    <!-- NAVBAR fin-->
+    <div th:fragment="scripts-admin">
+      <!-- Vendor JS Files -->
+      <script th:src="@{/admin/vendor/apexcharts/apexcharts.min.js}"></script>
+      <script th:src="@{/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+      <script th:src="@{/admin/vendor/chart.js/chart.umd.js}"></script>
+      <script th:src="@{/admin/vendor/echarts/echarts.min.js}"></script>
+      <script th:src="@{/admin/vendor/quill/quill.min.js}"></script>
+      <script th:src="@{/admin/vendor/simple-datatables/simple-datatables.js}"></script>
+      <script th:src="@{/admin/vendor/tinymce/tinymce.min.js}"></script>
+      <script th:src="@{/admin/vendor/php-email-form/validate.js}"></script>
+
+
+      <!-- Template Main JS File -->
+      <script th:src="@{/admin/js/main.js}"></script>
     </div>
 </body>
+
 </html>
