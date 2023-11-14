@@ -40,7 +40,7 @@ public class AuthController {
         }
 
         if (logueado.getRol().toString().equals("EMPRESA")) {
-            return "empresa.html";
+            return "empresa_lista.html";
         }
 
         return "inicio.html";

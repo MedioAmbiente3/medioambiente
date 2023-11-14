@@ -26,7 +26,7 @@ public class CampanaController {
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
     public String registrar() {
-        return "campana_registro.html";
+        return "campana_registrar.html";
     }
 
    //Registrar campañas
@@ -51,7 +51,7 @@ public class CampanaController {
             modelo.put("descripcion", descripcion);
             modelo.put("desafio", desafio);
             modelo.put("archivo", archivo);
-            return "campana_registro.html";
+            return "campana_registrar.html";
         }
     }
 
