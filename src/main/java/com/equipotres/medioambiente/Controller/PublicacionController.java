@@ -1,6 +1,8 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Campana;
+import com.equipotres.medioambiente.Entidades.Noticia;
+import com.equipotres.medioambiente.Entidades.Publicacion;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.PublicacionServicio;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/publicacion")
@@ -30,6 +34,7 @@ public class PublicacionController {
         return "publicacion_registrar.html";
     }
 
+    //Post de registro de la publicación
     @PostMapping("/registro")
     public String registro(
             @RequestParam String titulo,
@@ -62,5 +67,12 @@ public class PublicacionController {
 
     }
 
+    //Lista de publicaciones
+    @GetMapping("/lista")
+    public String lista(ModelMap modelo) {
+        List<Publicacion> publicaciones = publicacionServicio.listarPublicaciones();
+        modelo.addAttribute("publicaciones", publicaciones);
+        return "publicacion_lista.html";
+    }
 
 }

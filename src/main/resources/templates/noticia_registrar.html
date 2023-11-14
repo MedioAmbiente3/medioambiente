@@ -1,102 +1,102 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="admin/layout :: head-admin"></head>
+
 <body>
 
 <!-- ======= Header ======= -->
 <header th:replace="admin/layout :: navbar-admin"></header><!-- End Header -->
 <nav th:replace="admin/layout :: navbar1"></nav>
-<!-- End Sidebar--><!-- End Sidebar-->
+<!-- End Sidebar-->
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Noticias</h1>
-
+        <h1>Registrar Campañas</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html"></a></li>
+                <li class="breadcrumb-item"></li>
+                <li class="breadcrumb-item active"></li>
+            </ol>
+        </nav>
     </div><!-- End Page Title -->
-    <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+
+    <!-- Mensajes -->
+    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
         <div class="card-body">
-          <h5 class="card-title">Error!</h5>
-          <p class="card-text" th:text="${error}"></p>
+            <h5 class="card-title">Exito 👍</h5>
+            <p class="card-text" th:text="${exito}"></p>
         </div>
-      </div>
-      <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+    </div>
+    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
         <div class="card-body">
-          <h5 class="card-title">Exito!</h5>
-          <p class="card-text" th:text="${exito}"></p>
+            <h5 class="card-title">Error 👎</h5>
+            <p class="card-text" th:text="${error}"></p>
         </div>
-      </div>
+    </div>
+    <!--Fin Mensajes -->
+
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Datos de la Noticias</h5>
+                        <h5 class="card-title">Registrar Noticias</h5>
 
-                        <!-- General Form Elements -->
                         <form th:action="@{/noticia/registro}" method="POST" enctype="multipart/form-data">
+                            <input hidden th:value="${id}" name="id">
                             <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Titulo</label>
+                                <label for="titulo" class="col-sm-2 col-form-label">Título</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="titulo" id="titulo" class="form-control">
+                                    <input type="text" id="titulo" name="titulo" class="form-control">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">Fecha de Creacion</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-control">
-                                </div>
-                            </div>
-                           
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Contenido</label>
+                                <label for="contenido" class="col-sm-2 col-form-label">Contenido</label>
                                 <div class="col-sm-10">
                                     <input type="text" id="contenido" name="contenido" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                <label for="archivo" class="col-sm-2 col-form-label">Imagen</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="archivo" name="archivo">
+                                    <input class="form-control" type="file" name="archivo" id="archivo">
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <button class="btn btn-primary w-100" type="submit">Guardar</button>
                             </div>
                         </form>
-                        
-                        <!-- End General Form Elements -->
+                        <!-- End Table with stripped rows -->
 
                     </div>
                 </div>
 
             </div>
-
-
+        </div>
     </section>
 
-</main>
-<!-- End #main -->
+</main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
     </div>
 </footer><!-- End Footer -->
 
-<!-- Vendor JS Files -->
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <div th:replace="admin/layout :: scripts-admin"></div>
 
 </body>
