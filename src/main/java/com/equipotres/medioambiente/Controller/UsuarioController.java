@@ -68,16 +68,23 @@ public class UsuarioController {
     //Editar o modificar el perfil del usuario
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
     @PostMapping("/perfil/{id}")
-    public String actualizar(@PathVariable String id, @RequestParam String nombre,
+    public String actualizar(@PathVariable String id, 
+                             @RequestParam String nombre,
                              @RequestParam String email,
-                             @RequestParam String passwordA, @RequestParam String passwordB,
-                             ModelMap modelo, MultipartFile imagen) {
-
+                             @RequestParam String passwordA, 
+                             @RequestParam String passwordB,
+                             MultipartFile imagen,
+                             ModelMap modelo ) {
 
         try {
-            usuarioServicio.modificaUsuario(id, nombre, email, passwordA, passwordB, imagen);
+            usuarioServicio.modificaUsuario(id,
+                    nombre,
+                    email,
+                    passwordA,
+                    passwordB,
+                    imagen);
             modelo.put("exito", "Usuario actualizado correctamente!");
-            return "/campana/lista.html";
+            return "/login";
 
         } catch (MyException ex) {
 

@@ -35,33 +35,27 @@
               </div><!-- End Logo -->
 
               <div class="card mb-3">
-
                 <div class="card-body">
-
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Crea tu cuenta</h5>
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
-
                   <form class="row g-3 needs-validation" novalidate th:action="@{/registro}" method="POST" enctype="multipart/form-data">
                     <div class="col-12">
                       <label for="nombre" class="form-label">Tu nombre</label>
                       <input type="text" name="nombre" class="form-control" id="nombre" required th:value="${nombre}">
                       <div class="invalid-feedback">Por favor ingresa tu nombre</div>
                     </div>
-
                     <div class="col-12">
                       <label for="email" class="form-label">Tu email</label>
                       <input type="email" name="email" class="form-control" id="email" required th:value="${email}">
                       <div class="invalid-feedback">Por favor ingresa nuevamente tu correo</div>
                     </div>
-
                     <div class="col-12">
                       <label for="passwordA" class="form-label">Contraseña</label>
                       <input type="password" name="passwordA" class="form-control" id="passwordA" required th:value="${passwordA}">
                       <div class="invalid-feedback">Ingrese una contraseña</div>
                     </div>
-
                     <div class="col-12">
                       <label for="passwordB" class="form-label">Ingrese nuevamente tu contraseña</label>
                       <input type="password" name="passwordB" class="form-control" id="passwordB" required th:value="${passwordB}">

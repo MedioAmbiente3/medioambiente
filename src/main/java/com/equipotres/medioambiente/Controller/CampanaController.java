@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/campana") //http://localhost:8080/campana
 public class CampanaController {
@@ -21,14 +22,14 @@ public class CampanaController {
 
     @Autowired
     private SubscripcionServicio subscripcionServicio;
-    
+
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
     public String registrar() {
         return "campana_registro.html";
     }
 
-    //Registrar campañas
+   //Registrar campañas
     @PostMapping("/registro")
     public String registro(
             @RequestParam String titulo,
@@ -62,6 +63,14 @@ public class CampanaController {
         // Agrega al modelo la referencia al servicio
         modelo.addAttribute("subscripcionServicio", subscripcionServicio);
         return "campana_lista_user.html";
+    }
+
+    //Listar campañas en el admin
+        @GetMapping("/lista/admin")
+    public String listaAdmin(ModelMap modelo) {
+        List<Campana> campanas = campanaServicio.listarCampanas();
+        modelo.addAttribute("campanas", campanas);
+        return "campana_lista_admin.html";
     }
 
 

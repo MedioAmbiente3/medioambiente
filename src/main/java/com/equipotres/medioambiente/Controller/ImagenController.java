@@ -1,6 +1,7 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Campana;
+import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Noticia;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/imagen")
 public class ImagenController {
-
 
     @Autowired
     UsuarioServicio usuarioServicio;
@@ -56,7 +56,6 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
-
     //Imagen de una noticia
     @GetMapping("/noticia/{id}")
     public ResponseEntity<byte[]> imagenNoticia(@PathVariable String id) {
@@ -69,10 +68,5 @@ public class ImagenController {
 
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
-
-
-
-
-
 
 }
