@@ -76,10 +76,32 @@
                                   </a>
                               </div>
                               <div class="card-body">
-                                  <a sec:authorize="hasRole('USER')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
+                                  <a sec:authorize="hasRole('USER')"
+                                     th:href="${#strings.isEmpty(
+                                   subscripcionServicio.obtenerIdSubscripcion(
+                                   session.usuariosesion.id, campana.id)
+                                   )} ? '/subscripcion/registrar/' + ${campana.id} : 'javascript:void(0)'"
+                                     th:text="${#strings.isEmpty(
+                                   subscripcionServicio.obtenerIdSubscripcion(
+                                   session.usuariosesion.id,campana.id)
+                                    )} ?'Unirse' : 'Unido'">
                                       <i class="card-link"></i>
                                       Unirse
                                   </a>
+                                  <div class="card-body">
+                                      <a sec:authorize="hasRole('USER')"
+                                         th:href="@{/publicacion/registrar/__${campana.id}__}">
+                                          <i class="card-link"></i>
+                                          Publicar
+                                      </a>
+                                  </div>
+                                  <div class="card-body">
+                                      <a sec:authorize="hasRole('USER')"
+                                         th:href="@{/publicacion/lista/}">
+                                          <i class="card-link"></i>
+                                          Ver publicaciones
+                                      </a>
+                                  </div>
                                   <a sec:authorize="hasRole('EMPRESA')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
                                     <i class="card-link"></i>
                                     Auspiciar

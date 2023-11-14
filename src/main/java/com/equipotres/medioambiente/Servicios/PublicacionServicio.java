@@ -1,6 +1,7 @@
 package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Imagen;
+import com.equipotres.medioambiente.Entidades.Noticia;
 import com.equipotres.medioambiente.Entidades.Publicacion;
 import com.equipotres.medioambiente.Entidades.Subscripcion;
 import com.equipotres.medioambiente.Excepciones.MyException;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PublicacionServicio {
@@ -62,6 +66,17 @@ public class PublicacionServicio {
         return publicacionRepositorio.getOne(id);
 
     }
+
+    ////Método listar Publicación
+    @javax.transaction.Transactional
+    public List<Publicacion> listarPublicaciones() {
+        List<Publicacion> publicaciones = new ArrayList();
+
+        publicaciones = publicacionRepositorio.findAll();
+        //Metodo propio del jpaRepo es traer todos los datos de la tabla con el ".findAll()"
+        return publicaciones;
+    }
+
 
 
     //Validar campos vacios

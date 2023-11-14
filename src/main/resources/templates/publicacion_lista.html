@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/layout :: head-admin"></head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:replace="admin/layout :: navbar-admin"></header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<nav th:replace="admin/layout :: navbar1"></nav>
+<!-- End Sidebar-->
+
+<!-- End #main -->
+
+<section id="1">
+    <main id="main">
+
+        <div class="pagetitle">
+            <h1>Noticias</h1>
+            <nav>
+
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item active">Data</li>
+                </ol>
+
+            </nav>
+        </div><!-- End Page Title -->
+
+        <!-- Mensajes -->
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+            <div class="card-body">
+                <h5 class="card-title">Exito 👍</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+            <div class="card-body">
+                <h5 class="card-title">Error 👎</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+        <!--Fin Mensajes -->
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Lista de Publicaciones</h5>
+
+                            <div class="card-list row">
+                                <!-- Loop through campanas and display each card -->
+                                <div th:each="publicacion : ${publicaciones}" class="card">
+                                    <ul class="list-group list-group-flush">
+                                        <div class="card-body">
+                                            <section style="background-color: #eee;">
+                                                <div class="container my-5 py-5">
+                                                    <div class="row d-flex justify-content-center">
+                                                        <div class="col-md-12 col-lg-10 col-xl-8">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex flex-start align-items-center">
+                                                                        <img class="rounded-circle shadow-1-strong me-3"
+                                                                             th:if="${publicacion.imagen != null}"
+                                                                             th:src="@{/imagen/publicacion/__${publicacion.id}__}"
+                                                                             alt="avatar" width="60"
+                                                                             height="60"/>
+                                                                        <div>
+                                                                            <h6 th:text="${publicacion.titulo}" class="fw-bold text-primary mb-1"></h6>
+                                                                            <p class="text-muted small mb-0">
+                                                                                Shared publicly - Jan 2020
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <p th:text="${publicacion.contenido}" class="mt-3 mb-4 pb-2">
+                                                                    </p>
+                                                                    <div class="small d-flex justify-content-start">
+                                                                        <a href="#!"
+                                                                           class="d-flex align-items-center me-3">
+                                                                            <i class="fa-duotone fa-handshake fa-2xs"
+                                                                               style="--fa-primary-color: #1f5122;
+                                                                                      --fa-secondary-color: #3caf43;"></i>
+                                                                            <p class="mb-0">Voto</p>
+                                                                        </a>
+                                                                        <a href="#!"
+                                                                           class="d-flex align-items-center me-3">
+                                                                            <i class="far fa-comment-dots me-2"></i>
+                                                                            <p class="mb-0">Comentario</p>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer py-3 border-0"
+                                                                     style="background-color: #f8f9fa;">
+                                                                    <div class="d-flex flex-start w-100">
+                                                                        <img class="rounded-circle shadow-1-strong me-3"
+                                                                             th:if="${session.usuariosesion.imagen != null}"
+                                                                             th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}"
+                                                                             alt="avatar" width="40"
+                                                                             height="40"/>
+                                                                        <div class="form-outline w-100">
+                                                                <textarea class="form-control" id="textAreaExample" rows="4"
+                                                                style="background: #fff;"></textarea>
+                                                                            <label class="form-label"
+                                                                                   for="textAreaExample">Mensaje</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="float-end mt-2 pt-1">
+                                                                        <button type="button"
+                                                                                class="btn btn-primary btn-sm">Enviar
+                                                                            comentario
+                                                                        </button>
+                                                                        <button type="button"
+                                                                                class="btn btn-outline-primary btn-sm">
+                                                                            Cancel
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </ul>
+                                </div>
+                                <!-- End of card loop -->
+                            </div>
+                            <!--Find -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</section>
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<div th:replace="admin/layout :: scripts-admin"></div>
+
+</body>
+
+</html>
