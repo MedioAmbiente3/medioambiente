@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,13 +42,15 @@ public class NoticiaServicio {
 
     //Modificar una noticia
     @Transactional
-    public void modificarNoticia(String id_noticia, String titulo, String contenido, MultipartFile imagen) throws MyException {
+    public void modificarNoticia(String idnoticia, String titulo,
+                                 String contenido, MultipartFile imagen) throws MyException {
 
         //Validar campos vacios
         validar(titulo, contenido);
 
-        // en caso de que el id de la Evidencia este mal digitado o que no se encuentre, se debe de usar un optional
-        Optional<Noticia> respuesta = noticiaRepositorio.findById(id_noticia);
+        // en caso de que el id de la Evidencia este mal digitado o que no se
+        // encuentre, se debe de usar un optional
+        Optional<Noticia> respuesta = noticiaRepositorio.findById(idnoticia);
 
         //comprobar de que si exista un dato con el mismo id
         if (respuesta.isPresent()) {

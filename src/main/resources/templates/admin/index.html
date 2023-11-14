@@ -174,8 +174,6 @@
         </li><!-- End Messages Nav -->
 
         <li  class="nav-item dropdown pe-3">
-
-
           <a  class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img  th:if="${session.usuariosesion.imagen != null}"  class="rounded-circle" th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}" >
             <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${session.usuariosesion.nombre}"></span>
@@ -260,18 +258,32 @@
             </a>
         </ul>
       </li><!-- End Forms Nav -->
+      <!--Noticias -->
       <li class="nav-item">
         <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/noticia/registrar">
           <i class="bi bi-journal-text"></i>
           <span>Registrar Noticias</span>
         </a>
       </li>
+      <ul class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <li class="nav-item">
+          <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/noticia/lista">
+            <i class="bi bi-journal-text"></i>
+            <span>Ver Noticias</span>
+          </a>
+        </li>
+      </ul>
+      <!--Empresas -->
       <li class="nav-item">
         <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/empresa/registrar">
           <i class="bi bi-journal-text"></i>
           <span>Registrar Empresas</span>
         </a>
       </li>
+      <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+
+      </ul>
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="/logout">
@@ -294,15 +306,56 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+      <!-- Mensajes -->
+      <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+          <h5 class="card-title">Exito 👍</h5>
+          <p class="card-text" th:text="${exito}"></p>
+        </div>
+      </div>
+      <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+        <div class="card-body">
+          <h5 class="card-title">Error 👎</h5>
+          <p class="card-text" th:text="${error}"></p>
+        </div>
+      </div>
+      <!--Fin Mensajes -->
+
+
 
     <section class="section dashboard">
       <div class="row">
-
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row">
+            <!--Lista de Noticias-->
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div th:each="noticia : ${noticias}" class="carousel-item active" data-bs-interval="1000">
+                  <img th:if="${noticia.imagen != null}"  th:src="@{/imagen/noticia/__${noticia.id}__}"
+                      width="600" height="500" class="d-block w-100 rounded-2" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5 th:text="${noticia.titulo}" class="fs-1 bg-primary text-light" ></h5>
+                    <p th:text="${noticia.contenido}" class="fs-3 bg-dark text-light" ></p>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
 
-
+            <!--Fin lista de Noticias -->
 
           </div>
 
