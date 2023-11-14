@@ -19,13 +19,15 @@ import java.util.List;
 public class NoticiasController {
     @Autowired
     private NoticiaServicio noticiaServicio;
-//    @Autowired
-//    private ImagenServicio imagenServicio;
 
+
+    //Vista registrar noticias
     @GetMapping(value = "/registrar")
     public String generar_noticias() {
-        return "generar_noticias.html";
+        return "noticias_registrar.html";
     }
+
+    //Vista registro noticias
     @PostMapping("/registro")
     public String registrar(@RequestParam String titulo,
                             @RequestParam String contenido,
@@ -36,13 +38,13 @@ public class NoticiasController {
             // Convierte el String a Rol
             noticiaServicio.crearNoticia(titulo, contenido, archivo);
             modelo.put("exito", "Se ha creado la noticia correctamente");
-            return "generar_noticias.html";
+            return "noticias_registrar.html";
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("titulo", titulo);
             modelo.put("contenido", contenido);
             modelo.put("archivo", archivo);
-            return "generar_noticias.html";
+            return "noticias_registrar.html";
         }
         //noticiaServicio.crearNoticia();
         //return "redirect:/noticia/lista";

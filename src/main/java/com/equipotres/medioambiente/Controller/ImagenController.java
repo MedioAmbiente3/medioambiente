@@ -57,6 +57,7 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
+    //Imagen de noticia
     @GetMapping("/noticia/{id}")
     public ResponseEntity<byte[]> imagenNoticia(@PathVariable String id) {
         Noticia noticia = noticiaServicio.getOne(id);
@@ -68,6 +69,6 @@ public class ImagenController {
 
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
 
+    }
 
-}
 }

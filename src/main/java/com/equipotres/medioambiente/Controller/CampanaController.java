@@ -1,25 +1,16 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Campana;
-import com.equipotres.medioambiente.Entidades.Imagen;
-import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
-import com.equipotres.medioambiente.Servicios.ImagenServicio;
-import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/campana") //http://localhost:8080/campana
@@ -28,11 +19,6 @@ public class CampanaController {
     @Autowired
     private CampanaServicio campanaServicio;
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
-
-    @Autowired
-    private ImagenServicio imagenServicio;
 
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
@@ -50,7 +36,6 @@ public class CampanaController {
                            ModelMap modelo) {
 
         try {
-            // Convierte el String a Rol
             campanaServicio.crearCampana(titulo, descripcion, desafio , archivo);
             modelo.put("exito", "Se ha registrado la Campaña correctamente");
             return "admin/index";
@@ -67,14 +52,14 @@ public class CampanaController {
     }
 
     //Lista de las campañas
-   
     @GetMapping("/lista")
     public String lista(ModelMap modelo) {
         List<Campana> campanas = campanaServicio.listarCampanas();
         modelo.addAttribute("campanas", campanas);
         return "campana_lista_user.html";
     }
-  
+
+    //Listar campañas en el admin
         @GetMapping("/lista/admin")
     public String listaAdmin(ModelMap modelo) {
         List<Campana> campanas = campanaServicio.listarCampanas();

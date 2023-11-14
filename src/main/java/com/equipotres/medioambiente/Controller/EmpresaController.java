@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EmpresaController {
 
 
+    //Vista empresa registrar
     @GetMapping(value = "/registrar")
-    public String generar_empresa() {
-        return "generar_empresa";
+    public String registrar() {
+        return "empresa_registrar";
     }
 
 
