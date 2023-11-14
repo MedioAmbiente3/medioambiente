@@ -33,6 +33,15 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private RolEnum rol;
 
+    public Usuario(String nombre, String email, String password, RolEnum rol) {
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
+    }
+
     @OneToMany
     private List<Noticia> noticias;
+
+
 }
