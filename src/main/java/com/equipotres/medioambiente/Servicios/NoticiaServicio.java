@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,6 @@ public class NoticiaServicio {
 
         //Validamos los campos vacios
         validar(titulo, contenido);
-        LocalDate fecha;
         Noticia noticia = new Noticia();
         noticia.setTitulo(titulo);
         noticia.setContenido(contenido);
@@ -39,6 +39,7 @@ public class NoticiaServicio {
         noticiaRepositorio.save(noticia);
 
     }
+
 
     //Modificar una noticia
     @Transactional
@@ -83,7 +84,8 @@ public class NoticiaServicio {
         return noticiaRepositorio.getOne(id);
     }
     //Consultar noticias
-    //Listar todos los usuarios
+
+    //Listar todos las noticias
     @Transactional
     public List<Noticia> listarNoticias() {
         List<Noticia> noticias = new ArrayList();
