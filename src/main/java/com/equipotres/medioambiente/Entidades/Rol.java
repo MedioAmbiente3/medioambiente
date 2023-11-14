@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,10 +19,12 @@ public class Rol {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    //@Enumerated(EnumType.STRING)
-    //private RolEnum nombre;
+    @Enumerated(EnumType.STRING)
+    private RolEnum nombre;
 
-
-
-
+    @OneToMany(
+            mappedBy = "rol",
+            fetch = FetchType.EAGER
+    )
+    private List<Usuario> usuarios;
 }
