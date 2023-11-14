@@ -3,6 +3,7 @@ package com.equipotres.medioambiente.Controller;
 import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
+import com.equipotres.medioambiente.Servicios.SubscripcionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +20,8 @@ public class CampanaController {
     @Autowired
     private CampanaServicio campanaServicio;
 
+    @Autowired
+    private SubscripcionServicio subscripcionServicio;
 
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
@@ -26,29 +29,30 @@ public class CampanaController {
         return "campana_registro.html";
     }
 
-
-    //Registrar campañas
+   //Registrar campañas
     @PostMapping("/registro")
-    public String registro(@RequestParam String titulo,
-                           @RequestParam String descripcion,
-                           @RequestParam String desafio,
-                           MultipartFile archivo,
-                           ModelMap modelo) {
-
-        try {
+    public String registro(
+            @RequestParam String titulo,
+            @RequestParam String descripcion,
+            @RequestParam String desafio,
+                   MultipartFile archivo,
+                        ModelMap modelo)
+    {
+        try
+        {
             campanaServicio.crearCampana(titulo, descripcion, desafio , archivo);
             modelo.put("exito", "Se ha registrado la Campaña correctamente");
             return "admin/index";
-        } catch (MyException ex) {
+        }
+        catch (MyException ex)
+        {
             modelo.put("error", ex.getMessage());
             modelo.put("titulo", titulo);
             modelo.put("descripcion", descripcion);
             modelo.put("desafio", desafio);
             modelo.put("archivo", archivo);
-
             return "campana_registro.html";
         }
-
     }
 
     //Lista de las campañas
@@ -56,6 +60,8 @@ public class CampanaController {
     public String lista(ModelMap modelo) {
         List<Campana> campanas = campanaServicio.listarCampanas();
         modelo.addAttribute("campanas", campanas);
+        // Agrega al modelo la referencia al servicio
+        modelo.addAttribute("subscripcionServicio", subscripcionServicio);
         return "campana_lista_user.html";
     }
 
@@ -87,19 +93,17 @@ public class CampanaController {
                             @RequestParam Boolean estado,
                             MultipartFile archivo,
                             ModelMap modelo) {
-        try {
-            campanaServicio.modificarCampana(id, titulo,descripcion, desafio, estado, archivo );
+        try
+        {
+            campanaServicio.modificarCampana(id, titulo, descripcion,
+                    desafio, estado, archivo);
             modelo.put("exito", "Se ha modificado la campaña");
             return "redirect:../lista";
-        } catch (MyException ex) {
+        }
+        catch (MyException ex)
+        {
             modelo.put("error", "No se ha realizado ningún cambio");
             return "campana_modificar.html";
         }
-
     }
-
-
-
-
-
 }

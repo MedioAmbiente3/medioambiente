@@ -1,5 +1,4 @@
 package com.equipotres.medioambiente.Controller;
-import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;

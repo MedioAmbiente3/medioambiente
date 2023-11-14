@@ -11,4 +11,5 @@ public interface PublicacionRepositorio extends JpaRepository<Publicacion, Strin
 todas las operaciones necesarias (crear, modificar, listar y eliminar campañas)
 ya están cubiertas por los métodos proporcionados por JpaRepository*/
 
+
 }

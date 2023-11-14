@@ -27,7 +27,6 @@ public class ImagenController {
     @Autowired
     CampanaServicio campanaServicio;
 
-
     @Autowired
     NoticiaServicio noticiaServicio;
 
@@ -44,7 +43,7 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
-    //Imagen de perfil del usuario
+    //Imagen de una campaña
     @GetMapping("/campana/{id}")
     public ResponseEntity<byte[]> imagenCampana(@PathVariable String id) {
         Campana campana = campanaServicio.getOne(id);
@@ -57,7 +56,7 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
-    //Imagen de noticia
+    //Imagen de una noticia
     @GetMapping("/noticia/{id}")
     public ResponseEntity<byte[]> imagenNoticia(@PathVariable String id) {
         Noticia noticia = noticiaServicio.getOne(id);
@@ -68,7 +67,6 @@ public class ImagenController {
         headers.setContentType(MediaType.IMAGE_JPEG);
 
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
-
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 @Controller
@@ -20,11 +21,39 @@ public class NoticiasController {
     @Autowired
     private NoticiaServicio noticiaServicio;
 
-
     //Vista registrar noticias
-    @GetMapping(value = "/registrar")
-    public String generar_noticias() {
+    @Autowired
+    private NoticiaServicio noticiaServicio;
+
+    @GetMapping("/registrar")
+    public String registrar() {
         return "noticias_registrar.html";
+    }
+
+    @PostMapping("/registro")
+    public String registro(
+            @RequestParam String titulo,
+            @RequestParam String contenido,
+            MultipartFile archivo,
+            ModelMap modelo){
+        try {
+            noticiaServicio.crearNoticia(titulo, contenido, archivo);
+            modelo.put("exito", "La Noticia fue guardada en la Base de Datos");
+            return "admin/index";
+
+        } catch (MyException ex) {
+            modelo.put("error", ex.getMessage());
+            return "noticias_registrar.html";
+        }
+
+    }
+
+    //Listar las noticias
+    @GetMapping("/lista")
+    public String lista(ModelMap modelo) {
+        List<Noticia> noticias = noticiaServicio.listarNoticias();
+        modelo.addAttribute("noticias", noticias);
+        return "noticias_lista.html";
     }
 
     //Vista registro noticias

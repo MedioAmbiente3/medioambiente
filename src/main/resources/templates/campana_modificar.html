@@ -12,78 +12,78 @@
 <nav th:replace="admin/layout :: navbar1"></nav>
 <!-- End Sidebar-->
 
-<main id="main" class="main">
+<!-- End #main -->
 
-    <div class="pagetitle">
-        <h1>Modificar Campañas</h1>
-        <!--<nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html"></a></li>
-                <li class="breadcrumb-item"></li>
-                <li class="breadcrumb-item active"></li>
-            </ol>
-        </nav> End Page Title -->
-    </div> 
+<section id="1" >
+    <main id="main" >
 
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
+  <div class="pagetitle" >
+      <h1>Campañas</h1>
+      <nav>
+          
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item">Tables</li>
+              <li class="breadcrumb-item active">Data</li>
+          </ol>
+          
+      </nav>
+  </div><!-- End Page Title -->
 
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Modificar Campañas</h5>
+  <section class="section">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Lista de Campañas</h5>
+  
+                      <div class="card-list row">
+                          <!-- Loop through campanas and display each card -->
+                          <div th:each="campana : ${campanas}" class="card col-lg-2 mb-3">
+                              <img th:if="${campana.imagen != null}" th:src="@{/imagen/campana/__${campana.id}__}" class="card-img-top" alt="Card image cap">
+                              <div class="card-body">
+                                  <h5 th:text="${campana.titulo}" class="card-title"></h5>
+                              </div>
+                              <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">Descripción</li>
+                                  <div class="card-body">
+                                      <p th:text="${campana.descripcion}" class="card-text"></p>
+                                  </div>
+                                  <li class="list-group-item">Desafio</li>
+                                  <div class="card-body">
+                                      <p th:text="${campana.desafio}" class="card-text"></p>
+                                  </div>
+                              </ul>
+                              <div class="card-body">
+                                  <a sec:authorize="hasRole('ADMIN')" th:href="@{/campana/modificar/__${campana.id}__}">
+                                      <i class="card-link"></i>
+                                      Modificar
+                                  </a>
+                              </div>
+                              <div class="card-body">
+                                  <a sec:authorize="hasRole('USER')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
+                                      <i class="card-link"></i>
+                                      Unirse
+                                  </a>
+                                  <a sec:authorize="hasRole('EMPRESA')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
+                                    <i class="card-link"></i>
+                                    Auspiciar
+                                </a>
+                              </div>
+                          </div>
+                          <!-- End of card loop -->
+                      </div>
+                      <!--Find -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+</main>
+</section>
 
-                        <form th:action="@{/campana/modificar/__${campana.id}__}" method="POST" enctype="multipart/form-data">
-                            <input hidden th:value="${id}" name="id">
-                            <div class="row mb-3">
-                                <label for="titulo" class="col-sm-2 col-form-label">Título</label>
-                                <div class="col-sm-10">
-                                    <input th:value="${campana.titulo}" type="text" id="titulo" name="titulo" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                                <div class="col-sm-10">
-                                    <input th:value="${campana.descripcion}" type="text" id="descripcion" name="descripcion" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="desafio" class="col-sm-2 col-form-label">Desafio</label>
-                                <div class="col-sm-10">
-                                    <input th:value="${campana.desafio}" type="text" id="desafio" name="desafio" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="estado" class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-10">
-                                    <select name="estado" id="estado">
-                                        <option value="true" th:selected="${campana.estado == true}">Activa</option>
-                                        <option value="false" th:selected="${campana.estado == false}">Inactiva</option>
-                                        <option th:if="${campana.estado == null}" th:text="Estado actual" selected="selected"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="archivo" class="col-sm-2 col-form-label">Imagen</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" name="archivo" id="archivo">
-                                </div>
-                            </div>
 
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Modificar</button>
-                            </div>
-                        </form>
-                        <!-- End Table with stripped rows -->
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-</main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
@@ -91,11 +91,6 @@
         &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-
     </div>
 </footer><!-- End Footer -->
 
