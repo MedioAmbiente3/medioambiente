@@ -1,7 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Comentario;
-import com.equipotres.medioambiente.Entidades.Comentario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.ComentarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
