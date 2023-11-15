@@ -1,5 +1,6 @@
 package com.equipotres.medioambiente.Controller;
 
+import org.springframework.security.core.Authentication;
 import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Usuario;
@@ -69,17 +70,16 @@ public class CampanaController {
     //Lista de las campañas
    
     @GetMapping("/lista")
-    public String lista(ModelMap modelo) {
+    public String lista(ModelMap modelo, Authentication authentication) {
         List<Campana> campanas = campanaServicio.listarCampanas();
         modelo.addAttribute("campanas", campanas);
-        return "campana_lista_user.html";
-    }
-  
-        @GetMapping("/lista/admin")
-    public String listaAdmin(ModelMap modelo) {
-        List<Campana> campanas = campanaServicio.listarCampanas();
-        modelo.addAttribute("campanas", campanas);
-        return "campana_lista_admin.html";
+
+        if (authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
+            return "campana_lista_admin.html";
+        } else {
+            return "campana_lista_user.html";
+        }
     }
 
 

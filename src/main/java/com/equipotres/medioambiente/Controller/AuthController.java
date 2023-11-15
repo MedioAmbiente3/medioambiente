@@ -43,7 +43,7 @@ public class AuthController {
             return "empresa.html";
         }
 
-        return "inicio.html";
+        return "usuario.html";
     }
 
     @GetMapping(value = "/index")
