@@ -14,7 +14,7 @@ html{
 section{
     padding:2rem;
     margin: 0 auto;
-
+    max-width: 1200px;
 }
 
 .heading{
@@ -33,48 +33,82 @@ section{
 /*nav*/
 #mainNavigation a {
     font-family: 'Cabin', sans-serif;
-    font-size:14px;
+    font-size:16px;
     text-transform:uppercase;
     letter-spacing:2px;
     text-shadow:1px 1px 2px rgba(0,0,0,0.4)
+  }
+  
+
+
+
+  #lista{
+  /*  background-color: #407040e8;*/
+  }
+ a.dropdown-toggle {
+    color: #d2dbdc !important /*color de unete*/
+ }
+
+/*nuevo*/
+
+.dropdown-menu.show {
+    background-color: transparent; /* Hace que el fondo sea transparente */
+    border: none; /* Elimina el borde del menú desplegable */
+    padding: 0; /* Elimina el relleno del menú desplegable */
 }
 
-#lista{
-    background-color: #407040e8;
+#lista .dropdown-menu.show .dropdown-item {
+    padding: 0.5rem 1rem; /* Ajusta el espaciado interno del menú desplegable si es necesario */
 }
-a.dropdown-toggle {
-    color:#d2dbdc !important
-}
-a.dropdown-item:hover {
+
+
+  a.dropdown-item:hover {
     color:#616364 !important
-}
-.nav-item a{
+  }
+  .nav-item a{
+    /*color:#d5cbcb;*/
     color:#d5cbcb;
-}
-.nav-item a:hover {
+  }
+  .nav-item a:hover {
     color:#fff
-}
-.nav-item{
+
+
+  }
+  .nav-item{
     min-width:12vw;
-}
-#mainNavigation {
+  }
+  #mainNavigation {
     position:fixed;
     top:0;
     left:0;
     width:100%;
+    
 
 
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
-    background: -moz-linear-gradient(top, rgba(20, 74, 34, 0.925) 0%, rgba(0, 0, 0, 0.495) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); /* Chrome10-25, Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(18, 54, 25, 0.943) 0%, rgba(8, 45, 25, 0.55) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000', GradientType=0); /* IE6-9 */
+
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+background: -moz-linear-gradient(top, rgba(247, 244, 244, 0.925) 0%, rgba(60, 60, 60, 0.495) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(245, 247, 246, 0.884) 0%, rgba(232, 237, 232, 0.523) 100%); /* Chrome10-25, Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(227, 237, 229, 0.943) 0%, rgba(242, 247, 242, 0.55) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000', GradientType=0); /* IE6-9 */
 }
+
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+/*background: -moz-linear-gradient(top, rgba(224, 240, 228, 0.925) 0%, rgba(0, 0, 0, 0.495) 100%); /* FF3.6-15 */
+/*background: -webkit-linear-gradient(top, rgba(236, 246, 240, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); /* Chrome10-25, Safari5.1-6 */
+/*background: linear-gradient(to bottom, rgba(227, 237, 229, 0.943) 0%, rgba(43, 170, 43, 0.55) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000', GradientType=0); /* IE6-9 */
+/*}
+
+
 
 #navbarNavDropdown.collapsing .navbar-nav,
 #navbarNavDropdown.show .navbar-nav {
-    background: #d2d5d6;
-    padding: 12px;
+  background: #d2d5d6;
+
+
+
+  padding: 12px;
 }
 /*nav*/
 
@@ -165,6 +199,13 @@ header .fa-bars{
 
 }
 
+.home-container1{
+    background:url(/img/tree1fondo.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+}
 .home{
     display: flex;
     align-items: center;
@@ -856,4 +897,35 @@ video {
         font-size: 3rem;
     }
 
-}
+
+    .register {
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente para hacer el formulario más legible */
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+
+     /* .custom-btn {
+        background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%);
+        color: #ffffff;
+        border: 2px solid #01090f;
+        border-radius: 5px;
+        padding: 5px;
+        margin-bottom: 10px;
+        transition : color 0.3s linear 0.2s; /* Añadido para suavizar la transición */
+      }
+
+     /* .custom-btn:hover {
+        background: linear-gradient(to right, rgba(18, 98, 9, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%);
+        color: #ffffff;
+      }*/
+
+
+
+      .btn-primary:hover {
+        background: linear-gradient(to right, rgba(22, 100, 13, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%) !important;
+        border: 2px solid #01090f !important;
+        color: #ffffff !important;
+      }
+
+
