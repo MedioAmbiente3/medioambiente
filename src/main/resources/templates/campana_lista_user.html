@@ -30,9 +30,21 @@
       </nav>
   </div><!-- End Page Title -->
 
- 
+        <!-- Mensajes -->
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+            <div class="card-body">
+                <h5 class="card-title">Exito 👍</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+            <div class="card-body">
+                <h5 class="card-title">Error 👎</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+        <!--Fin Mensajes -->
 
-  <main>
   <section class="section">
       <div class="row">
           <div class="col-lg-12">
@@ -42,7 +54,7 @@
   
                       <div class="card-list row">
                           <!-- Loop through campanas and display each card -->
-                          <div th:each="campana : ${campanas}" class="card col-lg-2 mb-3">
+                          <div th:each="campana : ${campanas}" class="card col-lg-3 mb-3">
                               <img th:if="${campana.imagen != null}" th:src="@{/imagen/campana/__${campana.id}__}" class="card-img-top" alt="Card image cap">
                               <div class="card-body">
                                   <h5 th:text="${campana.titulo}" class="card-title"></h5>
@@ -64,10 +76,33 @@
                                   </a>
                               </div>
                               <div class="card-body">
-                                  <a sec:authorize="hasRole('USER')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
+                                  <a sec:authorize="hasRole('USER')"
+                                     th:href="${#strings.isEmpty(
+                                   subscripcionServicio.obtenerIdSubscripcion(
+                                   session.usuariosesion.id, campana.id)
+                                   )} ? '/subscripcion/registrar/' + ${campana.id} : 'javascript:void(0)'"
+                                     th:text="${#strings.isEmpty(
+                                   subscripcionServicio.obtenerIdSubscripcion(
+                                   session.usuariosesion.id,campana.id)
+                                    )} ?'Unirse' : 'Unido'">
                                       <i class="card-link"></i>
                                       Unirse
                                   </a>
+                                </div>
+                                  <div class="card-body">
+                                      <a sec:authorize="hasRole('USER')"
+                                         th:href="@{/publicacion/registrar/__${campana.id}__}">
+                                          <i class="card-link"></i>
+                                          Publicar
+                                      </a>
+                                  </div>
+                                  <div class="card-body">
+                                      <a sec:authorize="hasRole('USER')"
+                                         th:href="@{/publicacion/lista/}">
+                                          <i class="card-link"></i>
+                                          Ver publicaciones
+                                      </a>
+                                  </div>
                                   <a sec:authorize="hasRole('EMPRESA')" th:href="@{/subscripcion/registrar/__${campana.id}__}">
                                     <i class="card-link"></i>
                                     Auspiciar

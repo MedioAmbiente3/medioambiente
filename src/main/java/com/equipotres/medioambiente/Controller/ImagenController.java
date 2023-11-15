@@ -1,11 +1,9 @@
 package com.equipotres.medioambiente.Controller;
 
-import com.equipotres.medioambiente.Entidades.Campana;
-import com.equipotres.medioambiente.Entidades.Imagen;
-import com.equipotres.medioambiente.Entidades.Noticia;
-import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Entidades.*;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.NoticiaServicio;
+import com.equipotres.medioambiente.Servicios.PublicacionServicio;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -27,9 +25,11 @@ public class ImagenController {
     @Autowired
     CampanaServicio campanaServicio;
 
-
     @Autowired
     NoticiaServicio noticiaServicio;
+
+    @Autowired
+    PublicacionServicio publicacionServicio;
 
     //Imagen de perfil del usuario
     @GetMapping("/perfil/{id}")
@@ -44,7 +44,7 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
-    //Imagen de perfil del usuario
+    //Imagen de una campaña
     @GetMapping("/campana/{id}")
     public ResponseEntity<byte[]> imagenCampana(@PathVariable String id) {
         Campana campana = campanaServicio.getOne(id);
@@ -57,6 +57,7 @@ public class ImagenController {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
+    //Imagen de una noticia
     @GetMapping("/noticia/{id}")
     public ResponseEntity<byte[]> imagenNoticia(@PathVariable String id) {
         Noticia noticia = noticiaServicio.getOne(id);
@@ -67,7 +68,19 @@ public class ImagenController {
         headers.setContentType(MediaType.IMAGE_JPEG);
 
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
+    }
 
+    //Imagen de una publicación
+    @GetMapping("/publicacion/{id}")
+    public ResponseEntity<byte[]> imagenPublicacion(@PathVariable String id) {
+        Publicacion publicacion = publicacionServicio.getOne(id);
 
-}
+        byte[] imagen = publicacion.getImagen().getContenido();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+
+        return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
+    }
+
 }

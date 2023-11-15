@@ -24,11 +24,12 @@ public class NoticiaServicio {
     private ImagenServicio imagenServicio;
 
     //Crear una noticia
-    public void crearNoticia(String titulo, String contenido, MultipartFile imagen) throws MyException {
+    public void crearNoticia(String titulo,
+                             String contenido,
+                             MultipartFile imagen) throws MyException {
 
         //Validamos los campos vacios
         validar(titulo, contenido);
-        LocalDate fecha;
         Noticia noticia = new Noticia();
         noticia.setTitulo(titulo);
         noticia.setContenido(contenido);
@@ -41,15 +42,21 @@ public class NoticiaServicio {
 
     }
 
+
     //Modificar una noticia
     @Transactional
-    public void modificarNoticia(String idNoticia, String titulo, String contenido, MultipartFile imagen) throws MyException {
+    public void modificarNoticia(String idnoticia,
+                                 String titulo,
+                                 String contenido,
+                                 MultipartFile imagen) throws MyException {
 
         //Validar campos vacios
         validar(titulo, contenido);
 
-        // en caso de que el id de la Evidencia este mal digitado o que no se encuentre, se debe de usar un optional
-        Optional<Noticia> respuesta = noticiaRepositorio.findById(idNoticia);
+        // en caso de que el id de la Evidencia este mal digitado o que no se
+        // encuentre, se debe de usar un optional
+        Optional<Noticia> respuesta = noticiaRepositorio.findById(idnoticia);
+
 
         //comprobar de que si exista un dato con el mismo id
         if (respuesta.isPresent()) {
@@ -81,7 +88,8 @@ public class NoticiaServicio {
         return noticiaRepositorio.getOne(id);
     }
     //Consultar noticias
-    //Listar todos los usuarios
+
+    //Listar todos las noticias
     @Transactional
     public List<Noticia> listarNoticias() {
         List<Noticia> noticias = new ArrayList();
