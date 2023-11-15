@@ -28,7 +28,7 @@ public class AuthController {
         return "login"; //devolver la vista
     }
 
-    //Iniciar sesion
+
     //Inicio de session de un usuario, sea User o Admin
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
     @GetMapping("/inicio")
@@ -43,15 +43,16 @@ public class AuthController {
         if (logueado.getRol().getNombre().equals(RolEnum.EMPRESA)) {
             return "redirect:/empresa_lista.html";
 
+        }
         return "inicio.html";
     }
 
-    @GetMapping(value = "/index")
-    public String index() {
+    @GetMapping("/index")
+    public String index(){
         return "index";
     }
 
-    @GetMapping(value = "/register")
+    @GetMapping("/register")
     public String register() {
         return "register";
     }

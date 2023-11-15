@@ -54,7 +54,7 @@
   
                       <div class="card-list row">
                           <!-- Loop through campanas and display each card -->
-                          <div th:each="campana : ${campanas}" class="card col-lg-2 mb-3">
+                          <div th:each="campana : ${campanas}" class="card col-lg-3 mb-3">
                               <img th:if="${campana.imagen != null}" th:src="@{/imagen/campana/__${campana.id}__}" class="card-img-top" alt="Card image cap">
                               <div class="card-body">
                                   <h5 th:text="${campana.titulo}" class="card-title"></h5>
@@ -88,6 +88,7 @@
                                       <i class="card-link"></i>
                                       Unirse
                                   </a>
+                                </div>
                                   <div class="card-body">
                                       <a sec:authorize="hasRole('USER')"
                                          th:href="@{/publicacion/registrar/__${campana.id}__}">

@@ -24,7 +24,9 @@ public class NoticiaServicio {
     private ImagenServicio imagenServicio;
 
     //Crear una noticia
-    public void crearNoticia(String titulo, String contenido, MultipartFile imagen) throws MyException {
+    public void crearNoticia(String titulo,
+                             String contenido,
+                             MultipartFile imagen) throws MyException {
 
         //Validamos los campos vacios
         validar(titulo, contenido);
@@ -43,8 +45,10 @@ public class NoticiaServicio {
 
     //Modificar una noticia
     @Transactional
-    public void modificarNoticia(String idnoticia, String titulo,
-                                 String contenido, MultipartFile imagen) throws MyException {
+    public void modificarNoticia(String idnoticia,
+                                 String titulo,
+                                 String contenido,
+                                 MultipartFile imagen) throws MyException {
 
         //Validar campos vacios
         validar(titulo, contenido);

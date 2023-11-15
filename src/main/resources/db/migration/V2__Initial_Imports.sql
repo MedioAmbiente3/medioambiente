@@ -17,10 +17,10 @@ VALUES ('f2df6dd6-0c7f-4a53-bf83-852795dd4aae', 'EMPRESA');
 
 
 INSERT INTO medioambiente.usuario (id, email, nombre, password, imagen_id, rol_id)
-VALUES ('9d063a9a-edf0-485c-a3db-1bf1dcb4128a', 'user@example.com', 'Luis Perez',
+VALUES ('9d063a9a-edf0-485c-a3db-1bf1dcb4128a', 'user@gmail.com', 'Usuario',
         '$2a$10$KH5g0hdNdlk50Q7QkVoC0udPk8bwbOgRtPcpHKzK0CTIzelOWCrDy', '30e24dec-0191-4988-aa5b-83e71545c6e6',
         '779f0521-2c21-4499-a988-b472aac6d36f');
 INSERT INTO medioambiente.usuario (id, email, nombre, password, imagen_id, rol_id)
-VALUES ('f98e00be-b875-461c-abe0-1bc834bb045c', 'admin3@gmail.com', 'Admin Grupo3',
+VALUES ('f98e00be-b875-461c-abe0-1bc834bb045c', 'admin@gmail.com', 'Administrador',
         '$2a$10$Asj1mxkZZqFUuGvSmvNsUOkq/IYHNz3508yLldTPuc6438UNWUTzy', '98c05ef3-1830-4bce-b6af-c71ec9d9461c',
         'bc98b9ad-d499-4eff-827c-e3e5905a21fc');

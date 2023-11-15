@@ -54,13 +54,6 @@ public class PublicacionServicio {
         publicacionRepositorio.save(publicacion);
     }
 
-    //Método modificar Publicación
-
-
-    //Método eliminar Publicación
-
-    //Método consultar Publicación
-
     //Id de la publicación
     public Publicacion getOne(String id){
         return publicacionRepositorio.getOne(id);
@@ -68,7 +61,7 @@ public class PublicacionServicio {
     }
 
     ////Método listar Publicación
-    @javax.transaction.Transactional
+    @Transactional
     public List<Publicacion> listarPublicaciones() {
         List<Publicacion> publicaciones = new ArrayList();
 

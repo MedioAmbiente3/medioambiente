@@ -29,9 +29,18 @@ public class Usuario {
     @ManyToOne(fetch = FetchType.EAGER)
     private Rol rol;
 
+    public Usuario(String nombre, String email, String password) {
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+
+    }
+
     @OneToMany(
             mappedBy = "usuario",
             fetch = FetchType.LAZY
     )
     private List<Noticia> noticias;
+
+
 }

@@ -1,3 +1,5 @@
+
+
 -- -----------------------------------------------------
 -- Table `medioambiente`.`imagen`
 -- -----------------------------------------------------
@@ -222,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `medioambiente`.`noticia`
 (
     `id`         VARCHAR(255) NOT NULL,
     `contenido`  VARCHAR(255) NULL DEFAULT NULL,
-    `estado`     BIT(1)       NULL DEFAULT NULL,
+    `fecha_creacion`  DATE    NULL DEFAULT NULL,
     `titulo`     VARCHAR(255) NULL DEFAULT NULL,
     `imagen_id`  VARCHAR(255) NULL DEFAULT NULL,
     `usuario_id` VARCHAR(255) NULL DEFAULT NULL,
