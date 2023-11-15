@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Medio Ambiente</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link th:href="@{/admin/img/favicon.png}" rel="icon">
+  <link th:href="@{/admin/img/hoja.png}" rel="icon">
   <link th:href="@{/admin/img/apple-touch-icon.png}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -145,7 +145,7 @@
             </a>
           </li>
           <li>
-            <a href="/campana/lista/admin" sec:authorize="hasRole('ADMIN')">
+            <a href="/campana/lista/" sec:authorize="hasRole('ADMIN')">
               <i class="bi bi-circle"></i><span>Ver Campañas</span>
             </a>
             <a href="/campana/lista/" sec:authorize="hasRole('USER')">
@@ -213,6 +213,23 @@
     </ul>
   </aside>
     </div>
+
+<div th:fragment="dashboard">
+  <section class="section dashboard">
+    <div class="row">
+      <!-- Left side columns -->
+      <div class="col-lg-8">
+        <div class="row">
+          <!-- Contenedor de la imagen -->
+          <div style="width: 100%; height: 100vh; overflow: hidden;">
+            <!-- Imagen con atributos para cubrir el espacio disponible -->
+            <img src="/img/tree.jpg" style="width:85%; height: 95%; position: absolute;" alt="Tree">
+          </div>
+        </div>
+      </div><!-- End Left side columns -->
+    </div>
+  </section>
+</div>
 
 
     <!-- NAVBAR fin-->

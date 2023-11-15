@@ -7,6 +7,7 @@ import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.EmpresaRepositorio;
 import com.equipotres.medioambiente.Repositorios.RolRepositorio;
+import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class EmpresaServicio {
 
     @Autowired
     private RolRepositorio rolRepositorio;
+
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
 
     public void crearEmpresa(String nombre,
                              String email,
@@ -41,10 +45,9 @@ public class EmpresaServicio {
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
         usuario.setRol(userRolOptional.get());
-
+        usuarioRepositorio.save(usuario);
         Empresa empresa = new Empresa();
         empresa.setUsuario(usuario);
-
         empresaRepositorio.save(empresa);
 
 

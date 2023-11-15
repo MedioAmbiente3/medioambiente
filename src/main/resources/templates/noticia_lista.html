@@ -78,7 +78,7 @@
                               <div class="card-body">
                                   <a sec:authorize="hasRole('USER')" th:href="@{/subscripcion/registrar/__${noticia.id}__}">
                                       <i class="card-link"></i>
-                                      Unirse
+                                      Ver
                                   </a>
                                   <a sec:authorize="hasRole('EMPRESA')" th:href="@{/subscripcion/registrar/__${noticia.id}__}">
                                     <i class="card-link"></i>

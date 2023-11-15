@@ -7,8 +7,8 @@
 
   <!-- ======= Header ======= -->
   <header th:replace="admin/layout :: navbar-admin"></header><!-- End Header -->
-<nav th:replace="admin/layout :: navbar1"></nav>
-<!-- End Header -->
+  <nav th:replace="admin/layout :: navbar1"></nav>
+  <!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
 
@@ -43,22 +43,8 @@
 
     <section class="section dashboard">
       <div class="row">
+    <div th:replace="admin/layout :: dashboard"></div>
 
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
-
-
-
-          </div>
-
-
-        </div><!-- End Left side columns -->
-
-
-
-      </div>
-    </section>
 
   </main><!-- End #main -->
 
@@ -72,11 +58,12 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      
+
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
   <div th:replace="admin/layout :: scripts-admin"></div>
 </body>
 

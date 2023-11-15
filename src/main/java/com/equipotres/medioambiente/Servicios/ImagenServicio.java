@@ -42,36 +42,42 @@ public class ImagenServicio {
     }
 
     //Modificar o editar la imagen
-    public Imagen actualizar(MultipartFile archivo, String idImagen) throws MyException{
+    public Imagen actualizar(MultipartFile archivo, String idImagen) throws MyException {
         if (archivo != null) {
             try {
-
                 Imagen imagen = new Imagen();
-
+    
                 if (idImagen != null) {
                     Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
-
+    
                     if (respuesta.isPresent()) {
                         imagen = respuesta.get();
                     }
                 }
-
-
+    
                 imagen.setMime(archivo.getContentType());
-
                 imagen.setNombre(archivo.getName());
-
                 imagen.setContenido(archivo.getBytes());
-
+    
                 return imagenRepositorio.save(imagen);
-
+    
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
+        } else {
+            // Crear y retornar una imagen por defecto
+            Imagen imagenPorDefecto = new Imagen();
+            imagenPorDefecto.setMime("image/jpeg"); // ajusta el tipo MIME según tu necesidad
+            imagenPorDefecto.setNombre("imagen_por_defecto.jpg"); // ajusta el nombre según tu necesidad
+            // Puedes asignar contenido por defecto o dejarlo en null, dependiendo de tus necesidades
+            // imagenPorDefecto.setContenido(null);
+    
+            return imagenRepositorio.save(imagenPorDefecto);
         }
+    
         return null;
-
     }
+    
 
     //Captura el id de la Imagen
     public Imagen getOne(String id) {
