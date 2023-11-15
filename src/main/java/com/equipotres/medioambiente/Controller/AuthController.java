@@ -1,6 +1,7 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +28,7 @@ public class AuthController {
         return "login"; //devolver la vista
     }
 
-    //Iniciar sesion
+
     //Inicio de session de un usuario, sea User o Admin
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_EMPRESA')")
     @GetMapping("/inicio")
@@ -35,23 +36,23 @@ public class AuthController {
         Usuario logueado = (Usuario) sesion.getAttribute("usuariosesion");
 
 
-        if (logueado.getRol().toString().equals("ADMIN")) {
+        if (logueado.getRol().getNombre().equals(RolEnum.ADMIN)) {
             return "redirect:/admin/";
         }
 
-        if (logueado.getRol().toString().equals("EMPRESA")) {
-            return "empresa_lista.html";
-        }
+        if (logueado.getRol().getNombre().equals(RolEnum.EMPRESA)) {
+            return "redirect:/empresa_lista.html";
 
+        }
         return "inicio.html";
     }
 
-    @GetMapping(value = "/index")
-    public String index() {
+    @GetMapping("/index")
+    public String index(){
         return "index";
     }
 
-    @GetMapping(value = "/register")
+    @GetMapping("/register")
     public String register() {
         return "register";
     }

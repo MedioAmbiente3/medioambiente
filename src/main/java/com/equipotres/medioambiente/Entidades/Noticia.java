@@ -24,10 +24,11 @@ public class Noticia {
     private String contenido;
 
     private LocalDate fechaCreacion;
+  
     @OneToOne
     private Imagen imagen;
 
-   // @ManyToOne(fetch = FetchType.LAZY)
-   // private Usuario usuario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuario usuario;
 
 }

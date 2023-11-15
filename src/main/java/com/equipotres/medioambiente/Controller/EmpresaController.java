@@ -32,7 +32,6 @@ public class EmpresaController {
                            @RequestParam String email,
                            @RequestParam String passwordA,
                            @RequestParam String passwordB,
-                           MultipartFile archivo,
                            ModelMap modelo) {
         try {
             // Convierte el String a Rol
@@ -48,7 +47,7 @@ public class EmpresaController {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
-            modelo.put("password", passwordA);
+            modelo.put("passwordA", passwordA);
             modelo.put("passwordB", passwordB);
             return "empresa_registrar";
         }

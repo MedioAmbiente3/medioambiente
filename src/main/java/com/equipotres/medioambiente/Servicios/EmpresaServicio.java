@@ -1,19 +1,26 @@
 package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Empresa;
+import com.equipotres.medioambiente.Entidades.Rol;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.EmpresaRepositorio;
+import com.equipotres.medioambiente.Repositorios.RolRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class EmpresaServicio {
 
     @Autowired
     private EmpresaRepositorio empresaRepositorio;
+
+    @Autowired
+    private RolRepositorio rolRepositorio;
 
     public void crearEmpresa(String nombre,
                              String email,
@@ -24,10 +31,16 @@ public class EmpresaServicio {
 
         Usuario usuario = new Usuario();
 
+        // TODO: Buscar la forma de mostrar el mensaje en el front
+        Optional<Rol> userRolOptional = rolRepositorio.findByNombre(RolEnum.EMPRESA);
+        if (userRolOptional.isEmpty()) {
+            throw new MyException("No se encontro el rol USER en la base de datos");
+        }
+
         usuario.setNombre(nombre);
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-        usuario.setRol(RolEnum.EMPRESA);
+        usuario.setRol(userRolOptional.get());
 
         Empresa empresa = new Empresa();
         empresa.setUsuario(usuario);
