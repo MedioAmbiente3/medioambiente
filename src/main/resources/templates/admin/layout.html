@@ -250,4 +250,95 @@
     </div>
 </body>
 
+<div th:fragment="navbarindexM">
+    <header>
+
+        <div id="mainNavigation" class="navbar navbar-expand-md navbar-dark fixed-top">
+            <a class="navbar-brand" href="#home">
+                <img src="/img/logo.png" style="width: 90px;" class="invert" alt="Logo">
+                <span class="logo-text"
+                    style="color: rgb(7, 7, 7); margin-left: 10px; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MedioAmbiente</span>
+                  <!--  style="color: aliceblue; margin-left: 10px; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MedioAmbiente</span>-->
+            </a>
+
+            <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+            </button>
+            <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#about">Nosotros</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#noticiaContainer">Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#campañas">Campañas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#review">Opiniones</a>
+                    </li>
+
+             <!--      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Únete
+                        </a>
+
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="lista">
+                            <li><a class="dropdown-item" href="/login">Iniciar Sesion</a></li>
+                            <li><a class="dropdown-item" href="#contact">Contactenos</a></li>
+                        </ul>
+
+                    </li>-->
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Únete
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="lista">
+                            <li><a class="dropdown-item" href="/login">Iniciar Sesión</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Salir</a></li> -->
+                            <li><a class="dropdown-item" href="#contact">Contáctenos</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+
+    </header>
+
+</div>
+
+<div th:fragment="fondodeformularios">
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Lato', sans-serif;
+          background: url("/img/tree1fondoa.jpeg") center center fixed;
+          background-size: cover;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+
+        /* Añadir estilos adicionales según sea necesario */
+      </style>
+
+</div>
+
+
+
+
 </html>
