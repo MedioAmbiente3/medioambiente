@@ -3,6 +3,7 @@
 
 
     <head th:replace="admin/layout :: head-admin"></head>
+    
 
 
 <body>
@@ -314,37 +315,48 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Nombre</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control"style="margin-left: 10px;">
                   </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-2 col-form-label">Usuario</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control"style="margin-left: 10px;">
                     </div>
                   </div>
                 <div class="row mb-3">
                   <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control">
+                    <input type="email" class="form-control"style="margin-left: 10px;">
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputText" class="col-sm-2 col-form-label">Contraseña</label>
+                  <label for="inputText" class="col-sm-2 col-form-label"style="white-space: nowrap;">Contraseña</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control"style="margin-left: 10px;">
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-2 col-form-label">Rol</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control"style="margin-left: 10px;">
                   </div>
                 </div>
+
+            <!--    <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit"style="margin-left: 10px;">Guardar</button>
+                </div>boton original de guardar-->
                 <div class="col-12">
-                  <button class="btn btn-primary w-100" type="submit">Guardar</button>
-                </div>
+                  <button class="btn btn-primary w-100" type="submit" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #2980b9; border-radius: 5px; padding: 5px; transition: background 0.3s, color 0.3s, border-color 0.3s;"
+                      onmouseover="this.style.background='linear-gradient(to right, rgba(18, 98, 9, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%)'; this.style.borderColor='#1f618d';"
+                      onmouseout="this.style.background='linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%)'; this.style.borderColor='#2980b9';"
+                  >
+                      Guardar
+                  </button>
+              </div>
+
+
               </form>
 
             </div>

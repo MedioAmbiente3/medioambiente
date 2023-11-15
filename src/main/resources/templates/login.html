@@ -2,28 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="admin/layout :: head-admin"></head>
+<style th:replace= "admin/layout :: fondodeformularios"></style> 
+
+
+
+</head>
 
 <body>
   <main>
+
+
     <div class="container">
 
-      <!-- Mensajes -->
-      <div class="container-fluid m-5 contenedor">
-        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
-          <div class="card-body">
-            <h5 class="card-title">Error!</h5>
-            <p class="card-text" th:text="${error}"></p>
-          </div>
+
+
+    </div>
+
+
+    <!-- Mensajes -->
+    <div class="container-fluid m-5 contenedor">
+      <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+        <div class="card-body">
+          <h5 class="card-title">Error!</h5>
+          <p class="card-text" th:text="${error}"></p>
         </div>
-        <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
-          <div class="card-body">
-            <h5 class="card-title">Exito!</h5>
-            <p class="card-text" th:text="${exito}"></p>
-          </div>
+      </div>
+      <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+          <h5 class="card-title">Exito!</h5>
+          <p class="card-text" th:text="${exito}"></p>
         </div>
-        <!-- Fin Mensajes -->
+      </div>
+      <!-- Fin Mensajes -->
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+
         <div class="container">
+          <!-- <div class="home-container1">-->
+
+
+
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
@@ -66,12 +83,55 @@
                         <label class="form-check-label" for="rememberMe">Recuerdame</label>
                       </div>
                     </div>
+                    
+
+           <!--         <div class="col-12">
+                      <button class="btn btn-primary w-100"style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #01090f; border-radius: 5px; padding: 5px;margin-bottom: 10px;"  type="submit">Ingresar</button>
+
+                                    
+
                     <div class="col-12">
+                      <a th:href="@{/index}" class="btn btn-primary w-100" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #01090f; border-radius: 5px; padding: 5px;margin-bottom: 10px;">Volver</a>
+                    </div>-->
+
+
+                 <!--   <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Ingresar</button>
-                    </div>
-                    <div class="col-12">
+                    </div>-->
+                    
+                 <!--   <div class="col-12">
                       <a th:href="@{/index}" class="btn btn-primary w-100">Volver</a>
-                    </div>
+                    </div>   -->
+                    
+              <!--      <div class="col-12">
+                      <a th:href="@{/index}" class="btn btn-primary w-100" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #2980b9; border-radius: 5px; padding: 5px;">Volver</a>
+                    </div> -->
+
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #2980b9; border-radius: 5px; padding: 5px; transition: background 0.3s, color 0.3s, border-color 0.3s;"
+                          onmouseover="this.style.background='linear-gradient(to right, rgba(18, 98, 9, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%)'; this.style.borderColor='#1f618d';"
+                          onmouseout="this.style.background='linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%)'; this.style.borderColor='#2980b9';"
+                      >
+                          Ingresar
+                      </button>
+                  </div>
+
+
+                    <div class="col-12">
+                      <a th:href="@{/index}" class="btn btn-primary w-100" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #2980b9; border-radius: 5px; padding: 5px; transition: background 0.3s, color 0.3s, border-color 0.3s;"
+                          onmouseover="this.style.background='linear-gradient(to right, rgba(18, 98, 9, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%)'; this.style.borderColor='#1f618d';"
+                          onmouseout="this.style.background='linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%)'; this.style.borderColor='#2980b9';"
+                      >
+                          Volver
+                      </a>
+                  </div>     
+
+
+
+
+
+
+
                     <div class="col-12">
                       <p class="small mb-0">No tienes una cuenta? <a href="/register">Regístrate</a></p>
                     </div>
@@ -97,7 +157,8 @@
     </div>
   </main><!-- End #main -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
   <div th:replace="admin/layout :: scripts-admin"></div>
 </body>
 

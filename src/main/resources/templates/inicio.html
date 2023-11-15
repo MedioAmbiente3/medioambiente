@@ -4,61 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>complete responsive flower website design tutorial</title>
+    <title>Website Medio Ambiente</title>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+  
+    <style>
+        ul#lista li a.dropdown-item {
+            border-radius: 6px;
+            margin-bottom: 6px;
+            transition: background 0.3s;
+            /*transition:letter-spacing .2s;*/
+
+            background-color: #308879;
+            padding: 5px 15px;
+           
+        }
+
+        ul#lista li a.dropdown-item:hover {
+            /*background-color: #2980b9;*/
+            background-color: #e9ebed;
+        }
+
+        /* Estilo para el botón de tipo dropdown en "Únete" */
+        .nav-item.dropdown .nav-link {
+            border-radius: 6px;
+            margin-bottom: 6px;
+            text-align: center;
+           /* padding: 5px 5px;*/
+           /* -webkit-text-fill-color: red;*/
+        }
+
+        .nav-item.dropdown:hover .nav-link {
+            /*background-color: #077338; 1ee722color de boton primero*/
+            /*background-color: #20c997;*/
+            background-color:#308879; 
+        }
+
+       .nav-item a{
+         -webkit-text-fill-color: rgb(7, 7, 7);
+
+        }
+
+        .nav-item a:hover {
+            -webkit-text-fill-color: rgb(56, 143, 43);
+             
+}
+    </style>  
+
+
+
 
 </head>
 <body>
 
 <!-- header section starts  -->
 
-<header>
-
-    <section class="flex">
-       
-        <input type="checkbox" name="" id="toggler">
-        
-        <label for="toggler" class="fas fa-bars"></label>
-       
-        
-        <a href="/" class="logo">Campaña del Medio Ambiente<span>.</span></a>
-
-        <nav class="navbar">
-           <!-- <a href="#home">Inicio</a>-->
-         
-            <a href="#about">Nosotros</a>
-            <a href="#noticiaContainer">Noticias</a>
-            <a href="#campañas">Campañas</a>
-            <a href="#review">Opiniones</a>
-            <a href="#contact">Contacto</a>
-            <span></span>
-
-         <button class="button"> <a th:if="${session.usuariosesion != null}" href="/campana/lista">Unete a una campaña</a></button>
-         
-        </nav>
-
-        
-
-    </section>
-
-</header>
+<header th:replace= "admin/layout :: navbarindexM"></header>
 
 <!-- header section ends -->
 
 <!-- home section starts  -->
 
+
+
 <div class="home-container">
-    <!--Mensajes-->
 
-    <section class="home" id="home"
+    <section class="home" id="home">
 
-    </section>
+</section>
 
 </div>
 
@@ -66,7 +85,8 @@
 
 <!-- about section starts  -->
 
-
+<div id="hola"></div>
+<br>
 <section class="about" id="about">
 
     <h1 class="heading"> <span> Nosotros </span>  </h1>
@@ -74,12 +94,13 @@
     <div class="row">
 
         <div class="video-container">
-            <video src="/img/production_id_4176461 (2160p).mp4" loop autoplay muted></video>
+            <img src="/img/video.gif" alt="mundo"></img>
         </div>
 
         <div class="content">
-            <h3>La tierra madre te necesita?</h3>
-            <h1>Concurso global de carteles</h4>
+            <h3>La Tierra madre te necesita?</h3>
+            <h1>MedioAmbiente existe porque nuestro frágil planeta necesita una voz. Necesita soluciones. Necesita cambio. Necesita acción.</h4>
+            <p>Algunas personas miran a un bosque y ven sólo ganancia. Pero hay otros miles más que ven una casa, una sabiduría, un futuro. En todo el mundo, defendemos el medio ambiente y las comunidades que dependen de sus recursos, responsabilizando a gobiernos y corporaciones que los amenazan. Desde cualquier lugar, tenemos el poder de transformar al mundo cuando trabajamos juntos y para eso, te necesitamos.</p>    
             <p>Salvar el planeta es responsabilidad de todos.</p>
             <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de todo el mundo estan invitados a postular sus carteles. .</p>
             <h2>CONVOCATORIA 16BICM</h2>
@@ -256,7 +277,7 @@
 
 <section class="review" id="review">
 
-<h1 class="heading"> customer's <span>review</span> </h1>
+<h1 class="heading"> Opiniones </h1>
 
 <div class="box-container">
 
@@ -268,11 +289,15 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
         </div>
-        <p>Medio Ambiente.</p>
+        <p>Los recursos renovables son una solución sostenible y prometedora para abordar los problemas ambientales y energéticos. Su uso puede contribuir a la 
+           creación de un futuro más limpio y saludable para las generaciones venideras.           
+         <br>
+         <br>  
+        </p>
         <div class="user">
             <img src="/img/pic-1.png" alt="">
             <div class="user-info">
-                <h3>john deo</h3>
+                <h3>Camilo Huertas</h3>
                 <span></span>
             </div>
         </div>
@@ -287,11 +312,12 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
+        <p>La generación de fertilizantes a base de desechos orgánicos es una práctica que combina beneficios ambientales, agrícolas y económicos. Al aprovechar los residuos orgánicos y convertirlos en nutrientes naturales para las plantas, estamos 
+           promoviendo la sostenibilidad y construyendo un futuro más saludable para nuestro planeta.</p>
         <div class="user">
             <img src="/img/pic-2.png" alt="">
             <div class="user-info">
-                <h3>john deo</h3>
+                <h3>Vanessa P.</h3>
                 <span></span>
             </div>
         </div>
@@ -306,11 +332,12 @@
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti asperiores laboriosam praesentium enim maiores? Ad repellat voluptates alias facere repudiandae dolor accusamus enim ut odit, aliquam nesciunt eaque nulla dignissimos.</p>
+        <p>El reciclaje del plástico es esencial para preservar la vida natural en los océanos. Al reducir la cantidad de plásticos que llegan al mar y darles un nuevo uso, estamos tomando medidas concretas para 
+           proteger los ecosistemas marinos y garantizar un futuro saludable para la vida acuática.</p>
         <div class="user">
             <img src="/img/pic-3.png" alt="">
             <div class="user-info">
-                <h3>john deo</h3>
+                <h3>David Lugo</h3>
                
             </div>
         </div>
@@ -331,34 +358,34 @@
     <div class="box-container" id="contact">
 
         <div class="box">
-            <h3>quick links</h3>
-            <a href="#">home</a>
-            <a href="#">about</a>
-            <a href="#">campañas</a>
-            <a href="#">review</a>
-           <!-- <a href="#">contact</a>-->
+            <h3>links</h3>
+            <a href="#about">Nosotros</a>
+            <a href="#noticiaContainer">Noticias</a>
+            <a href="#campañas">Campañas</a>
+            <a href="#review">Opiniones</a>
+           <a href="#">Unete</a>
         </div>
 
         <div class="box">
             <h3>extra links</h3>
-            <a href="#">my account</a>
-            <a href="#">my favorite</a>
+            <a href="#">Mi cuenta</a>
+            <a href="#">Mis favoritos</a>
         </div>
 
         <div class="box">
             <h3>localidad</h3>
-            <a href="#">mexico</a>
-            <a href="#">ecuador</a>
-            <a href="#">colombia</a>
-            <a href="#">venezuela</a>
+            <a href="#">México</a>
+            <a href="#">Ecuador</a>
+            <a href="#">Colombia</a>
+            <a href="#">Venezuela</a>
         </div>
 
         <div class="box">
-            <h3>contacto información</h3>
+            <h3>Contacto Información</h3>
             <a href="#">+123-456-7890</a>
             <a href="#">villamarlen50@gmail.com</a>
-            <a href="#">San Luis Potosí, méxico - 78000</a>
-            <img src="/img/payment.png" alt="">
+            <a href="#">San Luis Potosí, México - 78000</a>
+           <!-- <img src="/img/payment.png" alt=""> -->
         </div>
         
     </div>
@@ -371,9 +398,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/scriptCarrusel.js"></script>
 <script src="/js/scriptCampana.js"></script>
-
 
 
 </body>

@@ -2,14 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="admin/layout :: head-admin"></head>
+<style th:replace= "admin/layout :: fondodeformularios"></style> 
+
 
 <body>
 
   <main>
-    <div class="container">
+    <div class="container">       
+
+    
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
+       <div class="container"> 
+        
+
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
@@ -64,11 +70,29 @@
                         <div class="invalid-feedback">Debe seleccionar el casillero.</div>
                       </div>
                     </div>
-                    <div class="col-12">
+
+
+
+                 <!--   <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit"> Crear Cuenta </button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">¿Ya tienes una cuenta? <a href="login">Ingresa</a></p>
+                    <div class="col-12">  -->
+
+
+                      <!--boton nuevo-->
+                      <div class="col-12">
+                        <button class="btn btn-primary w-100" type="submit" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #2980b9; border-radius: 5px; padding: 5px; transition: background 0.3s, color 0.3s, border-color 0.3s;"
+                            onmouseover="this.style.background='linear-gradient(to right, rgba(18, 98, 9, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%)'; this.style.borderColor='#1f618d';"
+                            onmouseout="this.style.background='linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%)'; this.style.borderColor='#2980b9';"
+                        >
+                            Crear Cuenta
+                        </button>
+                    </div>
+  
+
+
+
+                    <p class="small mb-0">¿Ya tienes una cuenta? <a href="login">Ingresa</a></p>
                     </div>
                   </form>
 

@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="admin/layout :: head-admin"></head>
+<style th:replace= "admin/layout :: fondodeformularios"></style>
 
 <body>
 
@@ -238,7 +239,10 @@
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a sec:authorize="hasRole('ADMIN')" href="/campana/registrar">
-                        <i class="bi bi-circle"></i><span>Registrar Campañas</span>
+                      <i class="bi bi-circle"></i><span>Registrar Campañas</span>
+                      <!-- <p class="display -1 titulo destacadp"> Registrar Campañas</p>-->
+
+
                     </a>
                 </li>
                 <li>
@@ -274,6 +278,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
+        <div style="text-align:center;">
         <h1>Registrar Campañas</h1>
         <nav>
             <ol class="breadcrumb">
@@ -290,6 +295,7 @@
 
                 <div class="card">
                     <div class="card-body">
+
                         <h5 class="card-title">Registrar Campañas</h5>
 
                         <form th:action="@{/campana/registro}" method="POST" enctype="multipart/form-data">
@@ -297,31 +303,55 @@
                             <div class="row mb-3">
                                 <label for="titulo" class="col-sm-2 col-form-label">Título</label>
                                 <div class="col-sm-10">
-                                    <input type="text" id="titulo" name="titulo" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                                <div class="col-sm-10">
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="desafio" class="col-sm-2 col-form-label">Desafio</label>
-                                <div class="col-sm-10">
-                                    <input  type="text" id="desafio" name="desafio" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="archivo" class="col-sm-2 col-form-label">Imagen</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" name="archivo" id="archivo">
+                                    <input type="text" id="titulo" name="titulo" class="form-control" style="margin-left: 10px;" >
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Guardar</button>
+                            
+                            <div class="row mb-3" style="margin-bottom: 1.5rem;">
+                                <label for="descripcion" class="col-sm-2 col-form-label" style="white-space: nowrap;" >Descripción</label>
+                                <div class="col-sm-10">
+                                    <input type="text" id="descripcion" name="descripcion" class="form-control" style="margin-left: 10px;" >
+                                </div>
                             </div>
+
+ 
+                            <div class="row mb-3">
+                                <label for="desafio" class="col-sm-2 col-form-label" style="white-space: nowrap;" >Desafio</label>
+                                <div class="col-sm-10">
+                                    <input  type="text" id="desafio" name="desafio" class="form-control" style="margin-left: 10px;">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="archivo" class="col-sm-2 col-form-label" style="white-space: nowrap;" >Imagen</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" style="margin-left: 10px;" type="file" name="archivo" id="archivo">
+                                </div>
+                            </div>
+
+                            
+
+
+
+
+                       <!--     <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit">Guardar</button>
+                            </div>  /*boton original-->
+
+
+
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #2980b9; border-radius: 5px; padding: 5px; transition: background 0.3s, color 0.3s, border-color 0.3s;"
+                                    onmouseover="this.style.background='linear-gradient(to right, rgba(18, 98, 9, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%)'; this.style.borderColor='#1f618d';"
+                                    onmouseout="this.style.background='linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%)'; this.style.borderColor='#2980b9';"
+                                >
+                                    Guardar
+                                </button>
+                            </div>
+
+
+
                         </form>
                         <!-- End Table with stripped rows -->
 
@@ -334,19 +364,19 @@
 
 </main><!-- End #main -->
 
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
+<!-- ======= Footer aqui escondi lo del copyright======= -->
+<!--<footer id="footer" class="footer">
     <div class="copyright">
         &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
+         All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
 
-    </div>
-</footer><!-- End Footer -->
+    <!--</div>
+</footer> End Footer -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <div th:replace="admin/layout :: scripts-admin"></div>

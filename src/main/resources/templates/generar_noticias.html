@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="admin/layout :: head-admin"></head>
+<!--<style th:replace= "admin/layout :: fondodeformularios"></style> -->
+
 <body>
 
 <!-- ======= Header ======= -->
@@ -320,39 +322,62 @@
                             <div class="row mb-3">
                                 <label for="inputText" class="col-sm-2 col-form-label">Titulo</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" style="margin-left: 10px;">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="inputDate" class="col-sm-2 col-form-label">Fecha de Creacion</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control">
+                                    <input type="date" class="form-control" style="margin-left: 10px;">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="inputText" class="col-sm-2 col-form-label">Autor</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" style="margin-left: 10px;">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Contenido</label>
+                                <label for="inputText" class="col-sm-2 col-form-label"style="white-space: nowrap;">Contenido</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" style="margin-left: 10px;">
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                      <!--      <div class="row mb-3">
+                                <label for="desafio" class="col-sm-2 col-form-label" style="white-space: nowrap;" >Desafio</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input  type="text" id="desafio" name="desafio" class="form-control" style="margin-left: 10px;">
+                                </div>
+                            </div>-->
+
+
+
+
+
+                            <div class="row mb-3">
+                                <label for="inputNumber" class="col-sm-2 col-form-label"style="white-space: nowrap;">File Upload</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="file" id="formFile"style="margin-left: 10px;">
                                 </div>
                             </div>
-                            <div class="col-12">
+
+
+                         <!--   <div class="col-12">
                                 <button class="btn btn-primary w-100" type="submit">Guardar</button>
+                            </div> boton original -->
+
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit" style="background: linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%); color: #ffffff; border: 2px solid #2980b9; border-radius: 5px; padding: 5px; transition: background 0.3s, color 0.3s, border-color 0.3s;"
+                                    onmouseover="this.style.background='linear-gradient(to right, rgba(18, 98, 9, 0.523) 0%, rgba(40, 97, 65, 0.884) 100%)'; this.style.borderColor='#1f618d';"
+                                    onmouseout="this.style.background='linear-gradient(to right, rgba(40, 97, 65, 0.884) 0%, rgba(22, 100, 13, 0.523) 100%)'; this.style.borderColor='#2980b9';"
+                                >
+                                    Guardar
+                                </button>
                             </div>
+
                         </form>
-                        -->
+                        
                         <!-- End General Form Elements -->
 
                     </div>

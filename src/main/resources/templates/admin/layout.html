@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:fragment="head-admin">
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<!--sufrido por la vane alias la vaca-->
+    <!--sufrido por la vane alias la vaca-->
     <title>Dashboard - NiceAdmin Bootstrap Template</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -14,8 +15,9 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link th:href="@{/admin/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -36,7 +38,12 @@
     * Author: BootstrapMade.com
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
+
+
+   
+
 </head>
+
 <body>
     <div th:fragment="scripts-admin">
         <!-- Vendor JS Files -->
@@ -53,4 +60,96 @@
         <script th:src="@{/admin/js/main.js}"></script>
     </div>
 </body>
+
+<div th:fragment="navbarindexM">
+    <header>
+
+        <div id="mainNavigation" class="navbar navbar-expand-md navbar-dark fixed-top">
+            <a class="navbar-brand" href="#home">
+                <img src="/img/logo.png" style="width: 90px;" class="invert" alt="Logo">
+                <span class="logo-text"
+                    style="color: rgb(7, 7, 7); margin-left: 10px; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MedioAmbiente</span>
+                  <!--  style="color: aliceblue; margin-left: 10px; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MedioAmbiente</span>-->
+            </a>
+
+            <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+            </button>
+            <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mx-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#about">Nosotros</a>
+                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#noticiaContainer">Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#campañas">Campañas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#review">Opiniones</a>
+                    </li>
+
+             <!--      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Únete
+                        </a>
+
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="lista">
+                            <li><a class="dropdown-item" href="/login">Iniciar Sesion</a></li>
+                            <li><a class="dropdown-item" href="#contact">Contactenos</a></li>
+                        </ul>
+          
+                    </li>-->
+           
+                        
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Únete
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="lista">
+                            <li><a class="dropdown-item" href="/login">Iniciar Sesión</a></li>
+                            <!-- <li><a class="dropdown-item" href="#">Salir</a></li> -->
+                            <li><a class="dropdown-item" href="#contact">Contáctenos</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+     
+    </header>
+   
+</div>
+
+<div th:fragment="fondodeformularios">
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Lato', sans-serif;
+          background: url("/img/tree1fondoa.jpeg") center center fixed;
+          background-size: cover;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      
+           
+        /* Añadir estilos adicionales según sea necesario */
+      </style>
+
+</div>
+
+
+
+
 </html>
