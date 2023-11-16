@@ -42,6 +42,7 @@ public class ImagenServicio {
     }
 
     //Modificar o editar la imagen
+    @Transactional
     public Imagen actualizar(MultipartFile archivo, String idImagen) throws MyException {
         if (archivo != null) {
             try {
