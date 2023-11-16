@@ -10,8 +10,15 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
     /*se extiende JpaRepository por tanto ya contiene métodos para operaciones
     de CRUD estándar*/
-/*se define un método personalizado findXMail(String correo) para buscar
-un usuario por su correo electrónico.*/
+    
+    /*se define un método personalizado findXMail(String correo) para buscar
+    un usuario por su correo electrónico.*/
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
     public Usuario findXMail(@Param("email") String email);
+
+    /*se define un método personalizado findByRolId(String rol_id) para buscar
+    un usuario por su correo electrónico.*/
+    @Query("SELECT u FROM Usuario u WHERE u.rol.id = :rol_id")
+    public List<Usuario> findByRolId(@Param("rol_id") String rol_id);
+
 }

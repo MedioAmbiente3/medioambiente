@@ -8,10 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-/**
- * @author luispillaga at 2023-11-06 23:54:06
- */
-
 @Repository
 public interface RolRepositorio extends JpaRepository<Rol, String> {
 
