@@ -9,6 +9,7 @@ import com.equipotres.medioambiente.Servicios.ImagenServicio;
 import com.equipotres.medioambiente.Servicios.SubscripcionServicio;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,14 +46,19 @@ public class CampanaController {
             @RequestParam String titulo,
             @RequestParam String descripcion,
             @RequestParam String desafio,
-            @RequestParam LocalDate fechaFinal,
             @RequestParam MultipartFile archivo,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaFinal,
             ModelMap modelo)
                        
     {
         try
         {
-            campanaServicio.crearCampana(titulo, descripcion, desafio , archivo, fechaFinal);
+            campanaServicio.crearCampana(
+                    titulo,
+                    descripcion,
+                    desafio,
+                    archivo,
+                    fechaFinal);
             modelo.put("exito", "Se ha registrado la Campaña correctamente");
             return "admin/index";
         }

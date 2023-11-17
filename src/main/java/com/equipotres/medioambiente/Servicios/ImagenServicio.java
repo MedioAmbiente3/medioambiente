@@ -25,11 +25,8 @@ public class ImagenServicio {
     // Crear una Imagen
     @Transactional
     public Imagen guardaImagen(MultipartFile archivo) throws MyException {
-        if (archivo != null && archivo.isEmpty()) {
+        if (archivo != null) {
             try {
-                if (archivo.getSize() > tamanoMaximo){
-                    throw new MyException("La imagen excede el tamaño máximo permitido");
-                }
 
                 Imagen imagen = new Imagen();
                 imagen.setMime(archivo.getContentType());
@@ -39,13 +36,10 @@ public class ImagenServicio {
                 return imagenRepositorio.save(imagen);
 
             } catch (Exception e) {
-                throw new MyException("Error al procesar la imagen.");
+                System.err.println(e.getMessage());
             }
-        } else {
-            throw new MyException("El archivo de imagen está vacío o es nulo.");
-
         }
-
+        return null;
     }
 
     //Modificar o editar la imagen
