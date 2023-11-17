@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,9 +26,16 @@ public class CampanaServicio {
 
     //Crear campaña
     @Transactional
-    public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo, LocalDate fechaFinal) throws MyException {
+    public void crearCampana(
+            String titulo,
+            String descripcion,
+            String desafio,
+            MultipartFile archivo,
+            LocalDate fechaFinal) throws MyException {
         //Validamos que los campos no esten vacios
-        validar(titulo, descripcion, desafio, archivo);
+        validar(titulo, descripcion, desafio);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         //Crear un objeto de la clase Campana
         Campana campana = new Campana();
@@ -38,7 +46,8 @@ public class CampanaServicio {
         Imagen imagen = imagenServicio.guardaImagen(archivo);
         campana.setImagen(imagen);
         campana.setEstado(true);
-        campana.setFechaCreacion(LocalDate.now());
+
+        campana.setFechaCreacion(LocalDate.parse(LocalDate.now().format(formatter)));
         campana.setFechaFinal(fechaFinal);
 
         //Guardamos la campaña
@@ -55,7 +64,7 @@ public class CampanaServicio {
                                  Boolean estado,
                                  MultipartFile archivo) throws MyException {
         //Validamos que los campos no estén vacios
-        validar(titulo, descripcion, desafio, archivo);
+        validar(titulo, descripcion, desafio);
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
@@ -113,7 +122,7 @@ public class CampanaServicio {
     }
 
     //Validar campos vacios
-    private void validar(String titulo, String descripcion, String desafio, MultipartFile archivo)
+    private void validar(String titulo, String descripcion, String desafio)
             throws MyException {
 
         if (titulo.isEmpty() || titulo == null) {
@@ -131,10 +140,13 @@ public class CampanaServicio {
                     + "nulo o estar vacio");
         }
 
+        /*
         if (archivo.isEmpty() || archivo == null){
             throw new MyException("El campo imagen no puede ser "
                     + "nulo o estar vacio");
         }
+
+         */
 
 
     }
