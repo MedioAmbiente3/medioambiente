@@ -68,10 +68,9 @@ public class UsuarioServicio implements UserDetailsService
           usuario.setImagen(foto);
           usuarioRepositorio.save(usuario);  
         }
-     
+
     //eliminar un Usuario dado su id
-    public void eliminarUsuarioPorId(String id) 
-    {
+    public void eliminarUsuarioPorId(String id) throws MyException {
         if (usuarioRepositorio.existsById(id)) 
         {
           usuarioRepositorio.deleteById(id); 
