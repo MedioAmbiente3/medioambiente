@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioServicio implements UserDetailsService {
-
+public class UsuarioServicio implements UserDetailsService 
+{
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
@@ -57,46 +57,74 @@ public class UsuarioServicio implements UserDetailsService {
         Optional<Rol> userRolOptional = rolRepositorio.findByNombre(RolEnum.USER);
         if (userRolOptional.isEmpty()) {
             throw new MyException("No se encontro el rol USER en la base de datos");
+          }
+
+          //seteamos los atributos
+          usuario.setNombre(nombre);
+          usuario.setEmail(email);
+          usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
+          usuario.setRol(userRolOptional.get());
+          Imagen foto = imagenServicio.guardaImagen(imagen);
+          usuario.setImagen(foto);
+          usuarioRepositorio.save(usuario);  
         }
-
-        //seteamos los atributos
-        usuario.setNombre(nombre);
-        usuario.setEmail(email);
-        usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-        usuario.setRol(userRolOptional.get());
-        Imagen foto = imagenServicio.guardaImagen(imagen);
-        usuario.setImagen(foto);
-        usuarioRepositorio.save(usuario);
+    
+    //Obtener una lista de usuarios dado un nombre de rol
+    public List<Usuario> listarUsuariosPorNombreDeRol(String rolNombre) 
+    {
+        Optional<Rol> rol = rolRepositorio.findByNombre(rolNombre);
+        if (rol.isPresent()) 
+        {
+          String rol_id = rol.get().getId();
+          return usuarioRepositorio.findByRolId(rol_id);
+        } 
+        else 
+        {
+          return new ArrayList<>();
+        }
+    }
+    
+    //eliminar un Usuario dado su id
+    public void eliminarUsuarioPorId(String id) 
+    {
+        if (usuarioRepositorio.existsById(id)) 
+        {
+          usuarioRepositorio.deleteById(id); 
+        } 
+        else 
+        {
+          throw new MyException("Usuario no encontrado con id: " + id); 
+        }
     }
 
-    //Captura el id del Usuario
-    public Usuario getOne(String id) {
-        return usuarioRepositorio.getOne(id);
-    }
+    //Recupera un Usuario dado su id
+    public Usuario getOne(String id) { return usuarioRepositorio.getOne(id); }
 
     //Http Sesion de usuario
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException 
+    {
 
         Usuario usuario = usuarioRepositorio.findXMail(email);
-        if (usuario != null) {
-            List<GrantedAuthority> permisos = new ArrayList<>();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre());
+        if (usuario != null) 
+        {
+          List<GrantedAuthority> permisos = new ArrayList<>();
+          GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre());
 
-            permisos.add(p);
+          permisos.add(p);
 
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+          ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
-            HttpSession sesion = attr.getRequest().getSession(true);
+          HttpSession sesion = attr.getRequest().getSession(true);
 
-            sesion.setAttribute("usuariosesion", usuario);
+          sesion.setAttribute("usuariosesion", usuario);
 
-            return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-
-        } else {
-            return null;
+          return new User(usuario.getEmail(), usuario.getPassword(), permisos);
+        } 
+        else 
+        {
+          return null;
         }
-
     }
 
     //Modificar usuario
@@ -107,33 +135,33 @@ public class UsuarioServicio implements UserDetailsService {
                                 String passwordA,
                                 String passwordB,
                                 MultipartFile archivo)
-            throws MyException {
+        throws MyException 
+        {
 
-        validar(nombre, email, passwordA, passwordB);
+          validar(nombre, email, passwordA, passwordB);
 
-        //Verificar si el usuario existe en la base de datos
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()) {
+          //Verificar si el usuario existe en la base de datos
+          Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+          if (respuesta.isPresent()) 
+          {
+              Usuario usuario = respuesta.get();
+              usuario.setNombre(nombre);
+              usuario.setEmail(email);
 
-            Usuario usuario = respuesta.get();
-            usuario.setNombre(nombre);
-            usuario.setEmail(email);
-
-            usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
-            //usuario.setRol(Rol.USER);
-            String idImagen = null;
-            if (usuario.getImagen() != null) {
-                idImagen = usuario.getImagen().getId();
-            }
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
-            usuario.setImagen(imagen);
-            usuarioRepositorio.save(usuario);
-        }
-
+              usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
+            
+              String idImagen = null;
+              if (usuario.getImagen() != null) { idImagen = usuario.getImagen().getId(); }
+            
+              Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+              usuario.setImagen(imagen);
+              usuarioRepositorio.save(usuario);
+          }
     }
 
     //Consultar usuario
-    public Usuario consultarUsuarioxEmail(String email) {
+    public Usuario consultarUsuarioxEmail(String email) 
+    {
         //Retornamos el usuario encontrado
         return usuarioRepositorio.findXMail(email);
     }
@@ -149,16 +177,6 @@ public class UsuarioServicio implements UserDetailsService {
         List<Usuario> usuarios = usuarioRepositorio.findXRol(rol);
         return usuarios;
     }
-
-    //Listar Usuarios
-    /*public List<Usuario> listarUsuarios() {
-    List<Usuario> usuarios = new ArrayList();
-    usuarios =usuarioRepositorio.findAll();
-        return usuarios;
-        }*/
-
-
-
 
     //Validar campos vacios
     private void validar(String nombre, String email, String passwordA, String passwordB)
@@ -190,7 +208,5 @@ public class UsuarioServicio implements UserDetailsService {
         if (!passwordA.equals(passwordB)) {
             throw new MyException("las contraseñas ingresadas deben coincidir");
         }
-
     }
-
 }
