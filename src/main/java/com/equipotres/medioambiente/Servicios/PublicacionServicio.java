@@ -28,16 +28,14 @@ public class PublicacionServicio {
     private SubscripcionServicio subscripcionServicio;
 
     //Método crear Publicacion
-    //Método crear Publicacion
     @Transactional
-    public void crearPublicacion(
-            String titulo,
-            String contenido,
-            MultipartFile archivo,
-            String idUsuario,
-            String idCampana)
-            throws MyException
-    {
+    public void crearPublicacion(String titulo,
+                                 String contenido,
+                                 MultipartFile archivo,
+                                 String idUsuario,
+                                 String idCampana)
+      throws MyException
+      {
         //Validamos que los campos no esten vacios
         validar(titulo, contenido);
         //Crear un objeto de la clase Publicación
@@ -54,29 +52,58 @@ public class PublicacionServicio {
         publicacionRepositorio.save(publicacion);
     }
 
-    //Id de la publicación
-    public Publicacion getOne(String id){
-        return publicacionRepositorio.getOne(id);
-
+    //eliminar una publicación dado su id
+    public void eliminarPublicacionPorId(String id) 
+    {
+        if (publicacionRepositorio.existsById(id)) 
+        {
+          publicacionRepositorio.deleteById(id); 
+        } 
+        else 
+        {
+          throw new MyException("Publicacion no encontrada con id: " + id); 
+        }
     }
 
-    ////Método listar Publicación
+    //Obtener la publicación dado el id
+    public Publicacion getOne(String id){ return publicacionRepositorio.getOne(id); }
+
+    //Método listar Publicación
     @Transactional
-    public List<Publicacion> listarPublicaciones() {
-        List<Publicacion> publicaciones = new ArrayList();
-
-        publicaciones = publicacionRepositorio.findAll();
-        //Metodo propio del jpaRepo es traer todos los datos de la tabla con el ".findAll()"
-        return publicaciones;
+    public List<Publicacion> listarPublicaciones()
+    {
+        List<Publicacion> listaDePublicaciones = publicacionRepositorio.findAll();
+        return listaDePublicaciones;
     }
-
-
+    
+    //Listar todas las publicaciones de una campaña dado su id
+    public List<Publicacion> listarPublicacionesDeCampana(String idCampana)
+    {
+        List<Publicacion> publicacionesDeCampana = new ArrayList<>();
+        for(Publicacion pub: listarPublicaciones())
+        {
+          Campana campana = pub.getSubscripcion().getCampana();
+           
+          if(campana.getId().equals(idCampana)){ publicacionesDeCampana.add(pub); }
+        }
+        return publicacionesDeCampana;
+    }
+    
+    //Recuperar id de la publicacion del usuario de una campaña dados los id   
+    public String getIdPublicacionDeUsuarioDeCampana(String idUsuario, String idCampana)
+    {
+        String idPublicacion = "";
+        for (Publicacion pub:listarPublicacionesDeCampana(idCampana))
+        {   
+            Usuario usuario = pub.getSubscripcion().getUsuario();
+            
+            if(usuarioc.getId().equals(idUsuario)){ idPublicacion = pub.getId(); }
+        }
+        return idPublicacion;
+    }
 
     //Validar campos vacios
-    private void validar(
-            String titulo,
-            String contenido)
-            throws MyException
+    private void validar(String titulo, String contenido) throws MyException
     {
         if (titulo.isEmpty() || titulo == null)
         {
