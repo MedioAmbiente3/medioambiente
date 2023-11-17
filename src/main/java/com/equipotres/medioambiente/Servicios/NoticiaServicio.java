@@ -24,6 +24,7 @@ public class NoticiaServicio {
     private ImagenServicio imagenServicio;
 
     //Crear una noticia
+    @Transactional
     public void crearNoticia(String titulo,
                              String contenido,
                              MultipartFile imagen) throws MyException {
@@ -83,7 +84,7 @@ public class NoticiaServicio {
 
     }
 
-    //Captura el id del Usuario
+    //traer el id de noticia
     public Noticia getOne(String id) {
         return noticiaRepositorio.getOne(id);
     }
@@ -105,7 +106,7 @@ public class NoticiaServicio {
         Optional<Noticia> respuesta = noticiaRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
-            Noticia noticia  = new Noticia();
+            Noticia noticia  = respuesta.get();
 
             noticiaRepositorio.delete(noticia);
 

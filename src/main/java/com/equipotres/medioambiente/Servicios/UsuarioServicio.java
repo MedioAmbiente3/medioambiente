@@ -42,11 +42,11 @@ public class UsuarioServicio implements UserDetailsService {
     //Crear usuario
     @Transactional
     public void crearUsuario(
-        String nombre,
-        String email,
-        String passwordA,
-        String passwordB,
-        MultipartFile imagen
+            String nombre,
+            String email,
+            String passwordA,
+            String passwordB,
+            MultipartFile imagen
     ) throws MyException {
         //Validamos que los campos no esten vacios
         validar(nombre, email, passwordA, passwordB);
@@ -138,13 +138,24 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.findXMail(email);
     }
 
-    //Listar Usuarios
-    public List<Usuario> listarUsuarios() {
-        List<Usuario> usuarios = new ArrayList();
-        usuarios = usuarioRepositorio.findAll();
-        return usuarios;
+    //Listar por rol
+    /*public List<Usuario> listarEmpresas (String rol){
+        //Retornamos una lista de empresas
+        return usuarioRepositorio.findXRol("f2df6dd6-0c7f-4a53-bf83-852795dd4aae");
+    }*/
 
+    public List<Usuario> listarUsuarios (RolEnum rol){
+        //Retornamos una lista de usuariosr
+        List<Usuario> usuarios = usuarioRepositorio.findXRol(rol);
+        return usuarios;
     }
+
+    //Listar Usuarios
+    /*public List<Usuario> listarUsuarios() {
+    List<Usuario> usuarios = new ArrayList();
+    usuarios =usuarioRepositorio.findAll();
+        return usuarios;
+        }*/
 
 
 
@@ -173,7 +184,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
         if (passwordA.length() <= 5 || passwordB.length() <= 5) {
-            throw new MyException("la contraseña debe contener mas de 6 caracteres ");
+            throw new MyException("la contraseña debe contener mas de 5 caracteres ");
         }
 
         if (!passwordA.equals(passwordB)) {
