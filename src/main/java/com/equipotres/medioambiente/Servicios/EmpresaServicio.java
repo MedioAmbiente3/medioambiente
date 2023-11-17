@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -25,7 +26,7 @@ public class EmpresaServicio {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-
+    @Transactional
     public void crearEmpresa(String nombre,
                              String email,
                              String passwordA,
@@ -57,9 +58,6 @@ public class EmpresaServicio {
     public Empresa getOne(String id){
         return empresaRepositorio.getOne(id);
     }
-
-
-
 
     //Validar campos vacios
     private void validar(String nombre, String email, String passwordA, String passwordB)

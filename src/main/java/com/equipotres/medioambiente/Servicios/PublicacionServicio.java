@@ -39,7 +39,7 @@ public class PublicacionServicio {
             throws MyException
     {
         //Validamos que los campos no esten vacios
-        validar(titulo, contenido);
+        validar(titulo, contenido, archivo);
         //Crear un objeto de la clase Publicación
         Publicacion publicacion = new Publicacion();
         publicacion.setTitulo(titulo);
@@ -75,7 +75,8 @@ public class PublicacionServicio {
     //Validar campos vacios
     private void validar(
             String titulo,
-            String contenido)
+            String contenido,
+            MultipartFile archivo)
             throws MyException
     {
         if (titulo.isEmpty() || titulo == null)
@@ -87,6 +88,10 @@ public class PublicacionServicio {
         {
             throw new MyException("El contenido de su desafío no puede ser "
                     + "nulo o estar vacío");
+        }
+        if (archivo.isEmpty() || archivo == null){
+            throw new MyException("El campo imagen no puede ser "
+                    + "nulo o estar vacio");
         }
     }
 

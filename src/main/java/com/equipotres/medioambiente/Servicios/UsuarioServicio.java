@@ -41,22 +41,21 @@ public class UsuarioServicio implements UserDetailsService
 
     //Crear usuario
     @Transactional
-    public void crearUsuario(String nombre,
-                             String email,
-                             String passwordA,
-                             String passwordB,
-                             MultipartFile imagen)
-        throws MyException 
-        {
-          //Validamos que los campos no esten vacios
-          validar(nombre, email, passwordA, passwordB);
-          //Instanciamos un objeto de la clase Usuario
-          Usuario usuario = new Usuario();
+    public void crearUsuario(
+            String nombre,
+            String email,
+            String passwordA,
+            String passwordB,
+            MultipartFile imagen
+    ) throws MyException {
+        //Validamos que los campos no esten vacios
+        validar(nombre, email, passwordA, passwordB);
+        //Instanciamos un objeto de la clase Usuario
+        Usuario usuario = new Usuario();
 
-          // TODO: Buscar la forma de mostrar el mensaje en el front
-          Optional<Rol> userRolOptional = rolRepositorio.findByNombre(RolEnum.USER);
-          if (userRolOptional.isEmpty()) 
-          {
+        // TODO: Buscar la forma de mostrar el mensaje en el front
+        Optional<Rol> userRolOptional = rolRepositorio.findByNombre(RolEnum.USER);
+        if (userRolOptional.isEmpty()) {
             throw new MyException("No se encontro el rol USER en la base de datos");
           }
 
@@ -167,11 +166,15 @@ public class UsuarioServicio implements UserDetailsService
         return usuarioRepositorio.findXMail(email);
     }
 
-    //Listar Usuarios
-    public List<Usuario> listarUsuarios() 
-    {
-        List<Usuario> usuarios = new ArrayList();
-        usuarios = usuarioRepositorio.findAll();
+    //Listar por rol
+    /*public List<Usuario> listarEmpresas (String rol){
+        //Retornamos una lista de empresas
+        return usuarioRepositorio.findXRol("f2df6dd6-0c7f-4a53-bf83-852795dd4aae");
+    }*/
+
+    public List<Usuario> listarUsuarios (RolEnum rol){
+        //Retornamos una lista de usuariosr
+        List<Usuario> usuarios = usuarioRepositorio.findXRol(rol);
         return usuarios;
     }
 
@@ -199,7 +202,7 @@ public class UsuarioServicio implements UserDetailsService
         }
 
         if (passwordA.length() <= 5 || passwordB.length() <= 5) {
-            throw new MyException("la contraseña debe contener mas de 6 caracteres ");
+            throw new MyException("la contraseña debe contener mas de 5 caracteres ");
         }
 
         if (!passwordA.equals(passwordB)) {

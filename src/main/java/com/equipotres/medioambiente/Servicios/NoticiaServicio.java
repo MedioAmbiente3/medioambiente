@@ -24,12 +24,13 @@ public class NoticiaServicio {
     private ImagenServicio imagenServicio;
 
     //Crear una noticia
+    @Transactional
     public void crearNoticia(String titulo,
                              String contenido,
                              MultipartFile imagen) throws MyException {
 
         //Validamos los campos vacios
-        validar(titulo, contenido);
+        validar(titulo, contenido, imagen);
         Noticia noticia = new Noticia();
         noticia.setTitulo(titulo);
         noticia.setContenido(contenido);
@@ -51,7 +52,7 @@ public class NoticiaServicio {
                                  MultipartFile imagen) throws MyException {
 
         //Validar campos vacios
-        validar(titulo, contenido);
+        validar(titulo, contenido, imagen);
 
         // en caso de que el id de la Evidencia este mal digitado o que no se
         // encuentre, se debe de usar un optional
@@ -83,7 +84,7 @@ public class NoticiaServicio {
 
     }
 
-    //Captura el id del Usuario
+    //traer el id de noticia
     public Noticia getOne(String id) {
         return noticiaRepositorio.getOne(id);
     }
@@ -105,7 +106,7 @@ public class NoticiaServicio {
         Optional<Noticia> respuesta = noticiaRepositorio.findById(id);
 
         if (respuesta.isPresent()) {
-            Noticia noticia  = new Noticia();
+            Noticia noticia  = respuesta.get();
 
             noticiaRepositorio.delete(noticia);
 
@@ -113,7 +114,7 @@ public class NoticiaServicio {
     }
 
     //Campos vacios
-    private void validar(String titulo, String contenido) throws MyException {
+    private void validar(String titulo, String contenido, MultipartFile imagen) throws MyException {
 
         if (titulo == null) {
             throw new MyException("el titulo de la noticia no puede ser nulo");
@@ -123,6 +124,10 @@ public class NoticiaServicio {
         }
         if (contenido.isEmpty() || contenido == null) {
             throw new MyException("el contenido de la noticia no puede ser nulo");
+        }
+        if (imagen.isEmpty() || imagen == null){
+            throw new MyException("El campo imagen no puede ser "
+                    + "nulo o estar vacio");
         }
 
     }
