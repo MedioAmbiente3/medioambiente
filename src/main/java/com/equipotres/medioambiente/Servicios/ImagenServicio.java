@@ -6,6 +6,8 @@ import com.equipotres.medioambiente.Repositorios.ImagenRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -17,28 +19,33 @@ public class ImagenServicio {
     @Autowired
     private ImagenRepositorio imagenRepositorio;
 
+    long tamanoMaximoEnMB = 10; // 10 megabytes
+    long tamanoMaximo = tamanoMaximoEnMB * 1024 * 1024; // convertir a bytes
+
     // Crear una Imagen
     @Transactional
     public Imagen guardaImagen(MultipartFile archivo) throws MyException {
-        if (archivo != null) {
+        if (archivo != null && archivo.isEmpty()) {
             try {
+                if (archivo.getSize() > tamanoMaximo){
+                    throw new MyException("La imagen excede el tamaño máximo permitido");
+                }
 
                 Imagen imagen = new Imagen();
-
                 imagen.setMime(archivo.getContentType());
-
                 imagen.setNombre(archivo.getName());
-
                 imagen.setContenido(archivo.getBytes());
-
 
                 return imagenRepositorio.save(imagen);
 
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                throw new MyException("Error al procesar la imagen.");
             }
+        } else {
+            throw new MyException("El archivo de imagen está vacío o es nulo.");
+
         }
-        return null;
+
     }
 
     //Modificar o editar la imagen
@@ -54,7 +61,6 @@ public class ImagenServicio {
                         imagen = respuesta.get();
                     }
                 }
-    
                 imagen.setMime(archivo.getContentType());
                 imagen.setNombre(archivo.getName());
                 imagen.setContenido(archivo.getBytes());
@@ -74,26 +80,20 @@ public class ImagenServicio {
     
             return imagenRepositorio.save(imagenPorDefecto);
         }
-    
         return null;
     }
-    
 
     //Captura el id de la Imagen
     public Imagen getOne(String id) {
         return imagenRepositorio.getOne(id);
     }
 
-
-    //Traer una campaña
-
-
-
     //Listar todas las imagenes
     @Transactional
     public List<Imagen> listarTodos() {
         return imagenRepositorio.findAll();
     }
+
 
 
 }
