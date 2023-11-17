@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -26,6 +27,10 @@ public class Campana {
     private String descripcion;
 
     private String desafio;
+
+    private LocalDate fechaCreacion;
+
+    private LocalDate fechaFinal;
 
     @OneToOne
     private Imagen imagen;

@@ -19,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -44,12 +45,13 @@ public class CampanaController {
             @RequestParam String titulo,
             @RequestParam String descripcion,
             @RequestParam String desafio,
-                   MultipartFile archivo,
-                        ModelMap modelo)
+            MultipartFile archivo,
+            ModelMap modelo,
+            @RequestParam LocalDate fechaFinal)
     {
         try
         {
-            campanaServicio.crearCampana(titulo, descripcion, desafio , archivo);
+            campanaServicio.crearCampana(titulo, descripcion, desafio , archivo, fechaFinal);
             modelo.put("exito", "Se ha registrado la Campaña correctamente");
             return "admin/index";
         }
@@ -60,6 +62,7 @@ public class CampanaController {
             modelo.put("descripcion", descripcion);
             modelo.put("desafio", desafio);
             modelo.put("archivo", archivo);
+            modelo.put("fechaFinal",fechaFinal);
             return "campana_registrar.html";
         }
     }

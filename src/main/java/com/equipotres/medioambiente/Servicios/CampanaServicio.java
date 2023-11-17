@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class CampanaServicio {
 
     //Crear campaña
     @Transactional
-    public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo) throws MyException {
+    public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo, LocalDate fechaFinal) throws MyException {
         //Validamos que los campos no esten vacios
         validar(titulo, descripcion, desafio);
 
@@ -37,6 +38,8 @@ public class CampanaServicio {
         Imagen imagen = imagenServicio.guardaImagen(archivo);
         campana.setImagen(imagen);
         campana.setEstado(true);
+        campana.setFechaCreacion(LocalDate.now());
+        campana.setFechaFinal(fechaFinal);
 
         //Guardamos la campaña
         campanaRepositorio.save(campana);
