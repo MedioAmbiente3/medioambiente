@@ -44,7 +44,7 @@ public class CampanaController {
             @RequestParam String titulo,
             @RequestParam String descripcion,
             @RequestParam String desafio,
-                   MultipartFile archivo,
+            @RequestParam MultipartFile archivo,
                         ModelMap modelo)
     {
         try
