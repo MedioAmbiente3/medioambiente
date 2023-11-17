@@ -59,8 +59,6 @@ public class EmpresaServicio {
         return empresaRepositorio.getOne(id);
     }
 
-
-
     //Validar campos vacios
     private void validar(String nombre, String email, String passwordA, String passwordB)
             throws MyException {

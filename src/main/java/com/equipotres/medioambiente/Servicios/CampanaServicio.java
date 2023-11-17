@@ -27,7 +27,7 @@ public class CampanaServicio {
     @Transactional
     public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo, LocalDate fechaFinal) throws MyException {
         //Validamos que los campos no esten vacios
-        validar(titulo, descripcion, desafio);
+        validar(titulo, descripcion, desafio, archivo);
 
         //Crear un objeto de la clase Campana
         Campana campana = new Campana();
@@ -55,7 +55,7 @@ public class CampanaServicio {
                                  Boolean estado,
                                  MultipartFile archivo) throws MyException {
         //Validamos que los campos no estén vacios
-        validar(titulo, descripcion, desafio);
+        validar(titulo, descripcion, desafio, archivo);
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
@@ -113,7 +113,7 @@ public class CampanaServicio {
     }
 
     //Validar campos vacios
-    private void validar(String titulo, String descripcion, String desafio)
+    private void validar(String titulo, String descripcion, String desafio, MultipartFile archivo)
             throws MyException {
 
         if (titulo.isEmpty() || titulo == null) {
@@ -130,6 +130,12 @@ public class CampanaServicio {
             throw new MyException("el desafio de la campaña  no puede ser "
                     + "nulo o estar vacio");
         }
+
+        if (archivo.isEmpty() || archivo == null){
+            throw new MyException("El campo imagen no puede ser "
+                    + "nulo o estar vacio");
+        }
+
 
     }
 
