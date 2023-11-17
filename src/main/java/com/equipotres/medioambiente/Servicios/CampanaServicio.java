@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,9 +25,9 @@ public class CampanaServicio {
 
     //Crear campaña
     @Transactional
-    public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo) throws MyException {
+    public void crearCampana(String titulo, String descripcion, String desafio,  MultipartFile archivo, LocalDate fechaFinal) throws MyException {
         //Validamos que los campos no esten vacios
-        validar(titulo, descripcion, desafio);
+        validar(titulo, descripcion, desafio, archivo);
 
         //Crear un objeto de la clase Campana
         Campana campana = new Campana();
@@ -37,6 +38,8 @@ public class CampanaServicio {
         Imagen imagen = imagenServicio.guardaImagen(archivo);
         campana.setImagen(imagen);
         campana.setEstado(true);
+        campana.setFechaCreacion(LocalDate.now());
+        campana.setFechaFinal(fechaFinal);
 
         //Guardamos la campaña
         campanaRepositorio.save(campana);
@@ -52,7 +55,7 @@ public class CampanaServicio {
                                  Boolean estado,
                                  MultipartFile archivo) throws MyException {
         //Validamos que los campos no estén vacios
-        validar(titulo, descripcion, desafio);
+        validar(titulo, descripcion, desafio, archivo);
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
@@ -83,7 +86,7 @@ public class CampanaServicio {
 
     }
 
-    //Captura el id del autor
+    //traer el id de la campana
     public Campana getOne(String id) {
         return campanaRepositorio.getOne(id);
     }
@@ -95,7 +98,8 @@ public class CampanaServicio {
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
         if (respuesta.isPresent()) {
-            Campana campana = new Campana();
+
+            Campana campana = respuesta.get();
 
             campanaRepositorio.delete(campana);
 
@@ -109,7 +113,7 @@ public class CampanaServicio {
     }
 
     //Validar campos vacios
-    private void validar(String titulo, String descripcion, String desafio)
+    private void validar(String titulo, String descripcion, String desafio, MultipartFile archivo)
             throws MyException {
 
         if (titulo.isEmpty() || titulo == null) {
@@ -126,6 +130,12 @@ public class CampanaServicio {
             throw new MyException("el desafio de la campaña  no puede ser "
                     + "nulo o estar vacio");
         }
+
+        if (archivo.isEmpty() || archivo == null){
+            throw new MyException("El campo imagen no puede ser "
+                    + "nulo o estar vacio");
+        }
+
 
     }
 
