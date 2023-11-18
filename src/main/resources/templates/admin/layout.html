@@ -194,8 +194,9 @@
             </a>
           </li>
           <li>
-            <a href="#" sec:authorize="hasAnyRole('ADMIN', 'USER')">
-              <i class="bi bi-circle"></i><span>Ver Empresas</span>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/admin/empresas">
+              <i class="bi bi-journal-text"></i>
+              <span>Ver Empresas</span>
             </a>
             <a href="#" sec:authorize="hasRole('EMPRESA')">
               <i class="bi bi-circle"></i><span>Ver Auspicio</span>
@@ -204,6 +205,24 @@
         </ul>
       </li>
 
+      <!-- Usuarios -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav-usuarios" data-bs-toggle="collapse" href="#" sec:authorize="hasAnyRole('ADMIN')"
+        >
+          <i class="bi bi-journal-text"></i><span>Usuarios</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <a class="nav-link collapsed" data-bs-target="#forms-nav-usuarios" data-bs-toggle="collapse" href="#" sec:authorize="hasRole('EMPRESA')">
+          <i class="bi bi-journal-text"></i><span>Auspicio</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav-usuarios" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/admin/usuarios">
+              <i class="bi bi-journal-text"></i>
+              <span>Ver Usuarios</span>
+            </a>
+          </li>
+        </ul>
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="/logout">
           <i class="bi bi-box-arrow-in-right"></i>

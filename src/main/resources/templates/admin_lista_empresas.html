@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="admin/layout :: head-admin"></head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:replace="admin/layout :: navbar-admin"></header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<nav th:replace="admin/layout :: navbar1"></nav>
+<!-- End Sidebar-->
+
+<!-- End #main -->
+
+
+<main id="main">
+    <div class="pagetitle">
+        <h1>Empresas</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active">Data</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <!-- Mensajes -->
+    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+            <h5 class="card-title">Exito 👍</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+        <div class="card-body">
+            <h5 class="card-title">Error 👎</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+    <!--Fin Mensajes -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Lista de Empresas</h5>
+
+                    <table class="table datatable">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">email</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col"> Editar</th>
+                            <th scope="col"> Eliminar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="empresa, rowStat : ${empresas}">
+                            <th scope="row" th:text="${rowStat.count}"></th>
+                            <td th:text="${empresa.nombre}"></td>
+                            <td th:text="${empresa.email}"></td>
+                            <td th:text="${empresa.rol.nombre}"></td>
+                            <td>
+                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/modificar/empresa/__${empresa.id}__}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/eliminar/empresa/__${empresa.id}__}">
+                                    <i class="bi bi-recycle"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--Find -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<div th:replace="admin/layout :: scripts-admin"></div>
+
+</body>
+
+</html>
