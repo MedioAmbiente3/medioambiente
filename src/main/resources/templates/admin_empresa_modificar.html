@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="admin/layout :: head-admin"></head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:replace="admin/layout :: navbar-admin"></header>
+
+<nav th:replace="admin/layout :: navbar1"></nav>
+
+<main id="main" class="main">
+    <!-- Mensajes -->
+    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+        <div class="card-body">
+            <h5 class="card-title">Exito 👍</h5>
+            <p class="card-text" th:text="${exito}"></p>
+        </div>
+    </div>
+    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+        <div class="card-body">
+            <h5 class="card-title">Error 👎</h5>
+            <p class="card-text" th:text="${error}"></p>
+        </div>
+    </div>
+    <!--Fin Mensajes -->
+
+    <div class="pagetitle">
+        <h1>Modificar Usuario</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item" th:text="${session.usuariosesion.nombre}">Usuario</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-12">
+                <!--Espacio para el Admin-->
+            </div>
+
+            <div class="col-m-6">
+
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade profile-overview" id="profile-overview">
+
+
+                                <h5 class="card-title">Modificar Empresa</h5>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Nombre completo</div>
+                                    <div class="col-lg-9 col-md-8" th:text="${session.usuariosesion.nombre}"></div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Email</div>
+                                    <div class="col-lg-9 col-md-8" th:text="${session.usuariosesion.email}"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
+
+                                <!-- Profile Edit Form -->
+                                <form th:action="@{/admin/modificar/empresa/__${empresa.id}__}" method="POST" enctype="multipart/form-data">
+                                    <input hidden th:value="${id}" name="id">
+                                    <div class="row mb-3">
+                                        <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="nombre" type="text" class="form-control" th:value="${empresa.usuario.nombre}" id="nombre" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="email" type="email" class="form-control" id="email" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="passwordA" class="col-md-4 col-lg-3 col-form-label">Contraseña</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="passwordA" type="password" class="form-control" id="passwordA" required >
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="passwordB" class="col-md-4 col-lg-3 col-form-label">Repita la contraseña</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="passwordB" type="password" class="form-control" id="passwordB" required>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Modificar cambios</button>
+                                    </div>
+                                </form>
+                                <!-- End Profile Edit Form -->
+
+                            </div>
+
+                            <div class="tab-pane fade pt-3" id="profile-change-password">
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div th:replace="admin/layout :: scripts-admin"></div>
+
+</body>
+
+</html>
