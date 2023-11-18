@@ -25,8 +25,11 @@ public class ImagenServicio {
     // Crear una Imagen
     @Transactional
     public Imagen guardaImagen(MultipartFile archivo) throws MyException {
-        if (archivo != null) {
+        if (archivo != null && !archivo.isEmpty()) {
             try {
+                if (archivo.getSize() > tamanoMaximo){
+                    throw new MyException("La imagen excede el tamaño máximo permitido");
+                }
 
                 Imagen imagen = new Imagen();
                 imagen.setMime(archivo.getContentType());
@@ -36,19 +39,24 @@ public class ImagenServicio {
                 return imagenRepositorio.save(imagen);
 
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                throw new MyException("Error al procesar la imagen.");
             }
+        } else {
+            throw new MyException("El archivo de imagen está vacío o es nulo.");
+
         }
-        return null;
     }
 
     //Modificar o editar la imagen
     @Transactional
     public Imagen actualizar(MultipartFile archivo, String idImagen) throws MyException {
-        if (archivo != null) {
+        if (archivo != null && !archivo.isEmpty()) {
             try {
+                if (archivo.getSize() > tamanoMaximo){
+                    throw new MyException("La imagen excede el tamaño máximo permitido");
+                }
+
                 Imagen imagen = new Imagen();
-    
                 if (idImagen != null) {
                     Optional<Imagen> respuesta = imagenRepositorio.findById(idImagen);
     
@@ -63,19 +71,24 @@ public class ImagenServicio {
                 return imagenRepositorio.save(imagen);
     
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                throw new MyException("Error al procesar la imagen.");
             }
         } else {
+
+            throw new MyException("El archivo de imagen está vacío o es nulo.");
+            /*
             // Crear y retornar una imagen por defecto
             Imagen imagenPorDefecto = new Imagen();
             imagenPorDefecto.setMime("image/jpeg"); // ajusta el tipo MIME según tu necesidad
             imagenPorDefecto.setNombre("imagen_por_defecto.jpg"); // ajusta el nombre según tu necesidad
             // Puedes asignar contenido por defecto o dejarlo en null, dependiendo de tus necesidades
             // imagenPorDefecto.setContenido(null);
-    
+
             return imagenRepositorio.save(imagenPorDefecto);
+
+             */
         }
-        return null;
+
     }
 
     //Captura el id de la Imagen
