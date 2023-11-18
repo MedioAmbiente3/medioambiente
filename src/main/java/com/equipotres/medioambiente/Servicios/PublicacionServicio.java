@@ -1,9 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
-import com.equipotres.medioambiente.Entidades.Imagen;
-import com.equipotres.medioambiente.Entidades.Noticia;
-import com.equipotres.medioambiente.Entidades.Publicacion;
-import com.equipotres.medioambiente.Entidades.Subscripcion;
+import com.equipotres.medioambiente.Entidades.*;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.PublicacionRepositorio;
 import com.equipotres.medioambiente.Repositorios.SubscripcionRepositorio;
@@ -76,7 +73,20 @@ public class PublicacionServicio {
         return publicaciones;
     }
 
-
+    //Si la publicacion existe retorna id, de contrario empty
+    public String obtenerIdPublicacion(String idUsuario, String idCampana)
+    {
+        String idPublicacion = "";
+        for (Publicacion pub:listarPublicacionPorCampana(idCampana))
+        {
+            Usuario usuario = pub.getSubscripcion().getUsuario();
+            if(usuario.getId().equals(idUsuario))
+            {
+                idPublicacion = pub.getId();
+            }
+        }
+        return idPublicacion;
+    }
 
     //Validar campos vacios
     private void validar(
