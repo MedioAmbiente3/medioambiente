@@ -28,7 +28,6 @@ public class PublicacionServicio {
     private SubscripcionServicio subscripcionServicio;
 
     //Método crear Publicacion
-    //Método crear Publicacion
     @Transactional
     public void crearPublicacion(
             String titulo,
@@ -67,6 +66,13 @@ public class PublicacionServicio {
 
         publicaciones = publicacionRepositorio.findAll();
         //Metodo propio del jpaRepo es traer todos los datos de la tabla con el ".findAll()"
+        return publicaciones;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Publicacion> listarPublicacionPorCampana(String id){
+        List<Publicacion> publicaciones;
+        publicaciones = publicacionRepositorio.buscarPublicacionPorCampana(id);
         return publicaciones;
     }
 

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -96,8 +97,11 @@ public class CampanaController {
     //Modificar campañas
     //Traer el id señalado a modificar
     @GetMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id, ModelMap modelo) {
+    public String modificar(@PathVariable String id, String nombreImagenAnterior,
+                            String extensionImagenAnterior, ModelMap modelo) {
         modelo.put("campana", campanaServicio.getOne(id));
+        modelo.addAttribute("nombreImagen", nombreImagenAnterior);
+        modelo.addAttribute("extensionImagen", extensionImagenAnterior);
 
         return "campana_modificar.html";
     }
@@ -105,24 +109,52 @@ public class CampanaController {
     //Realizar la modificación al id previamente seleccionado
     @PostMapping("/modificar/{id}")
     public String modificar(
-                            @PathVariable String id,
-                            @RequestParam  String titulo,
-                            @RequestParam String descripcion,
-                            @RequestParam String desafio,
-                            @RequestParam Boolean estado,
-                            MultipartFile archivo,
-                            ModelMap modelo) {
+            @RequestParam String id,
+            @RequestParam String titulo,
+            @RequestParam String descripcion,
+            @RequestParam String desafio,
+            @RequestParam Boolean estado,
+            @RequestParam MultipartFile archivo,
+            ModelMap modelo,
+            RedirectAttributes msg) {
         try
         {
             campanaServicio.modificarCampana(id, titulo, descripcion,
                     desafio, estado, archivo);
             modelo.put("exito", "Se ha modificado la campaña");
-            return "redirect:../lista";
+            return "redirect:../lista/admin/";
         }
         catch (MyException ex)
         {
-            modelo.put("error", "No se ha realizado ningún cambio");
-            return "campana_modificar.html";
+            msg.addFlashAttribute("error", ex.getMessage());
+            //modelo.put("error", "No se ha realizado ningún cambio");
+
+            return "redirect:/campana/modificar/" + id;
         }
     }
+
+    //Traer el id señalado para eliminar campaña
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable String id, ModelMap modelo) {
+        modelo.put("campana", campanaServicio.getOne(id));
+        return "campana_eliminar.html";
+    }
+
+    //Realizar la eliminacion de la campaña previamente seleccionado
+    @PostMapping("/eliminar/{id}")
+    public String eliminado(@PathVariable String id, ModelMap modelo) {
+        try {
+            campanaServicio.eliminarCampana(id);
+            modelo.put("exito", "Se ha eliminado la campaña seleccionada");
+            return "redirect:../lista/admin/";
+        } catch (MyException ex) {
+            modelo.put("error", "No se ha realizado ningún cambio");
+            return "campana_eliminar.html";
+        }
+
+    }
+
+
+
+
 }

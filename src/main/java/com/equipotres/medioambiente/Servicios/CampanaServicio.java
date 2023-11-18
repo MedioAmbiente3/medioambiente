@@ -24,6 +24,9 @@ public class CampanaServicio {
     @Autowired
     private ImagenServicio imagenServicio;
 
+    private String nombreImagen;  // Puedes ajustar el nombre según lo que necesites
+    private String extensionImagen;
+
     //Crear campaña
     @Transactional
     public void crearCampana(
@@ -33,7 +36,7 @@ public class CampanaServicio {
             MultipartFile archivo,
             LocalDate fechaFinal) throws MyException {
         //Validamos que los campos no esten vacios
-        validar(titulo, descripcion, desafio);
+        validar(titulo, descripcion, desafio, archivo);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -64,7 +67,7 @@ public class CampanaServicio {
                                  Boolean estado,
                                  MultipartFile archivo) throws MyException {
         //Validamos que los campos no estén vacios
-        validar(titulo, descripcion, desafio);
+        validar(titulo, descripcion, desafio, archivo);
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
@@ -79,6 +82,10 @@ public class CampanaServicio {
                 idImagen = campana.getImagen().getId();
 
             }
+            nombreImagen = campana.getImagen().getNombre();
+            extensionImagen = campana.getImagen().getMime();
+
+
             Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             campana.setImagen(imagen);
             campanaRepositorio.save(campana);
@@ -102,7 +109,7 @@ public class CampanaServicio {
 
     //Eliminar campañas
     @Transactional
-    public void eliminarCampana(String id_campana) {
+    public void eliminarCampana(String id_campana) throws MyException{
 
         Optional<Campana> respuesta = campanaRepositorio.findById(id_campana);
 
@@ -122,7 +129,7 @@ public class CampanaServicio {
     }
 
     //Validar campos vacios
-    private void validar(String titulo, String descripcion, String desafio)
+    private void validar(String titulo, String descripcion, String desafio, MultipartFile archivo)
             throws MyException {
 
         if (titulo.isEmpty() || titulo == null) {
@@ -140,13 +147,12 @@ public class CampanaServicio {
                     + "nulo o estar vacio");
         }
 
-        /*
+
         if (archivo.isEmpty() || archivo == null){
             throw new MyException("El campo imagen no puede ser "
                     + "nulo o estar vacio");
         }
 
-         */
 
 
     }
