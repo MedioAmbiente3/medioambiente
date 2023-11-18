@@ -192,7 +192,7 @@ header .fa-bars{
 }
 
 .home-container{
-    background:url(/img/tree1.jpg) ;
+    background:url('../img/tree1.jpg') ;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -200,7 +200,7 @@ header .fa-bars{
 }
 
 .home-container1{
-    background:url(/img/tree1fondo.png);
+    background:url('../img/tree1fondo.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -675,7 +675,7 @@ video {
     width:100%;
     top: 50%;
     left:50%;
-    transform:translate(-50%,-50%) scale (1.2);
+    transform:translate(-50%,-50%) scale(1.2);
     z-index:101;
     background: #fff;
     padding:25px;
@@ -688,7 +688,7 @@ video {
 .home.show .form_container{
     opacity: 1;
     pointer-events: auto;
-    transform:translate(-50%,-50%) scale (1.2);
+    transform:translate(-50%,-50%) scale(1.2);
 
 }
 
@@ -698,7 +698,7 @@ video {
 }
 
 .form_container.active .signup_form{
-    display:black;
+    display:block;
 
 }
 .form_container.active .login_form{

@@ -1,5 +1,3 @@
-
-
 -- -----------------------------------------------------
 -- Table `medioambiente`.`imagen`
 -- -----------------------------------------------------
@@ -79,12 +77,14 @@ CREATE TABLE IF NOT EXISTS `medioambiente`.`empresa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `medioambiente`.`campana`
 (
-    `id`          VARCHAR(255) NOT NULL,
-    `desafio`     VARCHAR(255) NULL DEFAULT NULL,
-    `descripcion` VARCHAR(255) NULL DEFAULT NULL,
-    `estado`      BIT(1)       NULL DEFAULT NULL,
-    `titulo`      VARCHAR(255) NULL DEFAULT NULL,
-    `imagen_id`   VARCHAR(255) NULL DEFAULT NULL,
+    `id`             VARCHAR(255) NOT NULL,
+    `desafio`        VARCHAR(255) NULL DEFAULT NULL,
+    `descripcion`    VARCHAR(255) NULL DEFAULT NULL,
+    `estado`         BIT(1)       NULL DEFAULT NULL,
+    `titulo`         VARCHAR(255) NULL DEFAULT NULL,
+    `imagen_id`      VARCHAR(255) NULL DEFAULT NULL,
+    `fecha_creacion` DATE         NULL DEFAULT NULL,
+    `fecha_final`    DATE         NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     INDEX `FKluvpv2iiq6rt9519y1hesw24g` (`imagen_id` ASC) VISIBLE,
     CONSTRAINT `FKluvpv2iiq6rt9519y1hesw24g`
@@ -222,12 +222,12 @@ CREATE TABLE IF NOT EXISTS `medioambiente`.`ganador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `medioambiente`.`noticia`
 (
-    `id`         VARCHAR(255) NOT NULL,
-    `contenido`  VARCHAR(255) NULL DEFAULT NULL,
-    `fecha_creacion`  DATE    NULL DEFAULT NULL,
-    `titulo`     VARCHAR(255) NULL DEFAULT NULL,
-    `imagen_id`  VARCHAR(255) NULL DEFAULT NULL,
-    `usuario_id` VARCHAR(255) NULL DEFAULT NULL,
+    `id`             VARCHAR(255) NOT NULL,
+    `contenido`      VARCHAR(255) NULL DEFAULT NULL,
+    `fecha_creacion` DATE         NULL DEFAULT NULL,
+    `titulo`         VARCHAR(255) NULL DEFAULT NULL,
+    `imagen_id`      VARCHAR(255) NULL DEFAULT NULL,
+    `usuario_id`     VARCHAR(255) NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     INDEX `FKq4o50dd5xw0641hmqor0roqqu` (`imagen_id` ASC) VISIBLE,
     INDEX `FK51s0hrvyltinu4gignfdoen34` (`usuario_id` ASC) VISIBLE,

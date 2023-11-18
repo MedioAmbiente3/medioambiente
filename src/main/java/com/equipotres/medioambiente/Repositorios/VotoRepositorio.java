@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VotoRepositorio extends JpaRepository<Voto,String> {
-
-    @Query("SELECT v.id FROM Voto v, Usuario u, Publicacion p WHERE u.id = :idUsuario " +
-            "AND p.id = :idPublicacion")
-    String obtenerIdVoto(@Param("idUsuario") String idUsuario,
-                                @Param("idPublicacion") String idPublicacion);
+/*No se define ningún método personalizado en este repositorio porque
+todas las operaciones necesarias (crear, modificar, listar y eliminar campañas)
+ya están cubiertas por los métodos proporcionados por JpaRepository*/
 }

@@ -1,15 +1,26 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Campana;
+import com.equipotres.medioambiente.Entidades.Imagen;
+import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
+import com.equipotres.medioambiente.Servicios.ImagenServicio;
 import com.equipotres.medioambiente.Servicios.SubscripcionServicio;
+import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -35,12 +46,19 @@ public class CampanaController {
             @RequestParam String titulo,
             @RequestParam String descripcion,
             @RequestParam String desafio,
-                   MultipartFile archivo,
-                        ModelMap modelo)
+            @RequestParam MultipartFile archivo,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaFinal,
+            ModelMap modelo)
+                       
     {
         try
         {
-            campanaServicio.crearCampana(titulo, descripcion, desafio , archivo);
+            campanaServicio.crearCampana(
+                    titulo,
+                    descripcion,
+                    desafio,
+                    archivo,
+                    fechaFinal);
             modelo.put("exito", "Se ha registrado la Campaña correctamente");
             return "admin/index";
         }
@@ -51,6 +69,7 @@ public class CampanaController {
             modelo.put("descripcion", descripcion);
             modelo.put("desafio", desafio);
             modelo.put("archivo", archivo);
+            modelo.put("fechaFinal",fechaFinal);
             return "campana_registrar.html";
         }
     }

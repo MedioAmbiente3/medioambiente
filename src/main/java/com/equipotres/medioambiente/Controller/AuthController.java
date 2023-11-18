@@ -44,7 +44,7 @@ public class AuthController {
             return "redirect:/empresa_lista.html";
 
         }
-        return "inicio.html";
+        return "usuario.html";
     }
 
     @GetMapping("/index")

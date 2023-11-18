@@ -1,5 +1,6 @@
 package com.equipotres.medioambiente.Controller;
 import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,8 +102,10 @@ public class UsuarioController {
 
     //Listar usuarios
     @GetMapping(value = "/lista")
-    public String listarUsuarios(ModelMap modelo) {
-        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+    public String listarUsuarios(ModelMap modelo,
+                                 @RequestParam String nombreRol) {
+        RolEnum role = RolEnum.valueOf(nombreRol);
+        List<Usuario> usuarios = usuarioServicio.listarUsuarios(role);
         modelo.addAttribute("usuarios", usuarios);
         return "usuarios_lista";
     }
