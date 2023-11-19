@@ -7,6 +7,7 @@ import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.ImagenServicio;
 import com.equipotres.medioambiente.Servicios.SubscripcionServicio;
+import com.equipotres.medioambiente.Servicios.PublicacionServicio;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,6 +35,9 @@ public class CampanaController {
 
     @Autowired
     private SubscripcionServicio subscripcionServicio;
+
+    @Autowired
+    private PublicacionServicio publicacionServicio;
 
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
@@ -132,6 +136,14 @@ public class CampanaController {
             return "redirect:/campana/modificar/" + id;
         }
     }
+    
+    //Detalle de campaña
+    @GetMapping("/detalle/{id}")
+    public String detalle(@PathVariable String id, ModelMap modelo){
+        modelo.addAttribute("campana", campanaServicio.getOne(id));
+        modelo.addAttribute("subscripcionServicio", subscripcionServicio);
+        modelo.addAttribute("publicacionServicio", publicacionServicio);
+        return "campana_detalle.html";}
 
     //Traer el id señalado para eliminar campaña
     @GetMapping("/eliminar/{id}")
