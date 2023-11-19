@@ -123,7 +123,7 @@ public class AdminController {
     //Modificar un usuario con rol.Empresa
     @GetMapping("/modificar/empresa/{id}")
     public String modificarEmpresa(@PathVariable String id, ModelMap modelo){
-        modelo.put("empresa", empresaServicio.getOne(id));
+        modelo.put("empresa", usuarioServicio.getOne(id));
         return "admin_empresa_modificar.html";
     }
 

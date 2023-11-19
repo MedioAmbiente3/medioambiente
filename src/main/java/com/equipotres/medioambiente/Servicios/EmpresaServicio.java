@@ -58,7 +58,7 @@ public class EmpresaServicio {
 
     //Obtener ID de la empresa
     public Empresa getOne(String id){
-        return empresaRepositorio.getOne(id);
+        System.out.println("idgetOne = "+id);return empresaRepositorio.getOne(id);
     }
 
     //Modificar usuario Empresa
