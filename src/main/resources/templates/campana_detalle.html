@@ -55,10 +55,10 @@
                                   <tr>
                                       <th scope="col">Imagen</th>
                                       <th scope="col">Título</th>
-                                      <th scope="col">Estado</th>
                                       <th scope="col">Descripción</th>
                                       <th scope="col">Desafío</th>
-                                      <th scope="col">Acciones</th>
+                                      <th scope="col">Subscripción</th>
+                                      <th scope="col">Publicaciones</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -70,26 +70,41 @@
                                        style="width: 100px;">
                                   </a>
                                   </td>
-                                  <td th:text="${campana.titulo}"></td>                                  
-                                  <td th:text="${campana.estado == true} ?'Activa' : 'Inactiva'"></td>
+                                  <td th:text="${campana.titulo}"></td>                               
                                   <td th:text="${campana.descripcion}"></td>
                                   <td th:text="${campana.desafio}"></td>
                                   <td>
-                                  <a sec:authorize="hasRole('USER')"
-                                     th:href="${#strings.isEmpty(subscripcionServicio.
-                                     obtenerIdSubscripcion(session.usuariosesion.id, campana.id))} 
-                                     ? '/subscripcion/registrar/' + ${campana.id} : 'javascript:void(0)'"
-                                     th:text="${#strings.isEmpty(subscripcionServicio.
-                                     obtenerIdSubscripcion(session.usuariosesion.id, campana.id))} ?
-                                     'Unirse' : 'Unido'">
-                                  </a>
-                                  <a sec:authorize="hasRole('USER')"
-                                     th:href="${#strings.isEmpty(publicacionServicio.
-                                     obtenerIdPublicacion(session.usuariosesion.id, campana.id))} ? 
-                                     '/publicacion/registrar/' + ${campana.id} : '/publicacion/lista/'"
-                                     th:text="${#strings.isEmpty(publicacionServicio.
-                                     obtenerIdPublicacion(session.usuariosesion.id, campana.id))} ? 
-                                     'Publicar' : 'Ver Publicaciones'">
+		                      <form th:if="${#strings.isEmpty(subscripcionServicio.
+                                    obtenerIdSubscripcion(session.usuariosesion.id, campana.id))}"
+                                    th:action="@{/subscripcion/registro}" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="campanaid" th:value="${campana.id}" />
+                                    <input type="hidden" th:value="${session.usuariosesion.id}" name="usuarioid">
+                              <button
+                                    class="btn btn-primary w-100" type="submit">Unirse
+                              </button>
+		                      </form>
+		                      <button th:unless="${#strings.isEmpty(subscripcionServicio.
+                                      obtenerIdSubscripcion(session.usuariosesion.id, campana.id))}"
+                                      class="btn btn-primary w-100" type="button" disabled>Unido
+                              </button>
+                                  </td>
+                                  <td>
+		                      <a sec:authorize="hasRole('USER')"
+                                         th:if="${!#strings.isEmpty(subscripcionServicio.                                     
+                                         obtenerIdSubscripcion(session.usuariosesion.id, campana.id))}"                                     
+                                         th:href="${#strings.isEmpty(publicacionServicio.                                     
+                                         obtenerIdPublicacion(session.usuariosesion.id, campana.id))} 
+                                         ? '/publicacion/registrar/' + ${campana.id} : 'javascript:void(0)'"
+                                         th:text="${#strings.isEmpty(publicacionServicio.
+		                                 obtenerIdPublicacion(session.usuariosesion.id, campana.id))} ?
+		                                 'Publicar' : 'Publicada'">
+                              </a>
+                                  </td>
+                              	  </tr>
+                              </tbody>
+                          </table>
+                                  <a th:href="@{/publicacion/lista/}">
+                                     Ver Publicaciones
                                   </a>
                                   <a sec:authorize="hasRole('USER')"
                                      th:href="@{/campana/lista}">
@@ -103,10 +118,6 @@
                                      th:href="@{/campana/lista/admin}">
                                      Regresar
                                   </a>
-                                  </td>
-                              	</tr>
-                              </tbody>
-                          </table>
                           <!--Find -->
                       </div>
                   </div>
