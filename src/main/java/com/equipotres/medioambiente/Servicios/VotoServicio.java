@@ -1,5 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
+import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Entidades.Voto;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.VotoRepositorio;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class VotoServicio {
@@ -50,7 +52,21 @@ public class VotoServicio {
         }
         return (int) votosDePublicacion.stream().count();
     }
-    
+
+    public List<Usuario> obtenerUsuariosQueVotaron(String idPublicacion) {
+        return listarVotos().stream()
+                .filter(voto -> voto.getPublicacion().getId().equals(idPublicacion))
+                .map(Voto::getUsuario)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> obtenerNombresUsuariosQueVotaron(String idPublicacion) {
+        return obtenerUsuariosQueVotaron(idPublicacion).stream()
+                .map(Usuario::getNombre)
+                .collect(Collectors.toList());
+    }
+
+
     //Obtener lista de cantidad de votos de cada idPublicación
     //Definir un objeto votación
     public class Votacion 

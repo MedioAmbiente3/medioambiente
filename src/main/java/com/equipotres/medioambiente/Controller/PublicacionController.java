@@ -53,7 +53,7 @@ public class PublicacionController {
                     usuarioid,
                     campanaid);
             modelo.put("exito", "Se ha publicado el desafio correctamente");
-            return "/admin/index";
+            return "redirect:/publicacion/lista";
         }
         catch (MyException ex)
         {
