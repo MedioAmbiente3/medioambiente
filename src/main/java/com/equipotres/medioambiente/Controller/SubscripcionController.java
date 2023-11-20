@@ -57,7 +57,7 @@ public class SubscripcionController {
             subscripcionServicio.crearSubscripcion(subscripcion);
 
             modelo.put("exito", "Se ha registrado la subscripción correctamente");
-            return "admin/index";
+            return String.format("redirect:/campana/detalle/%s", campanaid);
         }
         catch (MyException ex)
         {

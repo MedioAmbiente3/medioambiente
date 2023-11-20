@@ -6,6 +6,7 @@ import com.equipotres.medioambiente.Entidades.Publicacion;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.PublicacionServicio;
+import com.equipotres.medioambiente.Servicios.VotoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,14 +19,14 @@ import java.util.List;
 @RequestMapping("/publicacion")
 public class PublicacionController {
 
-
     @Autowired
     private PublicacionServicio publicacionServicio;
 
     @Autowired
     private CampanaServicio campanaServicio;
 
-
+    @Autowired
+    private VotoServicio votoServicio;
 
     @GetMapping("/registrar/{campanaid}")
     public String registrar(@PathVariable String campanaid, ModelMap modelo){
@@ -72,6 +73,7 @@ public class PublicacionController {
     public String lista(ModelMap modelo) {
         List<Publicacion> publicaciones = publicacionServicio.listarPublicaciones();
         modelo.addAttribute("publicaciones", publicaciones);
+        modelo.addAttribute("votoServicio", votoServicio);
         return "publicacion_lista.html";
     }
 
