@@ -46,10 +46,10 @@ public class VotoController {
             voto.setFechaCreacion(LocalDate.now());
             votoServicio.crearVoto(voto);
 
-            return "publicacion_lista";
+            return "redirect:../publicacion/lista";
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
-            return "publicacion_lista";
+            return "redirect:../publicacion/lista";
         }
     }
 }
