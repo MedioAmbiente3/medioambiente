@@ -13,12 +13,10 @@
 <!-- End Sidebar-->
 
 <!-- End #main -->
-
-<section id="1">
-    <main id="main">
-
+<main id="main">
+    <section id="1">
         <div class="pagetitle">
-            <h1>Noticias</h1>
+            <h1>Publicaciones Desafios</h1>
             <nav>
 
                 <ol class="breadcrumb">
@@ -70,65 +68,95 @@
                                                                              alt="avatar" width="60"
                                                                              height="60"/>
                                                                         <div>
-                                                                            <h6 th:text="${publicacion.titulo}" class="fw-bold text-primary mb-1"></h6>
+                                                                            <h6 th:text="${publicacion.titulo}"
+                                                                                class="fw-bold text-primary mb-1"></h6>
                                                                             <p class="text-muted small mb-0">
                                                                                 Shared publicly - Jan 2020
                                                                             </p>
                                                                         </div>
                                                                     </div>
-                                                                    <p th:text="${publicacion.contenido}" class="mt-3 mb-4 pb-2">
+                                                                    <p th:text="${publicacion.contenido}"
+                                                                       class="mt-3 mb-4 pb-2">
                                                                     </p>
-                                                                    <div class="small d-flex justify-content-start">
-                                                       <!--Votación Inicio-->                 
-                                                         <form th:if="${#strings.isEmpty(votoServicio.
+                                                                    <img class="card-img-top"
+                                                                         th:if="${publicacion.imagen != null}"
+                                                                         th:src="@{/imagen/publicacion/__${publicacion.id}__}"
+                                                                         alt="avatar" width="200"
+                                                                         height="150"/>
+
+                                                                    <!--Votación Inicio-->
+                                                                    <form th:if="${#strings.isEmpty(votoServicio.
                                                          obtenerIdVoto(session.usuariosesion.id, publicacion.id))}"
-                                                         th:action="@{/voto/registro}" method="POST" enctype="multipart/form-data">
-                                                         <input type="hidden" name="idPublicacion" th:value="${publicacion.id}" />
-                                                         <input type="hidden" th:value="${session.usuariosesion.id}" name="idUsuario">
-                                                         <button class="btn btn-primary w-100" type="submit">
-                                                              <i class="bi bi-hand-thumbs-up"></i>
-                                                              <p class="mb-0">Votar</p>
-                                                         </button>
-                                                              </form>
-                                                              <button th:unless="${#strings.isEmpty(votoServicio.
+                                                                          th:action="@{/voto/registro}" method="POST"
+                                                                          enctype="multipart/form-data">
+                                                                        <input type="hidden" name="idPublicacion"
+                                                                               th:value="${publicacion.id}"/>
+                                                                        <input type="hidden"
+                                                                               th:value="${session.usuariosesion.id}"
+                                                                               name="idUsuario">
+                                                                        <button class="btn btn-primary w-100"
+                                                                                type="submit">
+                                                                            <i class="bi bi-hand-thumbs-up"></i>
+                                                                            <p class="mb-0">Votar</p>
+                                                                        </button>
+                                                                    </form>
+                                                                    <button th:unless="${#strings.isEmpty(votoServicio.
                                                               obtenerIdVoto(session.usuariosesion.id, publicacion.id))}"
-                                                              class="btn btn-primary w-100" type="button" disabled>
-                                                              <i class="bi bi-hand-thumbs-up"></i>
-                                                              <p class="mb-0">Votó</p>
-                                                         </button>
-                                                         <!--Votación Fin-->
-                                                                      <a href="#!"
-                                                                           class="d-flex align-items-center me-3">
-                                                                            <i class="bi bi-chat-quote"></i>
-                                                                            <p class="mb-0">Comentario</p>
-                                                                      </a>
+                                                                            class="btn btn-primary w-100" type="button"
+                                                                            disabled>
+                                                                        <i class="bi bi-hand-thumbs-up"></i>
+                                                                        <p class="mb-0">Votó</p>
+                                                                    </button>
+                                                                    <p th:unless="${votoServicio.contarVotosDePublicacion(publicacion.id) == 0}">
+                                                                        <!-- Tu lógica aquí, por ejemplo, mostrar el número de votos -->
+                                                                        <span th:text="${votoServicio.contarVotosDePublicacion(publicacion.id)}"></span> votos
+                                                                    </p>
+                                                                    <!--Prueba de traer el nombre usuario relacionado con el voto -->
+                                                                    <!--
+                                                                    <p th:unless="${#lists.isEmpty(votoServicio.
+                                                                    obtenerUsuariosQueVotaron(publicacion.id))}">
+                                                                       <span th:text="${#strings.join(votoServicio.
+                                                                       obtenerNombresUsuariosQueVotaron(publicacion.id), ', ')}"></span>
+                                                                       votaron en esta publicación
+                                                                   </p>
+
+
+                                                                   -->
+
+
+                                                                    <!--Votación Fin-->
+                                                                    <a href="#!"
+                                                                       class="d-flex align-items-center me-3">
+                                                                        <i class="bi bi-chat-quote"></i>
+                                                                        <p class="mb-0">Comentario</p>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer py-3 border-0"
+                                                                 style="background-color: #f8f9fa;">
+                                                                <div class="d-flex flex-start w-100">
+                                                                    <img class="rounded-circle shadow-1-strong me-3"
+                                                                         th:if="${session.usuariosesion.imagen != null}"
+                                                                         th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}"
+                                                                         alt="avatar" width="40"
+                                                                         height="40"/>
+                                                                    <div class="form-outline w-100">
+                                                                <textarea class="form-control" id="textAreaExample"
+                                                                          rows="4"
+                                                                          style="background: #fff;"></textarea>
+                                                                        <label class="form-label"
+                                                                               for="textAreaExample">Mensaje</label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="card-footer py-3 border-0"
-                                                                     style="background-color: #f8f9fa;">
-                                                                    <div class="d-flex flex-start w-100">
-                                                                        <img class="rounded-circle shadow-1-strong me-3"
-                                                                             th:if="${session.usuariosesion.imagen != null}"
-                                                                             th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}"
-                                                                             alt="avatar" width="40"
-                                                                             height="40"/>
-                                                                        <div class="form-outline w-100">
-                                                                <textarea class="form-control" id="textAreaExample" rows="4"
-                                                                style="background: #fff;"></textarea>
-                                                                            <label class="form-label"
-                                                                                   for="textAreaExample">Mensaje</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="float-end mt-2 pt-1">
-                                                                        <button type="button"
-                                                                                class="btn btn-primary btn-sm">Enviar
-                                                                            comentario
-                                                                        </button>
-                                                                        <button type="button"
-                                                                                class="btn btn-outline-primary btn-sm">
-                                                                            Cancel
-                                                                        </button>
-                                                                    </div>
+                                                                <div class="float-end mt-2 pt-1">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary btn-sm">Enviar
+                                                                        comentario
+                                                                    </button>
+                                                                    <button type="button"
+                                                                            class="btn btn-outline-primary btn-sm">
+                                                                        Cancel
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -138,19 +166,16 @@
                                         </div>
                                     </ul>
                                 </div>
-                                <!-- End of card loop -->
                             </div>
-                            <!--Find -->
+                            <!-- End of card loop -->
                         </div>
+                        <!--Find -->
                     </div>
                 </div>
             </div>
         </section>
-
-    </main>
-</section>
-
-
+    </section>
+</main>
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
@@ -159,11 +184,8 @@
     <div class="credits">
     </div>
 </footer><!-- End Footer -->
-
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 <div th:replace="admin/layout :: scripts-admin"></div>
-
 </body>
-
 </html>
