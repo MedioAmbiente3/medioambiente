@@ -18,7 +18,7 @@ public class Empresa {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     String id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
 
 

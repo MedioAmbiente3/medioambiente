@@ -1,6 +1,5 @@
 package com.equipotres.medioambiente.Controller;
 
-import com.equipotres.medioambiente.Entidades.Empresa;
 import com.equipotres.medioambiente.Entidades.Noticia;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Enumeraciones.RolEnum;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -111,11 +111,11 @@ public class AdminController {
         try {
             usuarioServicio.eliminarUsuarioPorId(id);
             modelo.put("exito", "Usuario eliminado correctamente!");
-            return "redirect:/admin/usuarios";
+            return "redirect:/admin/usuarios/";
 
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
-            return "redirect:/admin_usuario_eliminar" + id ;
+            return "redirect:/admin/usuario/eliminar/" + id ;
 
         }
     }
@@ -123,7 +123,7 @@ public class AdminController {
     //Modificar un usuario con rol.Empresa
     @GetMapping("/modificar/empresa/{id}")
     public String modificarEmpresa(@PathVariable String id, ModelMap modelo){
-        modelo.put("empresa", empresaServicio.getOne(id));
+        modelo.put("empresa", usuarioServicio.getOne(id));
         return "admin_empresa_modificar.html";
     }
 
@@ -156,14 +156,30 @@ public class AdminController {
         }
     }
 
+    //Eliminar un usuario de rol.Empresa
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @GetMapping("/eliminar/empresa/{id}")
+    public String eliminandoEmpresa(@PathVariable String id, ModelMap modelo){
+        modelo.put("empresa", usuarioServicio.getOne(id));
+        return "admin_empresa_eliminar";
+    }
 
+    //Realizar la eliminacion del usuario previamente seleccionado
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PostMapping("/eliminar/empresa/{id}")
+    public String eliminarEmpresa(@PathVariable String id,
+                                  ModelMap modelo, RedirectAttributes msg ) {
 
+        try {
+            usuarioServicio.eliminarUsuarioConEmpresa(id);
+            modelo.put("exito", "Empresa eliminada correctamente!");
+            return "redirect:/admin/empresas/";
 
+        } catch (MyException ex) {
+            msg.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/admin/eliminar/empresa/" + id ;
 
-
-
-
-
-
+        }
+    }
 
 }

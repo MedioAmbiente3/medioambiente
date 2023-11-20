@@ -21,7 +21,7 @@
     </div>
     <!--Fin Mensajes -->
     <div class="pagetitle">
-        <h1>Eliminar Usuario</h1>
+        <h1>Eliminar Empresa</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -29,6 +29,7 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
+
     <section class="section profile">
         <div class="row">
             <div class="col-12">
@@ -40,7 +41,7 @@
                         <!-- Bordered Tabs -->
                         <div class="tab-content pt-2">
                             <div class="tab-pane fade profile-overview" id="profile-overview">
-                                <h5 class="card-title">Eliminar usuario</h5>
+                                <h5 class="card-title">Eliminar empresa</h5>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">Nombre completo</div>
                                     <div class="col-lg-9 col-md-8" th:text="${session.usuariosesion.nombre}"></div>
@@ -52,41 +53,31 @@
                             </div>
                             <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
                                 <!-- Profile Edit Form -->
-                                <form th:action="@{/admin/eliminar/usuario/__${usuario.id}__}" method="POST" enctype="multipart/form-data"
+                                <form th:action="@{/admin/eliminar/empresa/__${empresa.id}__}" method="POST" enctype="multipart/form-data"
                                       onsubmit="return confirmarEliminacion()">
                                     <input hidden th:value="${id}" name="id">
                                     <div class="row mb-3">
-                                        <label for="imagen" class="col-md-4 col-lg-3 col-form-label">Imagen de Perfil</label>
+                                        <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Nombre empresa</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <!-- Imagen de perfil actual -->
-                                            <img th:src="@{/imagen/perfil/__${usuario.id}__}"
-                                                 alt="Perfil" class="card-img-top" id="imagen">
-                                            <!-- Input para cargar nuevas imágenes -->
-                                            <input type="file" class="form-control" name="imagen" th:value="${usuario.imagen}" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="nombre" type="text" class="form-control" id="nombre"  th:value="${usuario.nombre}" disabled>
+                                            <input name="nombre" type="text" class="form-control" id="nombre"  th:value="${empresa.nombre}" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="email" type="email" class="form-control" id="email" th:value="${usuario.email}" disabled>
+                                            <input name="email" type="email" class="form-control" id="email" th:value="${empresa.email}" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="passwordA" class="col-md-4 col-lg-3 col-form-label">Contraseña</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="passwordA" type="password" class="form-control" id="passwordA" th:value="${usuario.password}" disabled >
+                                            <input name="passwordA" type="password" class="form-control" id="passwordA" th:value="${empresa.password}" disabled >
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="passwordB" class="col-md-4 col-lg-3 col-form-label">Repita la contraseña</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="passwordB" type="password" class="form-control" id="passwordB" th:value="${usuario.password}" disabled>
+                                            <input name="passwordB" type="password" class="form-control" id="passwordB" th:value="${empresa.password}" disabled>
                                         </div>
                                     </div>
                                     <div class="text-center">
@@ -96,7 +87,7 @@
                                 <!-- End Profile Edit Form -->
                                 <script th:inline="javascript">
                                     function confirmarEliminacion() {
-                                        return confirm([[#{confirmarEliminacionUsuario.mensaje}]]); // Mensaje de confirmación, puedes personalizarlo
+                                        return confirm([[#{confirmarEliminacionEmpresa.mensaje}]]); // Mensaje de confirmación, puedes personalizarlo
                                     }
                                 </script>
                             </div>

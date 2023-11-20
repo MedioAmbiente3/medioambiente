@@ -1,9 +1,6 @@
 package com.equipotres.medioambiente.Servicios;
 
-import com.equipotres.medioambiente.Entidades.Empresa;
-import com.equipotres.medioambiente.Entidades.Imagen;
-import com.equipotres.medioambiente.Entidades.Rol;
-import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Entidades.*;
 import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.EmpresaRepositorio;
@@ -12,7 +9,6 @@ import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -28,6 +24,7 @@ public class EmpresaServicio {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+
     @Transactional
     public void crearEmpresa(String nombre,
                              String email,
@@ -56,11 +53,6 @@ public class EmpresaServicio {
 
     }
 
-    //Obtener ID de la empresa
-    public Empresa getOne(String id){
-        return empresaRepositorio.getOne(id);
-    }
-
     //Modificar usuario Empresa
     @Transactional
     public void modificaEmpresa(String id,
@@ -68,16 +60,14 @@ public class EmpresaServicio {
                                 String email,
                                 String passwordA,
                                 String passwordB
-                                )
-            throws MyException
-    {
+    )
+            throws MyException {
 
         validar(nombre, email, passwordA, passwordB);
 
         //Verificar si el usuario existe en la base de datos
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent())
-        {
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuario.setNombre(nombre);
             usuario.setEmail(email);
@@ -85,6 +75,11 @@ public class EmpresaServicio {
             usuario.setPassword(new BCryptPasswordEncoder().encode(passwordA));
             usuarioRepositorio.save(usuario);
         }
+    }
+
+    //Obtener ID de la empresa
+    public Empresa getOne(String id) {
+        return empresaRepositorio.findById(id).orElse(null);
     }
 
 
