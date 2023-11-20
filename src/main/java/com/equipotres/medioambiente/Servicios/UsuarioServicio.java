@@ -1,11 +1,11 @@
 package com.equipotres.medioambiente.Servicios;
 
-import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Imagen;
 import com.equipotres.medioambiente.Entidades.Rol;
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Enumeraciones.RolEnum;
 import com.equipotres.medioambiente.Excepciones.MyException;
+import com.equipotres.medioambiente.Repositorios.EmpresaRepositorio;
 import com.equipotres.medioambiente.Repositorios.RolRepositorio;
 import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +38,9 @@ public class UsuarioServicio implements UserDetailsService
 
     @Autowired
     private RolRepositorio rolRepositorio;
+
+    @Autowired
+    private EmpresaRepositorio empresaRepositorio;
 
     //Crear usuario
     @Transactional
@@ -79,6 +82,15 @@ public class UsuarioServicio implements UserDetailsService
         {
           throw new MyException("Usuario no encontrado con id: " + id); 
         }
+    }
+
+    //Eliminar un Usuario con rol.Empresa
+    @Transactional
+    public void eliminarUsuarioConEmpresa(String usuarioId)throws MyException {
+
+        usuarioRepositorio.deleteById(usuarioId);
+        empresaRepositorio.deleteEmpresaByUsuarioId(usuarioId);
+
     }
 
     //Recupera un Usuario dado su id

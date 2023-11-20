@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="admin/layout :: head-admin"></head>
 
@@ -13,7 +13,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Modificar Campañas</h1>
+        <h1>Registrar Campañas</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html"></a></li>
@@ -37,59 +37,46 @@
         </div>
     </div>
     <!--Fin Mensajes -->
+
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
+
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Modificar Campañas</h5>
-                        <form th:action="@{/campana/modificar/__${campana.id}__}" method="POST"
+                        <h5 class="card-title">Noticias modificar</h5>
+
+                        <form th:action="@{/noticia/modificar/__${noticia.id}__}" method="POST"
                               enctype="multipart/form-data">
                             <input hidden th:value="${id}" name="id">
                             <div class="row mb-3">
                                 <label for="titulo" class="col-sm-2 col-form-label">Título</label>
                                 <div class="col-sm-10">
-                                    <input di th:value="${campana.titulo}" type="text" id="titulo" name="titulo"
-                                           class="form-control">
+                                    <input type="text" id="titulo" name="titulo"
+                                           th:value="${noticia.titulo}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+                                <label for="contenido" class="col-sm-2 col-form-label">Contenido</label>
                                 <div class="col-sm-10">
-                                    <input th:value="${campana.descripcion}" type="text" id="descripcion"
-                                           name="descripcion" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="desafio" class="col-sm-2 col-form-label">Desafio</label>
-                                <div class="col-sm-10">
-                                    <input th:value="${campana.desafio}" type="text" id="desafio" name="desafio"
-                                           class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="estado" class="col-sm-2 col-form-label">Estado</label>
-                                <div class="col-sm-10">
-                                    <select name="estado" id="estado">
-                                        <option value="true" th:selected="${campana.estado == true}">Activa</option>
-                                        <option value="false" th:selected="${campana.estado == false}">Inactiva</option>
-                                        <option th:if="${campana.estado == null}" th:text="Estado actual"
-                                                selected="selected"></option>
-                                    </select>
+                                    <input type="text" id="contenido" name="contenido"
+                                           th:value="${noticia.contenido}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="archivo" class="col-sm-2 col-form-label">Imagen</label>
                                 <div class="col-sm-10">
-                                    <!--Pendiente revisar para traer el nombre imagen o el dato relacionado de la image -->
-                                    <input class="form-control" type="file" name="archivo" id="archivo" required>
+                                    <input class="form-control" type="file"
+                                           name="archivo" id="archivo" required>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <button class="btn btn-primary w-100" type="submit">Modificar</button>
                             </div>
                         </form>
                         <!-- End Table with stripped rows -->
+
                     </div>
                 </div>
 
@@ -105,10 +92,15 @@
         &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+
     </div>
 </footer><!-- End Footer -->
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <div th:replace="admin/layout :: scripts-admin"></div>
 
 </body>
