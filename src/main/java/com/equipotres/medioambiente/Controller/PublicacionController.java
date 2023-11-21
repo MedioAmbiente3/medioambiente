@@ -1,12 +1,13 @@
 package com.equipotres.medioambiente.Controller;
 
 import com.equipotres.medioambiente.Entidades.Campana;
-import com.equipotres.medioambiente.Entidades.Noticia;
 import com.equipotres.medioambiente.Entidades.Publicacion;
+import com.equipotres.medioambiente.Entidades.Comentario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.PublicacionServicio;
 import com.equipotres.medioambiente.Servicios.VotoServicio;
+import com.equipotres.medioambiente.Servicios.ComentarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +28,9 @@ public class PublicacionController {
 
     @Autowired
     private VotoServicio votoServicio;
+
+    @Autowired
+    private ComentarioServicio comentarioServicio;
 
     @GetMapping("/registrar/{campanaid}")
     public String registrar(@PathVariable String campanaid, ModelMap modelo){
@@ -53,7 +57,7 @@ public class PublicacionController {
                     usuarioid,
                     campanaid);
             modelo.put("exito", "Se ha publicado el desafio correctamente");
-            return "redirect:/publicacion/lista";
+            return String.format("redirect:/publicacion/lista/%s", campanaid);
         }
         catch (MyException ex)
         {
@@ -69,12 +73,15 @@ public class PublicacionController {
     }
 
     //Lista de publicaciones
-    @GetMapping("/lista")
-    public String lista(ModelMap modelo) {
-        List<Publicacion> publicaciones = publicacionServicio.listarPublicaciones();
-        modelo.addAttribute("publicaciones", publicaciones);
+    @GetMapping("/lista/{campanaid}")
+    public String lista(@PathVariable String campanaid, ModelMap modelo) {
+        modelo.addAttribute("campanaid", campanaid);
+        List<Publicacion> publicacionesDeCampana = publicacionServicio.
+                          listarPublicacionPorCampana(campanaid);
+        modelo.addAttribute("publicacionesDeCampana", publicacionesDeCampana);
         modelo.addAttribute("votoServicio", votoServicio);
+        modelo.addAttribute("comentarioServicio", comentarioServicio);
         return "publicacion_lista.html";
     }
 
-}
+} 

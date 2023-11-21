@@ -33,13 +33,8 @@ public class ComentarioServicio {
     //Obtener los comentarios de la publicación
     public List<Comentario> comentariosDePublicacion(String idPublicacion)
     {
-        List<Comentario> comentariosDePublicacion = new ArrayList<>();
-        for (Comentario comentario :listarComentarios())
-        {   
-            Publicacion publicacion = comentario.getPublicacion();
-            if(publicacion.getId().equals(idPublicacion))
-            {comentariosDePublicacion.add(comentario);}
-        }
+        List<Comentario> comentariosDePublicacion = comentarioRepositorio.
+                buscarComentarioPorPublicacion(idPublicacion);
         return comentariosDePublicacion;
     }
     

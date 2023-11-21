@@ -103,8 +103,8 @@
                               	  </tr>
                               </tbody>
                           </table>
-                                  <a th:href="@{/publicacion/lista/}">
-                                     Ver Publicaciones
+                                  <a th:href="@{/publicacion/lista/__${campana.id}__}">
+                                     Ver Publicaciones de Campaña
                                   </a>
                                   <a sec:authorize="hasRole('USER')"
                                      th:href="@{/campana/lista}">
