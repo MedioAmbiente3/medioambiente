@@ -3,6 +3,7 @@ import com.equipotres.medioambiente.Entidades.Noticia;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.NoticiaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +74,7 @@ public class NoticiasController {
     }
 
     //Listar las noticias
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/lista")
     public String lista(ModelMap modelo) {
         List<Noticia> noticias = noticiaServicio.listarNoticias();
