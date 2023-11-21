@@ -102,7 +102,7 @@
                                     </button>
                                 </a><br /><br />
                                 <a sec:authorize="hasRole('USER')"
-                                   th:href="@{/publicacion/lista/}" >
+                                   th:href="@{/publicacion/lista/__${campana.id}__}" >
                                     <button class="btn btn-primary align-middle" type="button">
                                         <i class="card-link"></i>Ver
                                     </button>
@@ -135,3 +135,4 @@
 </body>
 
 </html>
+

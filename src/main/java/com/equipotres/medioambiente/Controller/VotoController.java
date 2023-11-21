@@ -36,6 +36,7 @@ public class VotoController {
     @PostMapping("/registro")
     public String registro(@RequestParam String idPublicacion,
                            @RequestParam String idUsuario,
+                           @RequestParam String campanaid,
                            ModelMap modelo) {
         try {
             Publicacion publicacion = publicacionServicio.getOne(idPublicacion);
@@ -45,11 +46,10 @@ public class VotoController {
             voto.setUsuario(usuario);
             voto.setFechaCreacion(LocalDate.now());
             votoServicio.crearVoto(voto);
-
-            return "redirect:../publicacion/lista";
+            return String.format("redirect:/publicacion/lista/%s", campanaid);
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
-            return "redirect:../publicacion/lista";
+            return String.format("redirect:/publicacion/lista/%s", campanaid);
         }
     }
 }

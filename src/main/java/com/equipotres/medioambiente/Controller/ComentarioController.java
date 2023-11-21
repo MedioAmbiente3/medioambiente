@@ -38,6 +38,7 @@ public class ComentarioController {
     public String registro(@RequestParam String contenido,
                            @RequestParam String idPublicacion,
                            @RequestParam String idUsuario,
+                           @RequestParam String campanaid,
                            ModelMap modelo) {
         try 
         {
@@ -49,13 +50,14 @@ public class ComentarioController {
           comentario.setUsuario(usuario);
           comentario.setFechaCreacion(LocalDate.now());
           comentarioServicio.crearComentario(comentario);
-          
-          return "redirect:../publicacion/lista";
+
+          return String.format("redirect:/publicacion/lista/%s", campanaid);
+
         } 
         catch (MyException ex) 
         {
           modelo.put("error", ex.getMessage());
-          return "redirect:../publicacion/lista";
+          return String.format("redirect:/publicacion/lista/%s", campanaid);
         }
     }
 }
