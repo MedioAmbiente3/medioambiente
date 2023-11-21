@@ -75,16 +75,6 @@
                                       Modificar
                                   </a>
                               </div>
-                              <div class="card-body">
-                                  <a sec:authorize="hasRole('USER')" th:href="@{/subscripcion/registrar/__${subscripcion.id}__}">
-                                      <i class="card-link"></i>
-                                      Ver
-                                  </a>
-                                  <a sec:authorize="hasRole('EMPRESA')" th:href="@{/subscripcion/registrar/__${noticia.id}__}">
-                                    <i class="card-link"></i>
-                                    Auspiciar
-                                </a>
-                              </div>
                           </div>
                           <!-- End of card loop -->
                       </div>
