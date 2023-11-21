@@ -14,70 +14,65 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 
-
-    <style>
-        ul#lista li a.dropdown-item {
-            border-radius: 6px;
-            margin-bottom: 6px;
-            transition: background 0.3s;
-            /*transition:letter-spacing .2s;*/
-
-            background-color: #308879;
-            padding: 5px 15px;
-
-        }
-
-        ul#lista li a.dropdown-item:hover {
-            /*background-color: #2980b9;*/
-            background-color: #e9ebed;
-        }
-
-        /* Estilo para el botón de tipo dropdown en "Únete" */
-        .nav-item.dropdown .nav-link {
-            border-radius: 6px;
-            margin-bottom: 6px;
-            text-align: center;
-           /* padding: 5px 5px;*/
-           /* -webkit-text-fill-color: red;*/
-        }
-
-        .nav-item.dropdown:hover .nav-link {
-            /*background-color: #077338; 1ee722color de boton primero*/
-            /*background-color: #20c997;*/
-            background-color:#308879;
-        }
-
-       .nav-item a{
-         -webkit-text-fill-color: rgb(7, 7, 7);
-
-        }
-
-        .nav-item a:hover {
-            -webkit-text-fill-color: rgb(56, 143, 43);
-
-}
-    </style>
-
-
-
 </head>
 <body>
 
 <!-- header section starts  -->
 
-<header th:replace= "admin/layout :: navbarindexM"></header>
+<header>
+
+    <div id="mainNavigation" class="navbar navbar-expand-md navbar-dark fixed-top">
+        <a class="navbar-brand" href="#home">
+            <img src="/img/logo.png" style="width: 90px;" class="invert" alt="Logo">
+            <span class="logo-text"
+                  style="color: aliceblue; margin-left: 10px; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">MedioAmbiente</span>
+        </a>
+        <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+        </button>
+        <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto ">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#about">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#noticiaContainer">Noticias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#campañas">Campañas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#review">Opiniones</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Únete
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="lista">
+                        <li><a class="dropdown-item" href="/login">Iniciar Sesion</a></li>
+                        <li><a class="dropdown-item" href="#">Salir</a></li>
+                        <li><a class="dropdown-item" href="#contact">Contactenos</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</header>
 
 <!-- header section ends -->
 
 <!-- home section starts  -->
 
 
-
 <div class="home-container">
 
     <section class="home" id="home">
 
-</section>
+    </section>
 
 </div>
 
@@ -89,7 +84,7 @@
 <br>
 <section class="about" id="about">
 
-    <h1 class="heading"> <span> Nosotros </span>  </h1>
+    <h1 class="heading"><span> Nosotros </span></h1>
 
     <div class="row">
 
@@ -99,12 +94,18 @@
 
         <div class="content">
             <h3>La Tierra madre te necesita?</h3>
-            <h1>MedioAmbiente existe porque nuestro frágil planeta necesita una voz. Necesita soluciones. Necesita cambio. Necesita acción.</h1>
-            <p>Algunas personas miran a un bosque y ven sólo ganancia. Pero hay otros miles más que ven una casa, una sabiduría, un futuro. En todo el mundo, defendemos el medio ambiente y las comunidades que dependen de sus recursos, responsabilizando a gobiernos y corporaciones que los amenazan. Desde cualquier lugar, tenemos el poder de transformar al mundo cuando trabajamos juntos y para eso, te necesitamos.</p>    
-            <p>Salvar el planeta es responsabilidad de todos.</p>
-            <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de todo el mundo estan invitados a postular sus carteles. .</p>
-            <h2>CONVOCATORIA 16BICM</h2>
-            <a href="#" class="btn">Consulta convocatoria completa</a>
+            <h4>MedioAmbiente existe porque nuestro frágil planeta necesita una voz. Necesita soluciones. Necesita
+                cambio. Necesita acción.</h4>
+                <p>Algunas personas miran a un bosque y ven sólo ganancia. Pero hay otros miles más que ven una casa,
+                    una sabiduría, un futuro. En todo el mundo, defendemos el medio ambiente y las comunidades que
+                    dependen de sus recursos, responsabilizando a gobiernos y corporaciones que los amenazan. Desde
+                    cualquier lugar, tenemos el poder de transformar al mundo cuando trabajamos juntos y para eso, te
+                    necesitamos.</p>
+                <p>Salvar el planeta es responsabilidad de todos.</p>
+                <p>Con la intención de aprovechar el poder del arte para inspirar la acción ambiental, artistas de todo
+                    el mundo estan invitados a postular sus carteles. .</p>
+                <h2>CONVOCATORIA 16BICM</h2>
+                <a href="#" class="btn">Consulta convocatoria completa</a>
         </div>
 
     </div>
@@ -115,94 +116,23 @@
 
 <!-- icons section starts  -->
 
+
+
 <section class="noticiaContainer" id="noticiaContainer">
     <h1 class="heading"> <span> Noticias </span>  </h1>
-   
+
     <div class="noticias-container">
-        <ul id="c"> 
-		
-            <li>
-                <a href="https://www.nationalgeographic.es/medio-ambiente/2023/10/como-millones-arboles-nuevos-podrian-transformar-estado-unidos">
-                    <p><img src="https://static.nationalgeographic.es/files/styles/image_3200/public/nationalgeographic_2794394.webp?w=1600&h=900" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>Unos trabajadores plantan un árbol en Los Ángeles, California, donde existe una marcada división.</p>
-                </a>
-            </li>
-           
-            <li>
-                <a href="https://www.nationalgeographic.es/animales/2023/10/ocelotes-causas-peligro-icono-estados-unidos">
-                    <p><img src="https://static.nationalgeographic.es/files/styles/image_3200/public/cat_mm10082_230314_004360.webp?w=768&h=432" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>¿Qué fue de los ocelotes de Estados Unidos?
-                        Los ocelotes son el felino americano por excelencia, pero una sola tormenta tropical podría borrarlos del mapa de Estados Unidos.</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://news.un.org/es/story/2023/07/1523112">
-                    <p><img src="https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Libraries/Production%20Library/31-07-2023_Unsplash_wildfire.jpg/image560x340cropped.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>
-                        De China a Estados Unidos, el verano boreal está marcado por los récords de temperaturas e incendios</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.eleconomista.com.mx/sectorfinanciero/Financiamiento-de-adaptacion-climatica-retrocede-15-en-el-2021-ONU-20231102-0088.html">
-                    <p><img src="https://www.eleconomista.com.mx/__export/1665701489843/sites/eleconomista/img/2022/07/27/shutterstock_1979940953.jpg_1832999950.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>Financiamiento de adaptación climática retrocede 15% en el 2021: ONU
+        <ul id="c">
+            <li th:each="noticia: ${noticias}">
+                <p>
+                    <img th:if="${noticia.imagen != null}" th:src="@{/imagen/noticia/__${noticia.id}__}" style="width: 150px;" alt="Imagen de la noticia">
+                </p>
+                <p th:text="${noticia.contenido}">Contenido de la noticia por defecto si no hay datos</p>
 
-                        El financiamiento de la adaptación climática de los países en desarrollo retrocedió...</p>
-                </a>
             </li>
-            <li>
-                <a href="https://elpais.com/clima-y-medio-ambiente/2023-11-02/guterres-exige-que-los-magnates-de-los-combustibles-fosiles-compensen-a-los-perdedores-de-la-crisis-climatica.html">
-                    <p><img src="https://imagenes.elpais.com/resizer/H0GF4-yhDYA-5QruTVRThrUBiY8=/828x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/7CBINHU2I5DU3C56FKBP5PBB5A.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>Guterres exige que los “magnates de los combustibles fósiles” compensen a los perdedores de la crisis climática.</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.elmundo.es/ciencia-y-salud/medio-ambiente/2023/11/02/6543c487fdddff89578b45cd.html">
-                    <p><img src="https://phantom-elmundo.unidadeditorial.es/e851255f3d51b68816542996bf4f2262/resize/550/f/webp/assets/multimedia/imagenes/2023/11/02/16989403064573.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>La ONU alerta de que el mundo no está preparado para el impacto económico del cambio climático</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.elmundo.es/cronica/2023/11/01/653bddd7e9cf4a4d1a8b45b8.html">
-                    <p><img src="https://phantom-elmundo.unidadeditorial.es/7ba50c7d20c5b461ba9aa7482ab83e53/resize/550/f/webp/assets/multimedia/imagenes/2023/10/27/16984219998160.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>Encuentro con la madre coraje de Londres que certifica la muerte de su hija por contaminación. Fue el primer caso reconocido en todo el mundo</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://news.un.org/es/story/2023/08/1523622#:~:text=foto%20de%20archivo).-,Los%20ni%C3%B1os%20tienen%20el%20derecho%20a%20un%20medioambiente%20limpio,Estados%20el%20deber%20de%20garantiz%C3%A1rselo&text=El%20Comit%C3%A9%20de%20los%20Derechos,a%20la%20degradaci%C3%B3n%20del%20medioambiente.">
-                    <p><img src="https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Libraries/Production%20Library/08-11-2022_UNICEF_Pakistan.jpg/image560x340cropped.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>Los niños tienen el derecho a un medioambiente limpio y los Estados el deber de garantizárselo.  </p>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.eitb.eus/es/radio/radio-euskadi/programas/la-mecanica-del-caracol/detalle/9342105/el-calor-intenso-y-agotamiento-de-acuiferos-subterraneos-entre-desastres-de-que-alerta-onu/">
-                    <p><img src="https://images11.eitb.eus/multimedia/images/2023/10/10/3161891/20231010070527_brasilsequiacambioclimati_foto610x342.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>El calor intenso y el agotamiento de acuíferos subterráneos, entre los desastres de los que alerta la ONU</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://efeverde.com/paises-pobres-fondos-adaptacion-climatica-onu/#:~:text=Nairobi.%2D%20Los%20pa%C3%ADses%20ricos%20deber%C3%ADan,)%2C%20con%20sede%20en%20Nairobi.">
-                    <p><img src="https://www.eltiempo.com/files/article_main_mobile/uploads/2023/11/02/6543fa2f49db7.jpeg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>ONU: países pobres necesitan hasta dieciocho veces más fondos de adaptación climática</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://expansion.mx/mundo/2023/06/01/deterioro-ambiental-rebasa-limites-para-seguridad-humana">
-                    <p><img src="https://cdn-3.expansion.mx/dims4/default/4ed0d21/2147483647/strip/true/crop/1200x628+0+0/resize/1200x628!/format/webp/quality/60/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fc9%2F42%2F55703f8d4126820d0a8d2314420a%2Flimites-medio-ambiente.jpg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>Limitar el calentamiento del planeta a +1.5 grados permitirá frenar el cambio climático.</p>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.greenpeace.org/mexico/noticia/53479/huracan-otis-y-la-crisis-climatica-greenpeace-mexico-noticias-ong/">
-                    <p><img src="https://www.greenpeace.org/static/planet4-mexico-stateless/2023/10/dbfd5799-ckzea73k2oivxcimngsvos4jl4-768x512.jpeg" style="width: 150px;" alt="Noticia 1"></p>
-                    <p>Las organizaciones firmantes nos solidarizamos con las personas afectadas por el huracán Otis, tanto en Guerrero como en otros estados impactados.</p>
-                </a>
-            </li>
-
-    
         </ul>
     </div>
-    
+
 </section>
 
 
@@ -212,62 +142,28 @@
 
 <section class="campañas" id="campañas">
 
-    <h1 class="heading"> <span>Campañas</span> </h1>
+    <h1 class="heading"><span>Campañas</span></h1>
 
     <div class="slider-wrap">
         <div id="card-slider" class="slider">
-          <div class="slider-item">
-              <div class="animation-card_image">
-                  <img src="https://m.media-amazon.com/images/M/MV5BMTk5Mzc4ODU0Ml5BMl5BanBnXkFtZTcwNjU1NTI0Mw@@._V1_UY317_CR12,0,214,317_AL_.jpg" alt="">
-              </div>
-              <div class="animation-card_content">
-                  <h4 class="animation-card_content_title title-2">Charlize Theron 1</h4>
-                  <p class="animation-card_content_description p-2">With no contractual commitments comes the freedom of having top notch content created whenever.</p>
-                  <p class="animation-card_content_city">New York, NY</p>
-              </div>
-          </div>
-          <div class="slider-item">
-              <div class="animation-card_image">
-                  <img src="https://m.media-amazon.com/images/M/MV5BMTk5Mzc4ODU0Ml5BMl5BanBnXkFtZTcwNjU1NTI0Mw@@._V1_UY317_CR12,0,214,317_AL_.jpg" alt="">
-              </div>
-              <div class="animation-card_content">
-                  <h4 class="animation-card_content_title title-2">Charlize Theron 2</h4>
-                  <p class="animation-card_content_description p-2">With no contractual commitments comes the freedom of having top notch content created whenever.</p>
-                  <p class="animation-card_content_city">New York, NY</p>
-              </div>
-          </div>
-          <div class="slider-item">
-              <div class="animation-card_image">
-                  <img src="https://m.media-amazon.com/images/M/MV5BMTk5Mzc4ODU0Ml5BMl5BanBnXkFtZTcwNjU1NTI0Mw@@._V1_UY317_CR12,0,214,317_AL_.jpg" alt="">
-              </div>
-              <div class="animation-card_content">
-                  <h4 class="animation-card_content_title title-2">Charlize Theron 3</h4>
-                  <p class="animation-card_content_description p-2">With no contractual commitments comes the freedom of having top notch content created whenever.</p>
-                  <p class="animation-card_content_city">New York, NY</p>
-              </div>
-          </div>
-          <div class="slider-item">
-              <div class="animation-card_image">
-                  <img src="https://m.media-amazon.com/images/M/MV5BMTk5Mzc4ODU0Ml5BMl5BanBnXkFtZTcwNjU1NTI0Mw@@._V1_UY317_CR12,0,214,317_AL_.jpg" alt="">
-              </div>
-              <div class="animation-card_content">
-                  <h4 class="animation-card_content_title title-2">Charlize Theron 4</h4>
-                  <p class="animation-card_content_description p-2">With no contractual commitments comes the freedom of having top notch content created whenever.</p>
-                  <p class="animation-card_content_city">New York, NY</p>
-              </div>
-          </div>
-          <div class="slider-item">
-              <div class="animation-card_image">
-                  <img src="https://m.media-amazon.com/images/M/MV5BMTk5Mzc4ODU0Ml5BMl5BanBnXkFtZTcwNjU1NTI0Mw@@._V1_UY317_CR12,0,214,317_AL_.jpg" alt="">
-              </div>
-              <div class="animation-card_content">
-                  <h4 class="animation-card_content_title title-2">Charlize Theron 5</h4>
-                  <p class="animation-card_content_description p-2">With no contractual commitments comes the freedom of having top notch content created whenever.</p>
-                  <p class="animation-card_content_city">New York, NY</p>
-              </div>
-          </div>
-      </div>
-      </div>  
+            <div class="slider-item" th:each="campana: ${campanas}">
+                <div class="animation-card_image">
+                    <img th:if="${campana.imagen != null}" th:src="@{/imagen/campana/__${campana.id}__}"
+                         alt="">
+                </div>
+                <div class="animation-card_content" >
+                    <h4 class="animation-card_content_title title-2" th:text="${campana.titulo}" ></h4>
+                    <p class="animation-card_content_description p-2" th:text="${campana.descripcion}"></p>
+                </div>
+
+                <a href="/login" class="btn btn-primary" style="background-color: #0dcaf0">
+                    <i class="card-link"></i> Ver Más
+                </a>
+            </div>
+
+        </div>
+    </div>
+    </div>
 
 </section>
 
@@ -277,75 +173,79 @@
 
 <section class="review" id="review">
 
-<h1 class="heading"> Opiniones </h1>
+    <h1 class="heading"> Opiniones </h1>
 
-<div class="box-container">
+    <div class="box-container">
 
-    <div class="box">
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-        </div>
-        <p>Los recursos renovables son una solución sostenible y prometedora para abordar los problemas ambientales y energéticos. Su uso puede contribuir a la
-           creación de un futuro más limpio y saludable para las generaciones venideras.
-         <br>
-         <br>  
-        </p>
-        <div class="user">
-            <img src="/img/pic-1.png" alt="">
-            <div class="user-info">
-                <h3>Camilo Huertas</h3>
-                <span></span>
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
             </div>
+            <p>Los recursos renovables son una solución sostenible y prometedora para abordar los problemas ambientales
+                y energéticos. Su uso puede contribuir a la
+                creación de un futuro más limpio y saludable para las generaciones venideras.
+                <br>
+                <br>
+            </p>
+            <div class="user">
+                <img src="/img/pic-1.png" alt="">
+                <div class="user-info">
+                    <h3>Camilo Huertas</h3>
+                    <span></span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
         </div>
-        <span class="fas fa-quote-right"></span>
+
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>La generación de fertilizantes a base de desechos orgánicos es una práctica que combina beneficios
+                ambientales, agrícolas y económicos. Al aprovechar los residuos orgánicos y convertirlos en nutrientes
+                naturales para las plantas, estamos
+                promoviendo la sostenibilidad y construyendo un futuro más saludable para nuestro planeta.</p>
+            <div class="user">
+                <img src="/img/pic-2.png" alt="">
+                <div class="user-info">
+                    <h3>Vanessa P.</h3>
+                    <span></span>
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+
+        <div class="box">
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>El reciclaje del plástico es esencial para preservar la vida natural en los océanos. Al reducir la
+                cantidad de plásticos que llegan al mar y darles un nuevo uso, estamos tomando medidas concretas para
+                proteger los ecosistemas marinos y garantizar un futuro saludable para la vida acuática.</p>
+            <div class="user">
+                <img src="/img/pic-3.png" alt="">
+                <div class="user-info">
+                    <h3>David Lugo</h3>
+
+                </div>
+            </div>
+            <span class="fas fa-quote-right"></span>
+        </div>
+
     </div>
 
-    <div class="box">
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-        </div>
-        <p>La generación de fertilizantes a base de desechos orgánicos es una práctica que combina beneficios ambientales, agrícolas y económicos. Al aprovechar los residuos orgánicos y convertirlos en nutrientes naturales para las plantas, estamos
-           promoviendo la sostenibilidad y construyendo un futuro más saludable para nuestro planeta.</p>
-        <div class="user">
-            <img src="/img/pic-2.png" alt="">
-            <div class="user-info">
-                <h3>Vanessa P.</h3>
-                <span></span>
-            </div>
-        </div>
-        <span class="fas fa-quote-right"></span>
-    </div>
-
-    <div class="box">
-        <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-        </div>
-        <p>El reciclaje del plástico es esencial para preservar la vida natural en los océanos. Al reducir la cantidad de plásticos que llegan al mar y darles un nuevo uso, estamos tomando medidas concretas para
-           proteger los ecosistemas marinos y garantizar un futuro saludable para la vida acuática.</p>
-        <div class="user">
-            <img src="/img/pic-3.png" alt="">
-            <div class="user-info">
-                <h3>David Lugo</h3>
-               
-            </div>
-        </div>
-        <span class="fas fa-quote-right"></span>
-    </div>
-
-</div>
-    
 </section>
 
 
@@ -359,11 +259,12 @@
 
         <div class="box">
             <h3>links</h3>
-            <a href="#about">Nosotros</a>
+            <a href="#">Nosotros</a>
             <a href="#noticiaContainer">Noticias</a>
             <a href="#campañas">Campañas</a>
-            <a href="#review">Opiniones</a>
-           <a href="#">Unete</a>
+            <!--<a href="#">Opiniones</a>-->
+            <a href="#review">Opiniones </a>
+            <a href="#">Unete</a>
         </div>
 
         <div class="box">
@@ -385,12 +286,12 @@
             <a href="#">+123-456-7890</a>
             <a href="#">villamarlen50@gmail.com</a>
             <a href="#">San Luis Potosí, México - 78000</a>
-           <!-- <img src="/img/payment.png" alt=""> -->
+            <!-- <img src="/img/payment.png" alt=""> -->
         </div>
-        
+
     </div>
 
-    <div class="credit"> creado por <span> equipo 3 egg latam</span> | all rights reserved </div>
+    <div class="credit"> creado por <span> equipo 3 egg latam</span> | all rights reserved</div>
 
 </section>
 
