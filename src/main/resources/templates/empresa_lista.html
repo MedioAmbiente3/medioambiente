@@ -5,63 +5,63 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header th:replace="admin/layout :: navbar-admin"></header><!-- End Header -->
+<!-- ======= Header ======= -->
+<header th:replace="admin/layout :: navbar-admin"></header><!-- End Header -->
 <nav th:replace="admin/layout :: navbar1"></nav>
 <!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
+<!-- ======= Sidebar ======= -->
 
-  <!-- End Sidebar-->
+<!-- End Sidebar-->
 
-  <main id="main" class="main">
+<main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Administrativo</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/admin/inicio">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+  <div class="pagetitle">
+    <h1>Administrativo</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin/inicio">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-    <!-- Mensajes -->
-    <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
-      <div class="card-body">
-        <h5 class="card-title">Exito 👍</h5>
-        <p class="card-text" th:text="${exito}"></p>
-      </div>
+  <!-- Mensajes -->
+  <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+    <div class="card-body">
+      <h5 class="card-title">Exito 👍</h5>
+      <p class="card-text" th:text="${exito}"></p>
     </div>
-    <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
-      <div class="card-body">
-        <h5 class="card-title">Error 👎</h5>
-        <p class="card-text" th:text="${error}"></p>
-      </div>
+  </div>
+  <div th:if="${error}!=null" class="card text-white bg-danger mb-3 mensajeError">
+    <div class="card-body">
+      <h5 class="card-title">Error 👎</h5>
+      <p class="card-text" th:text="${error}"></p>
     </div>
-    <!--Fin Mensajes -->
+  </div>
+  <!--Fin Mensajes -->
 
 
-    <div th:replace="admin/layout :: dashboard"></div>
+  <div th:replace="admin/layout :: dashboard"></div>
 
-  </main><!-- End #main -->
+</main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      
-    </div>
-  </footer><!-- End Footer -->
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>Grupo 3</span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <div th:replace="admin/layout :: scripts-admin"></div>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div th:replace="admin/layout :: scripts-admin"></div>
 </body>
 
 </html>

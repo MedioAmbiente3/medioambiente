@@ -170,7 +170,7 @@
             </a>
           </li>
           <li>
-            <a href="/noticia/lista">
+            <a sec:authorize="hasAnyRole('ADMIN', 'USER')" href="/noticia/lista" >
               <i class="bi bi-circle"></i><span>Ver Noticias</span>
             </a>
           </li>
