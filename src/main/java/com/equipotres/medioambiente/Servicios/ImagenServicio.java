@@ -42,7 +42,15 @@ public class ImagenServicio {
                 throw new MyException("Error al procesar la imagen.");
             }
         } else {
-            throw new MyException("El archivo de imagen está vacío o es nulo.");
+            // Crear y retornar una imagen por defecto
+
+            Imagen imagenPorDefecto = new Imagen();
+            imagenPorDefecto.setMime("image/jpeg"); // ajusta el tipo MIME según tu necesidad
+            imagenPorDefecto.setNombre("imagen_por_defecto.jpg"); // ajusta el nombre según tu necesidad
+            // Puedes asignar contenido por defecto o dejarlo en null, dependiendo de tus necesidades
+            imagenPorDefecto.setContenido(null);
+            return imagenRepositorio.save(imagenPorDefecto);
+
 
         }
     }
@@ -75,18 +83,16 @@ public class ImagenServicio {
             }
         } else {
 
-            throw new MyException("El archivo de imagen está vacío o es nulo.");
-            /*
             // Crear y retornar una imagen por defecto
+
             Imagen imagenPorDefecto = new Imagen();
             imagenPorDefecto.setMime("image/jpeg"); // ajusta el tipo MIME según tu necesidad
             imagenPorDefecto.setNombre("imagen_por_defecto.jpg"); // ajusta el nombre según tu necesidad
             // Puedes asignar contenido por defecto o dejarlo en null, dependiendo de tus necesidades
-            // imagenPorDefecto.setContenido(null);
-
+            imagenPorDefecto.setContenido(null);
             return imagenRepositorio.save(imagenPorDefecto);
 
-             */
+
         }
 
     }
