@@ -212,9 +212,6 @@
         >
           <i class="bi bi-journal-text"></i><span>Usuarios</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <a class="nav-link collapsed" data-bs-target="#forms-nav-usuarios" data-bs-toggle="collapse" href="#" sec:authorize="hasRole('EMPRESA')">
-          <i class="bi bi-journal-text"></i><span>Auspicio</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
         <ul id="forms-nav-usuarios" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/admin/usuarios">

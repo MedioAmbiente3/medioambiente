@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head th:replace="admin/layout :: head-admin"></head>
 
@@ -43,145 +43,156 @@
         </div>
         <!--Fin Mensajes -->
 
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Lista de Publicaciones De Campaña</h5>
+        <section style="background-color: #eee;">
+            <div class="container my-5 py-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-12 col-lg-10 col-xl-8">
+                        <div th:each="publicacion : ${publicacionesDeCampana}" class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-start align-items-center">
+                                    <img class="rounded-circle shadow-1-strong me-3"
+                                         th:src="@{/imagen/perfil/__${publicacion.subscripcion.usuario?.id}__}"
+                                         alt="avatar" width="60"
+                                         height="60"/>
+                                    <div>
+                                        <h6 class="fw-bold text-primary mb-1" th:text="${publicacion.titulo}"></h6>
+                                        <p class="text-muted small mb-0">
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-4 pb-2" th:text="${publicacion.contenido}">
+                                </p>
+                                <img class="card-img-top"
+                                     th:if="${publicacion.imagen != null}"
+                                     th:src="@{/imagen/publicacion/__${publicacion.id}__}"
+                                     alt="avatar" width="800"
+                                     height="600"/>
+                                <!--Votación Inicio-->
+                                <form th:if="${#strings.isEmpty(votoServicio.
+                                  obtenerIdVoto(session.usuariosesion.id, publicacion.id))}"
+                                      th:action="@{/voto/registro}" method="POST">
+                                    <input type="hidden" name="idPublicacion"
+                                           th:value="${publicacion.id}"/>
+                                    <input type="hidden"
+                                           th:value="${session.usuariosesion.id}"
+                                           name="idUsuario">
+                                    <input type="hidden" name="campanaid"
+                                           th:value="${campanaid}"/>
+                                    <div class="small d-flex justify-content-start">
+                                        <button type="submit"  id="btnVotar" class="btn btn-light text-center">
+                                            <a class="d-flex align-items-center me-3">
+                                                <i class="bi bi-hand-thumbs-up"></i>
+                                                <p class="mb-0 text-dark">Votar</p>
+                                            </a>
+                                        </button>
+                                        <button type="button" id="btnVoto" th:unless="${#strings.isEmpty(votoServicio.
+                                                      obtenerIdVoto(session.usuariosesion.id, publicacion.id))}"
+                                                class="btn btn-dark text-center" disabled>
+                                            <a class="d-flex align-items-center me-3">
+                                                <i class="bi bi-hand-thumbs-up"></i>
+                                                <p class="mb-0 text-dark">Voto</p>
+                                            </a>
+                                        </button>
+                                    </div>
+                                </form>
+                                <script>
+                                    $(document).ready(function () {
+                                        // Escucha el evento de clic en el botón "Votar"
+                                        $("#btnVotar").on("click", function () {
+                                            // Oculta el botón "Votar" y muestra el botón "Votó"
+                                            $("#btnVotar").hide();
+                                            $("#btnVoto").show();
+                                        });
+                                    });
+                                </script>
+                                <!--Fin Votación-->
 
-                            <div class="card-list row">
-                                <!-- Loop through campanas and display each card -->
-                                <div th:each="publicacion : ${publicacionesDeCampana}" class="card">
-                                    <ul class="list-group list-group-flush">
-                                        <div class="card-body">
-                                            <section style="background-color: #eee;">
-                                                <div class="container my-5 py-5">
-                                                    <div class="row d-flex justify-content-center">
-                                                        <div class="col-md-12 col-lg-10 col-xl-8">
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <div class="d-flex flex-start align-items-center">
-                                                                        
-                                                                        <img class="rounded-circle shadow-1-strong me-3"
-                                                                             th:if="${publicacion.subscripcion.
-                                                                                      usuario.imagen != null}"
-                                                                             th:src="@{/imagen/perfil/
-                                                                                    __${publicacion.subscripcion.
-                                                                                        usuario.id}__}"
-                                                                             alt="avatar" width="60"
-                                                                             height="60"/>
-                                                                        <div>
-                                                                            <h6 th:text="${publicacion.titulo}"
-                                                                                class="fw-bold text-primary mb-1"></h6>
-                                                                            <p class="text-muted small mb-0">
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <p th:text="${publicacion.contenido}"
-                                                                       class="mt-3 mb-4 pb-2">
-                                                                    </p>
-                                                                    <img class="card-img-top"
-                                                                         th:if="${publicacion.imagen != null}"
-                                                                         th:src="@{/imagen/publicacion/__${publicacion.id}__}"
-                                                                         alt="avatar" width="200"
-                                                                         height="150"/>
 
-                                                                    <!--Votación Inicio-->
-                                                                    <form th:if="${#strings.isEmpty(votoServicio.
-                                                              obtenerIdVoto(session.usuariosesion.id, publicacion.id))}"
-                                                                          th:action="@{/voto/registro}" method="POST"
-                                                                          enctype="multipart/form-data">
-                                                                        <input type="hidden" name="idPublicacion"
-                                                                               th:value="${publicacion.id}"/>
-                                                                        <input type="hidden"
-                                                                               th:value="${session.usuariosesion.id}"
-                                                                               name="idUsuario">
-                                                                        <input type="hidden" name="campanaid"
-                                                                               th:value="${campanaid}"/>
-                                                                        <button class="btn btn-primary w-100"
-                                                                                type="submit">
-                                                                            <i class="bi bi-hand-thumbs-up"></i>
-                                                                            <p class="mb-0">Votar</p>
-                                                                        </button>
-                                                                    </form>
-                                                                    <button th:unless="${#strings.isEmpty(votoServicio.
-                                                              obtenerIdVoto(session.usuariosesion.id, publicacion.id))}"
-                                                                            class="btn btn-primary w-100" type="button"
-                                                                            disabled>
-                                                                        <i class="bi bi-hand-thumbs-up"></i>
-                                                                        <p class="mb-0">Votó</p>
-                                                                    </button>
-                                                                     <p th:unless="${votoServicio.
-                                                                        contarVotosDePublicacion(publicacion.id) == 0}">
-                                                                     <span th:text="${votoServicio.
-                                                                        contarVotosDePublicacion(publicacion.id)}">
-                                                                     </span> votos
-                                                                    <!--Votación Fin-->
-                                                                </div>
-                                                            </div>
-                                                            <!--Comentar Inicio-->
-                                                            <form th:action="@{/comentario/registro}" method="POST"
-                                                                  enctype="multipart/form-data">
-                                                                  <input type="hidden" name="idPublicacion"
-                                                                           th:value="${publicacion.id}"/>
-                                                                  <input type="hidden" name="idUsuario"
-                                                                           th:value="${session.usuariosesion.id}"/>
-                                                                  <input type="hidden" name="campanaid"
-                                                                           th:value="${campanaid}"/>
-                                                            <div class="card-footer py-3 border-0"
-                                                                 style="background-color: #f8f9fa;">
-                                                                <div class="d-flex flex-start w-100">
-                                                                    <img class="rounded-circle shadow-1-strong me-3"
-                                                                         th:if="${session.usuariosesion.
-                                                                                  imagen != null}"
-                                                                         th:src="@{/imagen/perfil/
-                                                                                 __${session.usuariosesion.id}__}"
-                                                                         alt="avatar" width="40"
-                                                                         height="40"/>
-                                                                    <div class="form-outline w-100">
-                                                                    <textarea
-                                                                           class="form-control" id="textAreaContenido"
-                                                                           name="contenido" rows="4"
-                                                                           style="background: #fff; text-align: left;">
-                                                                    </textarea>
-                                                                    <label class="form-label" for="textAreaContenido">
-                                                                    Mensaje </label>
+                                    <!--Comentario Inicio-->
+                                <form th:action="@{/comentario/registro}" method="POST">
+                                    <input type="hidden" name="idPublicacion"
+                                           th:value="${publicacion.id}"/>
+                                    <input type="hidden" name="idUsuario"
+                                           th:value="${session.usuariosesion.id}"/>
+                                    <input type="hidden" name="campanaid"
+                                           th:value="${campanaid}"/>
+                                    <button type="submit" class="btn btn-light text-center">
+                                        <a class="d-flex align-items-center me-3">
+                                            <i class="bi bi-chat-square-dots"></i>
+                                            <p class="mb-0 text-dark"> Comentario </p>
+                                        </a>
+                                    </button>
+                                    <button class="btn btn-light text-center">
+                                        <!--Conteo votos inicio -->
+                                        <a th:unless="${votoServicio.contarVotosDePublicacion(publicacion.id) == 0}" class="d-flex align-items-center me-3">
+                                            <i class="bi bi-person-fill-up">  </i>
+                                            <p class="mb-0" th:text="' ' + ${votoServicio.contarVotosDePublicacion(publicacion.id) + ' Votos '}"></p>
+                                        </a>
+                                        <!--Conteo votos fin -->
+                                    </button>
+                                    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                                        <div class="d-flex flex-start w-100">
+                                            <img class="rounded-circle shadow-1-strong me-3"
+                                                 th:src="@{/imagen/perfil/__${publicacion.subscripcion.usuario?.id}__}"
+                                                 alt="avatar"
+                                                 width="40"
+                                                 height="40"/>
+                                            <div class="form-outline w-100">
+                <textarea class="form-control" id="contenido" name="contenido" rows="4"
+                          style="background: #fff;"></textarea>
+                                                <label class="form-label" for="contenido">Mensaje</label>
+                                            </div>
+                                        </div>
+                                        <div class="float-end mt-2 pt-1">
+                                            <button type="submit" class="btn btn-primary btn-sm">Comentar</button>
+                                        </div>
+                                    </div>
+
+                                    <!--Listas de comentarios-->
+                                    <section style="background-color: #f7f6f6;">
+                                        <div class="container my-5 py-5 text-dark">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-md-12 col-lg-10 col-xl-8">
+                                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                                        <h4 class="text-dark mb-0">Comentarios </h4>
+                                                    </div>
+
+                                                    <div th:each="comentario : ${comentarioServicio.
+                                                                  comentariosDePublicacion(publicacion.id)}"
+                                                         class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="d-flex flex-start">
+                                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                                     th:src="@{/imagen/perfil/__${publicacion.subscripcion.usuario?.id}__}"
+                                                                     alt="avatar" width="40"
+                                                                     height="40"/>
+                                                                <div class="w-100">
+                                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                                        <h6 class="text-primary fw-bold mb-0"
+                                                                            th:text="${comentario.usuario.nombre}">
+                                                                        </h6>
+                                                                        <h6 class="text-primary fw-bold mb-0">
+                                                                            <span class="text-dark ms-2">
+                                                                                <p th:text="${comentario.contenido}"></p>
+                                                                            </span>
+                                                                        </h6>
                                                                     </div>
                                                                 </div>
-                                                                <div class="float-end mt-2 pt-1">
-                                                                    <button type="submit"
-                                                                     class="btn btn-primary btn-sm">Comentar
-                                                                    </button>
-                                                                </div>
                                                             </div>
-                                                            </form>
-                                                            <!--Comentar Fin-->
-                                                       </div>
-                                                            <!--Listar comentarios Inicio-->
-                                                            <div th:each="comentario : ${comentarioServicio.
-                                                                          comentariosDePublicacion(publicacion.id)}"
-                                                                 style="margin-bottom: 20px;
-                                                                 background-color: #f8f9fa; padding: 10px;">
-                                                                <p th:text="${comentario.contenido}"
-                                                                 style="text-align: left;"></p>
-                                                                <small th:text="${comentario.usuario.nombre}"
-                                                                       style="text-align: right; display: block;">
-                                                                           </small>                                                            
-                                                            <!--Listar comentarios Fin-->
-                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </section>
+                                            </div>
                                         </div>
-                                    </ul>
-                                </div>
+                                    </section>
+                                    <!--Fin listas de comentarios -->
+                                </form>
+                                <!--Comentario Fin-->
                             </div>
-                            <!-- End of card loop -->
                         </div>
-                        <!--Find -->
                     </div>
                 </div>
+            </div>
             </div>
         </section>
     </section>

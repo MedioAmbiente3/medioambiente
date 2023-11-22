@@ -3,11 +3,9 @@ package com.equipotres.medioambiente.Controller;
 import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Entidades.Publicacion;
 import com.equipotres.medioambiente.Entidades.Comentario;
+import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
-import com.equipotres.medioambiente.Servicios.CampanaServicio;
-import com.equipotres.medioambiente.Servicios.PublicacionServicio;
-import com.equipotres.medioambiente.Servicios.VotoServicio;
-import com.equipotres.medioambiente.Servicios.ComentarioServicio;
+import com.equipotres.medioambiente.Servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +29,9 @@ public class PublicacionController {
 
     @Autowired
     private ComentarioServicio comentarioServicio;
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @GetMapping("/registrar/{campanaid}")
     public String registrar(@PathVariable String campanaid, ModelMap modelo){
