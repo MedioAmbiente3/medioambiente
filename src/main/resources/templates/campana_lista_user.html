@@ -57,9 +57,18 @@
                                             <a sec:authorize="hasRole('USER')"
                                                th:href="@{/campana/detalle/__${campana.id}__}">
                                                 <button class="btn btn-primary" type="button">
-                                                    <i class="card-link"></i>Ver Detalles
+                                                      <i class="card-link"></i>Ver Detalles
                                                 </button>
-                                            </a>
+                                            </a>                                         
+                                       <div th:if="${!#strings.isEmpty(auspicianteServicio.
+                                            obtenerIdAuspiciante(session.usuariosesion.id, campana.id))}">
+                                         <a sec:authorize="hasRole('EMPRESA')"
+                                            th:href="@{/empresa/lista/publicaciones/__${campana.id}__}">
+                                         <button class="btn btn-primary" type="button">
+                                            <i class="card-link"></i>Ver Auspicio
+                                         </button>
+                                         </a>
+                                      </div>
                                         </div>
                                     </div>
                                     <!---Formulario Inicio-->
