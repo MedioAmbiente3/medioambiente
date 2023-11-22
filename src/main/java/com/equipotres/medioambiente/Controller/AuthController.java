@@ -41,14 +41,14 @@ public class AuthController {
         }
 
         if (logueado.getRol().getNombre().equals(RolEnum.EMPRESA)) {
-            return "redirect:/empresa_lista.html";
+            return "empresa_lista.html";
 
         }
         return "usuario.html";
     }
 
     @GetMapping("/index")
-    public String index(){
+    public String index (){
         return "index";
     }
 

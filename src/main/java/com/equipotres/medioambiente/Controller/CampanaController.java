@@ -8,6 +8,7 @@ import com.equipotres.medioambiente.Servicios.CampanaServicio;
 import com.equipotres.medioambiente.Servicios.ImagenServicio;
 import com.equipotres.medioambiente.Servicios.SubscripcionServicio;
 import com.equipotres.medioambiente.Servicios.PublicacionServicio;
+import com.equipotres.medioambiente.Servicios.AuspicianteServicio;
 import com.equipotres.medioambiente.Servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,6 +39,9 @@ public class CampanaController {
 
     @Autowired
     private PublicacionServicio publicacionServicio;
+
+    @Autowired
+    private AuspicianteServicio auspicianteServicio;
 
     //Vista campaña registro
     @GetMapping("/registrar") //http://localhost:8080/campana/registrar
@@ -86,6 +90,7 @@ public class CampanaController {
         modelo.addAttribute("campanas", campanas);
         // Agrega al modelo la referencia al servicio
         modelo.addAttribute("subscripcionServicio", subscripcionServicio);
+        modelo.addAttribute("auspicianteServicio", auspicianteServicio);
         return "campana_lista_user.html";
     }
 

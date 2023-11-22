@@ -62,11 +62,23 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <a sec:authorize="hasRole('EMPRESA')"
-                                        th:href="@{/subscripcion/registrar/__${campana.id}__}">
-                                        <i class="card-link"></i>Auspiciar</a>
+                                    <!---Formulario Inicio-->
+                                    <div sec:authorize="hasRole('EMPRESA')">
+                                    <form th:if="${#strings.isEmpty(auspicianteServicio.
+                                    obtenerIdAuspiciante(session.usuariosesion.id, campana.id))}"
+                                          th:action="@{/auspiciante/registro}" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="campanaid" th:value="${campana.id}"/>
+                                        <input type="hidden" th:value="${session.usuariosesion.id}" name="empresaid">
+                                        <button
+                                                class="btn btn-primary w-100" type="submit">Auspiciar
+                                        </button>
+                                    </form>
+                                    <button th:unless="${#strings.isEmpty(auspicianteServicio.
+                                      obtenerIdAuspiciante(session.usuariosesion.id, campana.id))}"
+                                            class="btn btn-primary w-100" type="button" disabled>Auspiciando
+                                    </button>
                                     </div>
+                                    <!---Formulario Fin-->
                                 </div>
                             </div>
                             <!-- End of card loop -->

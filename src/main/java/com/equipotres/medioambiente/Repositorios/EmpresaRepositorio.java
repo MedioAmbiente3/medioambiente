@@ -17,4 +17,6 @@ public interface EmpresaRepositorio extends JpaRepository<Empresa, String> {
     @Query("DELETE FROM Empresa e WHERE e.usuario.id = :usuarioId")
     void deleteEmpresaByUsuarioId(@Param("usuarioId") String usuarioId);
 
+    @Query("SELECT e.id FROM Empresa e WHERE e.usuario.id = :usuarioId")
+    String selectEmpresaIdByUsuarioId(@Param("usuarioId") String usuarioId);
 }
