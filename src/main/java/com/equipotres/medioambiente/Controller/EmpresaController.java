@@ -1,15 +1,17 @@
 package com.equipotres.medioambiente.Controller;
 
+import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
+import com.equipotres.medioambiente.Servicios.ComentarioServicio;
 import com.equipotres.medioambiente.Servicios.EmpresaServicio;
+import com.equipotres.medioambiente.Servicios.PublicacionServicio;
+import com.equipotres.medioambiente.Servicios.VotoServicio;
+import com.equipotres.medioambiente.Entidades.Publicacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @Controller
 @RequestMapping("/empresa")
@@ -18,6 +20,15 @@ public class EmpresaController {
 
     @Autowired
     private EmpresaServicio empresaServicio;
+
+    @Autowired
+    private ComentarioServicio comentarioServicio;
+
+    @Autowired
+    private PublicacionServicio publicacionServicio;
+
+    @Autowired
+    private VotoServicio votoServicio;
 
 
     //Vista empresa registrar
@@ -54,5 +65,29 @@ public class EmpresaController {
     }
 
 
+    //Lista de publicaciones de empresa
+    @GetMapping("lista/publicaciones/{campanaid}")
+    public String lista(@PathVariable String campanaid, ModelMap modelo) {
+        modelo.addAttribute("campanaid", campanaid);
+        List<Publicacion> publicacionesDeCampana = publicacionServicio.
+                          listarPublicacionPorCampana(campanaid);
+        modelo.addAttribute("publicacionesDeCampana", publicacionesDeCampana);
+        modelo.addAttribute("votoServicio", votoServicio);
+        modelo.addAttribute("comentarioServicio", comentarioServicio);
+        return "empresa_lista_publicaciones.html";
+    }
+
+    //Lista de publicaciones de empresa
+    @GetMapping("lista/usuarios_publicacion/{publicacionid}")
+    public String listausuarios(@PathVariable String publicacionid, ModelMap modelo) {
+        Publicacion publicacion = publicacionServicio.getOne(publicacionid);
+        String campanaid = publicacion.getSubscripcion().getCampana().getId();
+        modelo.addAttribute("campanaid", campanaid);
+        List<Usuario> usuariosQueVotaron = votoServicio.
+                          obtenerUsuariosQueVotaron(publicacionid);
+        modelo.addAttribute("usuariosQueVotaron", usuariosQueVotaron);
+        modelo.addAttribute("votoServicio", votoServicio);
+        return "empresa_lista_usuarios";
+    }
 
 }
