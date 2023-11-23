@@ -19,15 +19,7 @@
 
   <div class="pagetitle" >
       <h1>Noticias</h1>
-      <nav>
-          
-          <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item">Tables</li>
-              <li class="breadcrumb-item active">Data</li>
-          </ol>
-          
-      </nav>
+
   </div><!-- End Page Title -->
 
         <!-- Mensajes -->
@@ -55,7 +47,7 @@
                       <div class="card-list row">
                           <!-- Loop through campanas and display each card -->
                           <div th:each="noticia : ${noticias}" class="card col-lg-3 mb-3">
-                              <img th:if="${noticia.imagen != null}" th:src="@{/imagen/noticia/__${noticia.id}__}" class="card-img-top" alt="Card image cap">
+                              <img th:if="${noticia.imagen != null}" th:src="@{/imagen/noticia/__${noticia.id}__}" class="card-img-top"  alt="Card image cap" style="width: 200px">
                               <div class="card-body">
                                   <h5 th:text="${noticia.titulo}" class="card-title"></h5>
                               </div>

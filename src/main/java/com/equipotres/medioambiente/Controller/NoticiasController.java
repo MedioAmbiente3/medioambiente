@@ -74,7 +74,7 @@ public class NoticiasController {
     }
 
     //Listar las noticias
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'EMPRESA')")
     @GetMapping("/lista")
     public String lista(ModelMap modelo) {
         List<Noticia> noticias = noticiaServicio.listarNoticias();

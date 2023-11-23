@@ -17,15 +17,7 @@
     <section id="1">
         <div class="pagetitle">
             <h1>Publicaciones Desafios</h1>
-            <nav>
 
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Tables</li>
-                    <li class="breadcrumb-item active">Data</li>
-                </ol>
-
-            </nav>
         </div><!-- End Page Title -->
 
         <!-- Mensajes -->
@@ -62,25 +54,18 @@
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <div class="d-flex flex-start align-items-center">
-                                                                        
+
                                                                         <img class="rounded-circle shadow-1-strong me-3"
-                                                                             th:if="${publicacion.subscripcion.
-                                                                                      usuario.imagen != null}"
-                                                                             th:src="@{/imagen/perfil/
-                                                                                    __${publicacion.subscripcion.
-                                                                                        usuario.id}__}"
+                                                                             th:src="@{/imagen/perfil/__${publicacion.subscripcion.usuario?.id}__}"
                                                                              alt="avatar" width="60"
                                                                              height="60"/>
                                                                         <div>
+                                                                            <h6 th:text="${publicacion.subscripcion.usuario?.nombre}" class="fw-bold text-primary"></h6>
                                                                             <h6 th:text="${publicacion.titulo}"
-                                                                                class="fw-bold text-primary mb-1"></h6>
+                                                                                class="fw-bold text-black mb-1"></h6>
                                                                             <p class="text-muted small mb-0">
                                                                             </p>
-                                              <a th:href="@{/empresa/lista/usuarios_publicacion/__${publicacion.id}__}">
-                                                                        <button class="btn btn-primary" type="button">
-                                                                            <i class="card-link"></i>Ver estadísticas
-                                                                        </button>
-                                                                        </a>
+
                                                                         </div>
                                                                     </div>
                                                                     <p th:text="${publicacion.contenido}"
@@ -90,28 +75,25 @@
                                                                          th:if="${publicacion.imagen != null}"
                                                                          th:src="@{/imagen/publicacion/__${publicacion.id}__}"
                                                                          alt="avatar" width="200"
-                                                                         height="150"/>
+                                                                         height="300"/>
 
-                                                                     <p th:unless="${votoServicio.
-                                                                        contarVotosDePublicacion(publicacion.id) == 0}">
-                                                                     <span th:text="${votoServicio.
-                                                                        contarVotosDePublicacion(publicacion.id)}">
-                                                                     </span> votos
+                                                                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 15px">
+                                                                        <p th:unless="${votoServicio.contarVotosDePublicacion(publicacion.id) == 0}">
+                                                                            <span th:text="${votoServicio.contarVotosDePublicacion(publicacion.id)}"></span> votos <i class="bi bi-hand-thumbs-up-fill"></i>
+                                                                        </p>
+                                                                        <a th:href="@{/empresa/lista/usuarios_publicacion/__${publicacion.id}__}">
+                                                                            <button class="btn btn-primary" type="button">
+                                                                                <i class="card-link"></i>Ver estadísticas
+                                                                            </button>
+                                                                        </a>
+                                                                    </div>
+
+
                                                                 </div>
+
                                                             </div>
                                                        </div>
-                                                            <!--Listar comentarios Inicio-->
-                                                            <div th:each="comentario : ${comentarioServicio.
-                                                                          comentariosDePublicacion(publicacion.id)}"
-                                                                 style="margin-bottom: 20px;
-                                                                 background-color: #f8f9fa; padding: 10px;">
-                                                                <p th:text="${comentario.contenido}"
-                                                                 style="text-align: left;"></p>
-                                                                <small th:text="${comentario.usuario.nombre}"
-                                                                       style="text-align: right; display: block;">
-                                                                           </small>                                                            
-                                                            <!--Listar comentarios Fin-->
-                                                            </div>
+
                                                     </div>
                                                 </div>
                                             </section>

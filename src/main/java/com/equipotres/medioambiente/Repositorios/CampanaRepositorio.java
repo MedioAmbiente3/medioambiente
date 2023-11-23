@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CampanaRepositorio extends JpaRepository<Campana, String> {
-/*No se define ningún método personalizado en este repositorio porque
+
+
+    /*No se define ningún método personalizado en este repositorio porque
 todas las operaciones necesarias (crear, modificar, listar y eliminar campañas)
 ya están cubiertas por los métodos proporcionados por JpaRepository*/
 
