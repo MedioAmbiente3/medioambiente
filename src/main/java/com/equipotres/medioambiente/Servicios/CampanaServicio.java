@@ -102,6 +102,12 @@ public class CampanaServicio {
 
     }
 
+    public List<Campana> listarCampanasEmpresa() {
+        List<Campana> campanas = new ArrayList();
+        campanas = campanaRepositorio.findAll();
+        return campanas;
+    }
+
     //traer el id de la campana
     public Campana getOne(String id) {
         return campanaRepositorio.getOne(id);

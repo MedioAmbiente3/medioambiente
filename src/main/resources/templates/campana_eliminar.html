@@ -12,16 +12,7 @@
 
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Eliminar Campañas</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html"></a></li>
-                <li class="breadcrumb-item"></li>
-                <li class="breadcrumb-item active"></li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
+ <!-- End Page Title -->
 
     <!-- Mensajes -->
     <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
@@ -89,8 +80,10 @@
                                 }
                             </script>
 
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Eliminar Campaña</button>
+                            <div class="row">
+                                <div class="col-6 d-flex justify-content-end">
+                                    <button class="btn btn-danger btn-lg btn-block" type="submit"><i class="ri-delete-bin-5-line"></i> Eliminar</button>
+                                </div>
                             </div>
                         </form>
                         <!-- End Table with stripped rows -->

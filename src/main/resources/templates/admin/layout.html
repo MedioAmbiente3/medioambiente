@@ -56,12 +56,7 @@
       </div>
       <!-- End Logo -->
 
-      <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-          <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-          <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-      </div><!-- End Search Bar -->
+     <!-- End Search Bar -->
 
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -78,10 +73,10 @@
 
           <li class="nav-item dropdown pe-3">
 
-            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown" >
               <img
               th:src="@{/imagen/perfil/__${session.usuariosesion.id}__}"
-              alt="Perfil" class="rounded-circle" id="imagen">
+              alt="Perfil" class="rounded-circle" id="imagen" sec:authorize="hasAnyRole('ADMIN', 'USER')">
               <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${session.usuariosesion.nombre}"></span>
             </a><!-- End Profile Iamge Icon -->
 
@@ -98,7 +93,7 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="/perfil">
+                <a class="dropdown-item d-flex align-items-center" href="/perfil" sec:authorize="hasAnyRole('ADMIN', 'USER')">
                   <i class="bi bi-person"></i>
                   <span>Mi Perfil</span>
                 </a>
@@ -128,10 +123,15 @@
     <div th:fragment="navbar1">
 
       <aside id="sidebar" class="sidebar">
+
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
         <a class="nav-link ">
           <p>Qué quieres hacer?</p>
+        </a>
+        <a class="nav-link " href="/inicio" sec:authorize="hasAnyRole('ADMIN', 'EMPRESA')">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
         </a>
       <!--Inicio nav izquierdo-->
       <li class="nav-item">
@@ -170,7 +170,7 @@
             </a>
           </li>
           <li>
-            <a sec:authorize="hasAnyRole('ADMIN', 'USER')" href="/noticia/lista" >
+            <a sec:authorize="hasAnyRole('ADMIN', 'USER', 'EMPRESA')" href="/noticia/lista" >
               <i class="bi bi-circle"></i><span>Ver Noticias</span>
             </a>
           </li>
@@ -179,14 +179,11 @@
       
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav-empresas" data-bs-toggle="collapse"
-           href="#" sec:authorize="hasAnyRole('ADMIN', 'USER')"
+           href="#" sec:authorize="hasAnyRole('ADMIN')"
         >
           <i class="bi bi-journal-text"></i><span>Empresas</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <a class="nav-link collapsed" data-bs-target="#forms-nav-empresas" data-bs-toggle="collapse"
-           href="#" sec:authorize="hasRole('EMPRESA')">
-          <i class="bi bi-journal-text"></i><span>Auspicio</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
+
         <ul id="forms-nav-empresas" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a sec:authorize="hasRole('ADMIN')" class="nav-link collapsed" href="/empresa/registrar">

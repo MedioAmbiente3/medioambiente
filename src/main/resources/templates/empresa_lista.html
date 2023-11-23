@@ -18,12 +18,7 @@
 
   <div class="pagetitle">
     <h1>Administrativo</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/admin/inicio">Home</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
-      </ol>
-    </nav>
+
   </div><!-- End Page Title -->
 
   <!-- Mensajes -->
@@ -41,8 +36,51 @@
   </div>
   <!--Fin Mensajes -->
 
+<section>
 
-  <div th:replace="admin/layout :: dashboard"></div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Lista de Campañas</h5>
+
+          <table class="table datatable">
+            <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Imagen</th>
+              <th scope="col">Título</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Desafío</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="campana, rowStat : ${campanas}">
+              <th scope="row" th:text="${rowStat.count}"></th>
+              <td>
+                <a>
+                  <img th:if="${campana.imagen != null}" class="logo"
+                       th:src="@{/imagen/campana/__${campana.id}__}" style="width: 100px;">
+                </a>
+              </td>
+              <td th:text="${campana.titulo}"></td>
+              <td th:text="${campana.descripcion}"></td>
+              <td th:text="${campana.desafio}"></td>
+              <td th:text="${campana.estado} ? 'Activa' : 'Inactiva'"></td>
+
+            </tr>
+            </tbody>
+          </table>
+          <!--Find -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
 
 </main><!-- End #main -->
 
