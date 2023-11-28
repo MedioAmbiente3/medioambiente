@@ -2,7 +2,10 @@ package com.equipotres.medioambiente.Servicios;
 
 import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Entidades.Voto;
+import com.equipotres.medioambiente.Entidades.Publicacion;
 import com.equipotres.medioambiente.Excepciones.MyException;
+import com.equipotres.medioambiente.Repositorios.PublicacionRepositorio;
+import com.equipotres.medioambiente.Repositorios.UsuarioRepositorio;
 import com.equipotres.medioambiente.Repositorios.VotoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,15 @@ public class VotoServicio {
     @Autowired
     private VotoRepositorio votoRepositorio;
 
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
+
+    @Autowired
+    private PublicacionRepositorio publicacionRepositorio;
+
+    @Autowired
+    private PublicacionServicio publicacionServicio;
+
     @Transactional
     public void crearVoto(Voto voto) throws MyException
     {
@@ -30,18 +42,7 @@ public class VotoServicio {
         return votos;
     }
     
-    //Método auxiliar para obtener lista idpublicaciones votadas
-    public List<String> IdDePublicacionesVotadas()
-    {
-        List<String> IdDePublicacionesVotadas = new ArrayList<>();
-        for (Voto voto :listarVotos())
-        {
-            IdDePublicacionesVotadas.add(voto.getPublicacion().getId());
-        }
-        return IdDePublicacionesVotadas;
-    }
-    
-    //Conteo de votos
+    //Conteo de votos de publicación
     public int contarVotosDePublicacion(String idPublicacion)
     {
         List<Voto> votosDePublicacion = new ArrayList<>();
@@ -53,78 +54,43 @@ public class VotoServicio {
         return (int) votosDePublicacion.stream().count();
     }
 
-    public List<Usuario> obtenerUsuariosQueVotaron(String idPublicacion) {
-        return listarVotos().stream()
-                .filter(voto -> voto.getPublicacion().getId().equals(idPublicacion))
-                .map(Voto::getUsuario)
-                .collect(Collectors.toList());
+    //Conteo de votos de usuario suscrito
+    public int contarVotosDeSuscrito(String idUsuario, String idCampana)
+    { 
+        String idPublicacion = publicacionServicio.obtenerIdPublicacion(idUsuario,idCampana);
+        return contarVotosDePublicacion(idPublicacion);
     }
 
-    public List<String> obtenerNombresUsuariosQueVotaron(String idPublicacion) {
-        return obtenerUsuariosQueVotaron(idPublicacion).stream()
-                .map(Usuario::getNombre)
-                .collect(Collectors.toList());
-    }
-
-
-    //Obtener lista de cantidad de votos de cada idPublicación
-    //Definir un objeto votación
-    public class Votacion 
+    //Obtener las más votadas de una campaña
+    public List<Publicacion> publicacionesMasVotadasDeCampana(String campanaid)
     {
-        String idPublicacion;
-        int cantidadDeVotos;
-        // constructor
-        public Votacion(String idPublicacion, int cantidadDeVotos) {
-            this.idPublicacion = idPublicacion;
-            this.cantidadDeVotos = cantidadDeVotos;
-        }
-        public int getCantidad() {
-            return cantidadDeVotos;
-        }
+        List <Publicacion> publicacionesDeCampana;
+        publicacionesDeCampana = publicacionRepositorio.findPublicacionesByCampana(campanaid);
+        return votoRepositorio.findPublicacionesMasVotadas(publicacionesDeCampana);
     }
 
-    //Obtener lista de votaciones con cantidad de votos por idPublicacion	
-    public List<Votacion> listaDeVotaciones() 
+    //Usuarios más votados
+    public List<Usuario> usuariosMasVotadosDeCampana(String campanaid)
     {
-        List<Votacion> listaDeVotaciones = new ArrayList<>();
-        
-        for(String idPublicacion : IdDePublicacionesVotadas()) 
-        {
-            int cantidadDeVotos = contarVotosDePublicacion(idPublicacion);
-            listaDeVotaciones.add(new Votacion(idPublicacion, cantidadDeVotos));
-        }
-
-        // Ordenar la lista de publicaciones por cantidad de votos
-        Collections.sort(listaDeVotaciones, new Comparator<Votacion>() {
-            @Override
-            public int compare(Votacion actual, Votacion siguiente) 
-            {
-              return Integer.compare(siguiente.getCantidad(), actual.getCantidad());
-              // orden descendente
-            }
-        });
-        return listaDeVotaciones;
-    }
-    
-    // Devuelve los primeros 10 elementos, o menos si la lista es más pequeña
-    public List<Votacion> diezPublicacionesMasVotadas() 
-    {   
-        List<Votacion> publicacionesMasVotadas = listaDeVotaciones();
-        return publicacionesMasVotadas.subList(0, Math.min(10, publicacionesMasVotadas.size())); 
+        List <Publicacion> publicacionesMasVotadas;
+        publicacionesMasVotadas = publicacionesMasVotadasDeCampana(campanaid);
+        return votoRepositorio.findUsuariosMasVotados(publicacionesMasVotadas);
     }
 
-    //Obtener los votos del usuario dado  el id
     public List<Voto> listarVotosDeUsuario(String idUsuario)
     {
         List<Voto> votosDeUsuario = new ArrayList<>();
-        for (Voto voto :listarVotos())
+        for(Voto voto: listarVotos())
         {
             if(voto.getUsuario().getId().equals(idUsuario))
-            {votosDeUsuario.add(voto);}
+            {
+                votosDeUsuario.add(voto);
+            }
         }
         return votosDeUsuario;
     }
-    //Obtener el id de un Voto dado el usuario y publicación
+
+    //Obtener el id de un Voto o empty dado el usuario y publicación
     public String obtenerIdVoto(String idUsuario, String idPublicacion)
     {
         String idVoto = "";

@@ -67,9 +67,9 @@ public class PublicacionServicio {
     }
 
     @Transactional(readOnly = true)
-    public List<Publicacion> listarPublicacionPorCampana(String id){
+    public List<Publicacion> listarPublicacionPorCampana(String idCampana){
         List<Publicacion> publicaciones;
-        publicaciones = publicacionRepositorio.buscarPublicacionPorCampana(id);
+        publicaciones = publicacionRepositorio.findPublicacionesByCampana(idCampana);
         return publicaciones;
     }
 

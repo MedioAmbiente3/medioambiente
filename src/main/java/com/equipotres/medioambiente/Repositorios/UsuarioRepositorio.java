@@ -19,9 +19,13 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
     public Usuario findXMail(@Param("email") String email);
 
-/*se define un metodo personalizado findXRol(String rol) para buscar
-un usuario por su rol */
+    /*se define un metodo personalizado findXRol(String rol) para buscar
+    un usuario por su rol */
     @Query("SELECT u FROM Usuario u WHERE u.rol.nombre = :rol")
     public List<Usuario> findXRol(@Param("rol")RolEnum rol);
+    
+    /*El método devuelve todos los usuarios suscritos a una campaña*/
+    @Query("SELECT s.usuario FROM Subscripcion s WHERE s.campana.id = ?1")
+    public List<Usuario> findUsuariosByCampana(String campanaId);
 
 }

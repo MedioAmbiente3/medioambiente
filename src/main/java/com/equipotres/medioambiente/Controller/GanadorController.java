@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/ganador")
 public class GanadorController {
@@ -49,18 +51,21 @@ public class GanadorController {
         try
         {   
             Ganador ganador = new Ganador();
-	    
-	        empresaid = empresaRepositorio.selectEmpresaIdByUsuarioId(empresaid);
+
+            empresaid = empresaRepositorio.selectEmpresaIdByUsuarioId(empresaid);
             Empresa empresa = empresaServicio.getOne(empresaid);
             ganador.setEmpresa(empresa);
-            
+
             String subscripcionid = subscripcionServicio.
                                     obtenerIdSubscripcion(usuarioid,campanaid);
             Subscripcion subscripcion = subscripcionServicio.getOne(subscripcionid);
+            ganador.setSubscripcion(subscripcion);
+            
+            ganador.setFechaCreacion(LocalDate.now());
             
             ganadorServicio.crearGanador(ganador);
             modelo.put("exito", "Se ha asignado el ganador correctamente");
-            return String.format("redirect:/publicacion/lista/%s", campanaid);
+            return String.format("redirect:/empresa/lista/usuarios_campana/{campanaid}%s", campanaid);
         }
         catch (MyException ex)
         {
@@ -68,7 +73,7 @@ public class GanadorController {
             modelo.put("empresaid", empresaid);
             modelo.put("campanaid", campanaid);
             modelo.put("usuarioid", usuarioid);
-            return "publicacion_registrar.html";
+            return String.format("redirect:/empresa/lista/usuarios_campana/{campanaid}%s", campanaid);
         }
 
     }

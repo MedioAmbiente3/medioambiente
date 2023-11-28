@@ -4,7 +4,7 @@ import com.equipotres.medioambiente.Entidades.Usuario;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Servicios.ComentarioServicio;
 import com.equipotres.medioambiente.Servicios.EmpresaServicio;
-import com.equipotres.medioambiente.Servicios.PublicacionServicio;
+import com.equipotres.medioambiente.Servicios.GanadorServicio;
 import com.equipotres.medioambiente.Servicios.VotoServicio;
 import com.equipotres.medioambiente.Entidades.Publicacion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +25,16 @@ public class EmpresaController {
     private ComentarioServicio comentarioServicio;
 
     @Autowired
-    private PublicacionServicio publicacionServicio;
-
-    @Autowired
     private VotoServicio votoServicio;
 
+    @Autowired
+    private GanadorServicio ganadorServicio;
 
     //Vista empresa registrar
     @GetMapping("/registrar")
     public String registrar() {
         return "empresa_registrar";
     }
-
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre,
@@ -64,30 +62,29 @@ public class EmpresaController {
         }
     }
 
-
-    //Lista de publicaciones de empresa
+    //Lista de publicaciones de campaña auspiciada
     @GetMapping("lista/publicaciones/{campanaid}")
     public String lista(@PathVariable String campanaid, ModelMap modelo) {
         modelo.addAttribute("campanaid", campanaid);
-        List<Publicacion> publicacionesDeCampana = publicacionServicio.
-                          listarPublicacionPorCampana(campanaid);
-        modelo.addAttribute("publicacionesDeCampana", publicacionesDeCampana);
+        List<Publicacion> publicacionesTop = votoServicio.
+                          publicacionesMasVotadasDeCampana(campanaid);
+        publicacionesTop = publicacionesTop.
+                                 subList(0,Math.min(publicacionesTop.size(),10));
+        modelo.addAttribute("publicacionesTop", publicacionesTop);
         modelo.addAttribute("votoServicio", votoServicio);
         modelo.addAttribute("comentarioServicio", comentarioServicio);
         return "empresa_lista_publicaciones.html";
     }
 
-    //Lista de publicaciones de empresa
-    @GetMapping("lista/usuarios_publicacion/{publicacionid}")
-    public String listausuarios(@PathVariable String publicacionid, ModelMap modelo) {
-        Publicacion publicacion = publicacionServicio.getOne(publicacionid);
-        String campanaid = publicacion.getSubscripcion().getCampana().getId();
+    //Lista de usuarios de campaña auspiciada
+    @GetMapping("lista/usuarios_campana/{campanaid}")
+    public String listausuarios(@PathVariable String campanaid, ModelMap modelo) {
+        List<Usuario> usuariosTop = votoServicio.usuariosMasVotadosDeCampana(campanaid);
+        usuariosTop = usuariosTop.subList(0,Math.min(usuariosTop.size(), 10));
         modelo.addAttribute("campanaid", campanaid);
-        List<Usuario> usuariosQueVotaron = votoServicio.
-                          obtenerUsuariosQueVotaron(publicacionid);
-        modelo.addAttribute("usuariosQueVotaron", usuariosQueVotaron);
+        modelo.addAttribute("usuariosTop", usuariosTop);
         modelo.addAttribute("votoServicio", votoServicio);
-        return "empresa_lista_usuarios";
+        modelo.addAttribute("ganadorServicio", ganadorServicio);
+        return "empresa_lista_usuarios.html";
     }
-
 }

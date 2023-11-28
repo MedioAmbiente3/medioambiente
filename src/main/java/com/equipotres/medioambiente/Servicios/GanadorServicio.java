@@ -3,11 +3,11 @@ package com.equipotres.medioambiente.Servicios;
 import com.equipotres.medioambiente.Entidades.*;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.GanadorRepositorio;
-import com.equipotres.medioambiente.Repositorios.SubscripcionRepositorio;
+import com.equipotres.medioambiente.Repositorios.EmpresaRepositorio;
+import com.equipotres.medioambiente.Servicios.SubscripcionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,9 @@ public class GanadorServicio {
 
     @Autowired
     private GanadorRepositorio ganadorRepositorio;
+
+    @Autowired
+    private EmpresaRepositorio empresaRepositorio;
 
     @Autowired
     private SubscripcionServicio subscripcionServicio;
@@ -43,19 +46,29 @@ public class GanadorServicio {
     //Listar ganadores dado el id de la empresa
     @Transactional(readOnly = true)
     public List<Ganador> listarGanadoresPorEmpresa(String empresaid){
-        List<Ganador> ganadores;
-        ganadores = ganadorRepositorio.selectGanadoresbyEmpresaId(empresaid);
-        return ganadores;
+        return ganadorRepositorio.selectGanadoresByEmpresaId(empresaid);
     }
-
-    //Si el ganador existe retorna id, de contrario empty
-    public String obtenerIdGanador(String usuarioid, String empresaid)
+    @Transactional(readOnly = true)
+    public List<Ganador> listarGanadoresPorEmpresaYCampana(String empresaid, String campanaid){
+        return ganadorRepositorio.selectGanadoresByEmpresaIdAndCampanaId(empresaid, campanaid);
+    }
+    public boolean noHayGanadorEnEmpresa(String empresaid, String campanaid)
     {
+        empresaid = empresaRepositorio.selectEmpresaIdByUsuarioId(empresaid);
+        return listarGanadoresPorEmpresaYCampana(empresaid,campanaid).stream().count() == 0;
+    }
+    
+    //Si el ganador existe retorna id, de contrario empty
+    public String obtenerIdGanador(String empresaid,String usuarioid, String campanaid)
+    {
+        empresaid = empresaRepositorio.selectEmpresaIdByUsuarioId(empresaid);
+        String subscripcionid = subscripcionServicio.
+                obtenerIdSubscripcion(usuarioid,campanaid);
         String idGanador = "";
         for (Ganador gan:listarGanadoresPorEmpresa(empresaid))
         {
-            Usuario usuario = gan.getSubscripcion().getUsuario();
-            if(usuario.getId().equals(usuarioid))
+            Subscripcion subscripcion = gan.getSubscripcion();
+            if(subscripcion.getId().equals(subscripcionid))
             {
                 idGanador = gan.getId();
             }

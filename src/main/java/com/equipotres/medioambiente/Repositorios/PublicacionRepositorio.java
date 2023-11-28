@@ -13,8 +13,9 @@ public interface PublicacionRepositorio extends JpaRepository<Publicacion, Strin
     /*No se define ningún método personalizado en este repositorio porque
 todas las operaciones necesarias (crear, modificar, listar y eliminar campañas)
 ya están cubiertas por los métodos proporcionados por JpaRepository*/
-
     @Query("SELECT p FROM Publicacion p WHERE p.subscripcion.campana.id = ?1")
-    List<Publicacion> buscarPublicacionPorCampana(String campanaId);
+    public List<Publicacion> findPublicacionesByCampana(String campanaId);
+
+
 
 }

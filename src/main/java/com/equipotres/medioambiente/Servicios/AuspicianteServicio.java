@@ -3,6 +3,7 @@ package com.equipotres.medioambiente.Servicios;
 import com.equipotres.medioambiente.Entidades.Auspiciante;
 import com.equipotres.medioambiente.Entidades.Empresa;
 import com.equipotres.medioambiente.Entidades.Usuario;
+import com.equipotres.medioambiente.Entidades.Campana;
 import com.equipotres.medioambiente.Excepciones.MyException;
 import com.equipotres.medioambiente.Repositorios.AuspicianteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,23 @@ public class AuspicianteServicio {
             { auspiciantesDeCampana.add(aus); }
         }
         return auspiciantesDeCampana;
+    }
+    
+    public List<Campana> campanasDeEmpresa(String idCampana, String idEmpresa)
+    {
+       List<Campana> campanasDeEmpresa = new ArrayList();
+       for (Auspiciante aus:listarAuspiciantesDeCampana(idCampana))
+       {
+            Empresa empresa = aus.getEmpresa();
+            Usuario usuario = empresa.getUsuario();
+            
+            if(usuario.getId().equals(idEmpresa))
+            {
+              Campana campana = aus.getCampana();
+              campanasDeEmpresa.add(campana);
+            }
+       }
+       return campanasDeEmpresa;
     }
     
     public String obtenerIdAuspiciante(String idEmpresa, String idCampana)
